@@ -7,4 +7,6 @@ Always update feature branches, then have branch review. Always keep a local ver
 
 Always rebase your updates from master
 
-Development -> QA -> Master Branch for github
+Music \
+       |---->Master
+Game  /

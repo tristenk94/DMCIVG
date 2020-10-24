@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jawbreaker_sample.png-c0d27d1f445599e7048c57cb1fe39fdf.stex"
+path="res://.import/azul_tiles.png-979c26ad55457b231c12682362a64271.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://jawbreaker_sample.png"
-dest_files=[ "res://.import/jawbreaker_sample.png-c0d27d1f445599e7048c57cb1fe39fdf.stex" ]
+source_file="res://azul_tiles.png"
+dest_files=[ "res://.import/azul_tiles.png-979c26ad55457b231c12682362a64271.stex" ]
 
 [params]
 

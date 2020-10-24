@@ -1,10 +1,7 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://jawbreaker_sample.png" type="Texture" id=1]
+[gd_scene format=2]
 
 [node name="tileset_edit" type="Node2D"]
 
 [node name="floor tile" type="Sprite" parent="."]
-texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )

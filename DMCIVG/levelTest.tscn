@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://characters/character.tscn" type="PackedScene" id=2]
 
 [node name="Background" type="Node2D"]
 
@@ -16,3 +17,6 @@ tile_data = PoolIntArray( -983058, 195, 0, -983057, 195, 0, -983056, 195, 0, -98
 position = Vector2( 605.814, 495.391 )
 current = true
 zoom = Vector2( 2.5, 2.5 )
+
+[node name="character" parent="." instance=ExtResource( 2 )]
+position = Vector2( -1856.13, 511.433 )

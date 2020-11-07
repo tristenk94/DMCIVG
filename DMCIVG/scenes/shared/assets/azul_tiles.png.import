@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/azul_tiles.png-979c26ad55457b231c12682362a64271.stex"
+path="res://.import/azul_tiles.png-9f0d4d5e0b1c5edf3e50d013054f3595.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://azul_tiles.png"
-dest_files=[ "res://.import/azul_tiles.png-979c26ad55457b231c12682362a64271.stex" ]
+source_file="res://scenes/shared/assets/azul_tiles.png"
+dest_files=[ "res://.import/azul_tiles.png-9f0d4d5e0b1c5edf3e50d013054f3595.stex" ]
 
 [params]
 

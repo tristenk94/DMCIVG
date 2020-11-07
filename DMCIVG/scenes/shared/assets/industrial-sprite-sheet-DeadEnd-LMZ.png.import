@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jawbreaker_tiles.png-48c5386625e4222a3fb3f482c2773554.stex"
+path="res://.import/industrial-sprite-sheet-DeadEnd-LMZ.png-52427bd17dae1795d3bf7c7759fadab2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://jawbreaker_tiles.png"
-dest_files=[ "res://.import/jawbreaker_tiles.png-48c5386625e4222a3fb3f482c2773554.stex" ]
+source_file="res://scenes/shared/assets/industrial-sprite-sheet-DeadEnd-LMZ.png"
+dest_files=[ "res://.import/industrial-sprite-sheet-DeadEnd-LMZ.png-52427bd17dae1795d3bf7c7759fadab2.stex" ]
 
 [params]
 

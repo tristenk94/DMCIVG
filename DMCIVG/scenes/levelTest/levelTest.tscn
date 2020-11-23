@@ -23,7 +23,11 @@ current = true
 zoom = Vector2( 2.5, 2.5 )
 
 [node name="character" parent="." instance=ExtResource( 1 )]
+<<<<<<< HEAD
 position = Vector2( 221.09, 1354.15 )
 =======
 zoom = Vector2( 10, 10 )
 >>>>>>> Stashed changes
+=======
+position = Vector2( 213.09, 1358.15 )
+>>>>>>> parent of 080837b... Basic Enemy

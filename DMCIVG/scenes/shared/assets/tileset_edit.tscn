@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="tileset_edit" type="Node2D"]
+
+[node name="floor tile" type="Sprite" parent="."]
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )

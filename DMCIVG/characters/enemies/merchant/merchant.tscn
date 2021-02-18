@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://characters/enemies/merchant/Merchant Idle.png" type="Texture" id=1]
+[ext_resource path="res://characters/enemies/merchant/Merchant Walk.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("idle/idleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "walk"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("walk/walkSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+
+[node name="idle" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+
+[node name="idleSprite" type="Sprite" parent="idle"]
+position = Vector2( 33.0373, 9.67748 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 3
+
+[node name="walk" type="AnimationPlayer" parent="."]
+anims/walk = SubResource( 2 )
+
+[node name="walkSprite" type="Sprite" parent="walk"]
+position = Vector2( 34.3722, 62.7376 )
+texture = ExtResource( 2 )
+hframes = 5
+frame = 4

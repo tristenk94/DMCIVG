@@ -1,85 +1,62 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://characters/enemies/grunt/idle.png" type="Texture" id=1]
-[ext_resource path="res://characters/enemies/grunt/attack 1.png" type="Texture" id=2]
+[ext_resource path="res://characters/enemies/grunt/Grunt Idle.png" type="Texture" id=1]
+[ext_resource path="res://characters/enemies/grunt/Grunt Attack.png" type="Texture" id=2]
+[ext_resource path="res://characters/enemies/grunt/grunt.gd" type="Script" id=3]
 
-[sub_resource type="AnimationNodeAnimation" id=1]
-animation = "attack"
-
-[sub_resource type="AnimationNodeAnimation" id=2]
-animation = "idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=3]
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=4]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id=5]
-states/attack/node = SubResource( 1 )
-states/attack/position = Vector2( -1045, -357 )
-states/idle/node = SubResource( 2 )
-states/idle/position = Vector2( -1251, -357 )
-transitions = [ "idle", "attack", SubResource( 3 ), "attack", "idle", SubResource( 4 ) ]
-graph_offset = Vector2( -1374, -425 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
-
-[sub_resource type="Animation" id=7]
-length = 2.0
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../attack sprite:frame")
-tracks/0/interp = 1
+tracks/0/path = NodePath("AnimationTree/idle/idleSprite:frame")
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 4 ]
+"values": [ 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=8]
-length = 1.4
+[sub_resource type="Animation" id=2]
+resource_name = "attack"
+length = 1.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("AnimationTree/attack/attackSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.1, 1.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+"values": [ 0, 1, 2, 3, 4, 6, 6 ]
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( 24.1329, -0.841846 )
+position = Vector2( 29.701, -7.74631 )
+script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="idle" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 5 )
-anim_player = NodePath("attack sprite/attack anim")
-parameters/playback = SubResource( 6 )
-
-[node name="idle sprite" type="Sprite" parent="AnimationTree"]
-position = Vector2( 25.8829, -0.591846 )
+[node name="idleSprite" type="Sprite" parent="idle"]
+position = Vector2( -1.28065, 0.280613 )
 texture = ExtResource( 1 )
+centered = false
 vframes = 5
 frame = 1
 
-[node name="idle anim" type="AnimationPlayer" parent="AnimationTree/idle sprite"]
-anims/idle = SubResource( 7 )
+[node name="attack" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 2 )
 
-[node name="attack sprite" type="Sprite" parent="AnimationTree"]
-position = Vector2( 87.8989, -3.39801 )
+[node name="attackSprite" type="Sprite" parent="attack"]
+position = Vector2( -1.21486, 29.1769 )
 texture = ExtResource( 2 )
+centered = false
 vframes = 7
-
-[node name="attack anim" type="AnimationPlayer" parent="AnimationTree/attack sprite"]
-anims/attack = SubResource( 8 )
+frame = 6

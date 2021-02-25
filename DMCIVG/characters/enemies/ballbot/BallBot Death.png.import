@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attack 1.png-43b41040277d029915f05153411c1017.stex"
+path="res://.import/BallBot Death.png-adf93e8b03f225fc3345cfc08b3f75e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/grunt/attack 1.png"
-dest_files=[ "res://.import/attack 1.png-43b41040277d029915f05153411c1017.stex" ]
+source_file="res://characters/enemies/ballbot/BallBot Death.png"
+dest_files=[ "res://.import/BallBot Death.png-adf93e8b03f225fc3345cfc08b3f75e3.stex" ]
 
 [params]
 

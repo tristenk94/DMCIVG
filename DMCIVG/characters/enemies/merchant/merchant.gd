@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-# grunt stats
+# merchant stats
 var health = 100
 var health_max = 100
 var health_regeneration = 1
@@ -25,6 +25,9 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+#JUST REMOVE ABILITY TO ATTACK FOR MERCHANT? THAT WAY HE ONLY GOES NEAR PLAYER, TAKES MONEY AWAY?
+#OR JUST LEAVE HIM AS NPC WE CAN ATTACK FOR NOW
+
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,7 +44,7 @@ func _process(delta):
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
 	
-	# Check if Grunt can attack
+	# Check if merchant can attack
 	var now = OS.get_ticks_msec()
 	if now >= next_attack_time:
 		# What's the target?
@@ -61,7 +64,7 @@ func _process(delta):
 				get_node( "AnimatedSprite" ).set_flip_h( false )
 				
 			#var animation = get_animation_direction(last_direction) + "_attack"
-			$AnimatedSprite.play("attack")
+			#$AnimatedSprite.play("attack") #NO ATTACKING ANIMATION, RUNS AWAY?
 			# Add cooldown time to current time
 			next_attack_time = now + attack_cooldown_time
 			#print("done")
@@ -82,12 +85,12 @@ func hit(damage):
 		direction = Vector2.ZERO
 		set_process(false)
 		other_animation_playing = true
-		$AnimatedSprite.play("death")
+		#$AnimatedSprite.play("death")
 		emit_signal("death")
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
-	# Calculate the position of the player relative to the grunt
+	# Calculate the position of the player relative to the merchant
 	var player_relative_position = player.position - position
 
 	if player_relative_position.length() <= 16:
@@ -130,7 +133,7 @@ func _physics_process(delta):
 	#else : 
 		#print("nope")
 	
-	# Animate grunt based on direction
+	# Animate merchant based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
 		

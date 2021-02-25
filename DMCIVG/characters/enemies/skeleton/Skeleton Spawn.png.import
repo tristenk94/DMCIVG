@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle.png-6ca8e310c92b7da052c3c8c48aecc20f.stex"
+path="res://.import/Skeleton Spawn.png-e70a2f37ba469e277fc153dff3f6c005.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/enemies/grunt/idle.png"
-dest_files=[ "res://.import/idle.png-6ca8e310c92b7da052c3c8c48aecc20f.stex" ]
+source_file="res://characters/enemies/skeleton/Skeleton Spawn.png"
+dest_files=[ "res://.import/Skeleton Spawn.png-e70a2f37ba469e277fc153dff3f6c005.stex" ]
 
 [params]
 

@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-# grunt stats
+# ballbot stats
 var health = 100
 var health_max = 100
 var health_regeneration = 1
@@ -41,7 +41,7 @@ func _process(delta):
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
 	
-	# Check if Grunt can attack
+	# Check if ballbot can attack
 	var now = OS.get_ticks_msec()
 	if now >= next_attack_time:
 		# What's the target?
@@ -87,7 +87,7 @@ func hit(damage):
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
-	# Calculate the position of the player relative to the grunt
+	# Calculate the position of the player relative to the ballbot
 	var player_relative_position = player.position - position
 
 	if player_relative_position.length() <= 16:
@@ -130,7 +130,7 @@ func _physics_process(delta):
 	#else : 
 		#print("nope")
 	
-	# Animate grunt based on direction
+	# Animate ballbot based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
 		

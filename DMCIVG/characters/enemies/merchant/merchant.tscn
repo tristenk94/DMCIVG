@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/enemies/merchant/Merchant Idle.png" type="Texture" id=1]
 [ext_resource path="res://characters/enemies/merchant/Merchant Walk.png" type="Texture" id=2]
+[ext_resource path="res://characters/enemies/merchant/merchant.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -35,22 +36,180 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 15 ), SubResource( 16 ) ],
+"loop": false,
+"name": "death",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": false,
+"name": "spawn",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=13]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 13.3879, 13.3428 )
+
 [node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 3 )
 
 [node name="idle" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
 
 [node name="idleSprite" type="Sprite" parent="idle"]
+visible = false
 position = Vector2( 33.0373, 9.67748 )
 texture = ExtResource( 1 )
 hframes = 4
-frame = 3
 
 [node name="walk" type="AnimationPlayer" parent="."]
 anims/walk = SubResource( 2 )
 
 [node name="walkSprite" type="Sprite" parent="walk"]
+visible = false
 position = Vector2( 34.3722, 62.7376 )
 texture = ExtResource( 2 )
 hframes = 5
 frame = 4
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 6, 6 )
+frames = SubResource( 12 )
+animation = "attack"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hit = SubResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -11.8164, 34.3255 )
+scale = Vector2( 4, 4 )
+shape = SubResource( 14 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2( 4, 4 )
+enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

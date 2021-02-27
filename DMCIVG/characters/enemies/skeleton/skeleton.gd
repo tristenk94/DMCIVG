@@ -28,13 +28,13 @@ var other_animation_playing = false
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#player = get_tree().root.get_node("Root/player") #in the default code
-	player = get_node("../player") # ok for single instance
+	player = get_tree().root.get_node("Background/player") #in the default code
+	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
 	rng.randomize()
 
-#delta is frames passed
+
 #delta is frames passed
 func _process(delta):
 	#base health regen
@@ -48,7 +48,8 @@ func _process(delta):
 		var target = $RayCast2D.get_collider()
 		#print(target)
 		if target != null and target.name == "player" and player.health > 0: #DETECTED TO STATE MACHINE
-			#THIS LINE OF CODE IS NOT WOKRING, THE PLAYER IS NOT BEING DETECTED
+				#EMIT SIGNAL FOR ENEMY attacking
+	
 			# Play attack animation
 			other_animation_playing = true
 			
@@ -64,17 +65,11 @@ func _process(delta):
 			$AnimatedSprite.play("attack")
 			# Add cooldown time to current time
 			next_attack_time = now + attack_cooldown_time
-			#print("done")
-			
-#		else:
-#			print("fail1")
-#	else:
-#			print("fail2")
-	
+
 
 func hit(damage):
 	health -= damage
-	print("hit called")
+	#print("hit called")
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -136,7 +131,7 @@ func _physics_process(delta):
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
-		$RayCast2D.cast_to = direction.normalized() * 32
+		$RayCast2D.cast_to = direction.normalized() * 40
 
 
 #-------------------------------------------ANIMATION FUNCTIONS-------------------------------------------
@@ -197,7 +192,7 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_AnimatedSprite_frame_changed():
-	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 1:
+	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 7:
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)

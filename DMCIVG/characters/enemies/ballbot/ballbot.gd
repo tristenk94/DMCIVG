@@ -28,8 +28,8 @@ var other_animation_playing = false
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#player = get_tree().root.get_node("Root/player") #in the default code
-	player = get_node("../player") # ok for single instance
+	player = get_tree().root.get_node("Background/player") #in the default code
+	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
 	rng.randomize()
@@ -74,7 +74,7 @@ func _process(delta):
 
 func hit(damage):
 	health -= damage
-	print("hit called")
+	#print("hit called")
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -197,7 +197,7 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_AnimatedSprite_frame_changed():
-	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 1:
+	if $AnimatedSprite.animation.ends_with("attack") and ($AnimatedSprite.frame == 0 or $AnimatedSprite.frame == 4):
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)

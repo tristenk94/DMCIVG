@@ -14,6 +14,13 @@ var merchant_scene = preload("res://characters/enemies/merchant/merchant.tscn")
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
+# Merchant Spawner Signals
+signal spawning_enemies
+signal all_enemies_defeated
+
+signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
+#this is for a special puzzle room
+
 func _ready():
 	# Get tilemaps references
 #	tilemap = get_tree().root.get_node("Root/TileMap")
@@ -25,6 +32,7 @@ func _ready():
 	# Create merchants
 	for i in range(start_merchants):
 		instance_merchant()
+		emit_signal("spawning_enemies", merchant_count) #returns signal with amt of enemies
 	merchant_count = start_merchants
 
 func instance_merchant():
@@ -72,3 +80,9 @@ func _on_merchant_death():
 ####can make a function here to see if x amt of time ran out, player did not kill merchants in time
 ###using a func _process(delta) check amt of time against amt of merchants
 ##if didnt complete in time, emit signal puzzle fail
+
+func _process(delta):
+	if merchant_count == 0 and delta >= 100:
+		emit_signal("all_enemies_defeated")
+		#timer connection goes here to also emit the within time signal constraint
+

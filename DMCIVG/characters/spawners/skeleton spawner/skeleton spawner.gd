@@ -14,6 +14,13 @@ var skeleton_scene = preload("res://characters/enemies/skeleton/skeleton.tscn")
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
+# Skeleton Spawner Signals
+signal spawning_enemies
+signal all_enemies_defeated
+
+signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
+#this is for a special puzzle room
+
 func _ready():
 	# Get tilemaps references
 #	tilemap = get_tree().root.get_node("Root/TileMap")
@@ -22,9 +29,10 @@ func _ready():
 	# Initialize random number generator
 	rng.randomize()
 	
-	# Create skeletons
+	# Create skeleton
 	for i in range(start_skeletons):
 		instance_skeleton()
+		emit_signal("spawning_enemies", skeleton_count) #returns signal with amt of enemies
 	skeleton_count = start_skeletons
 
 func instance_skeleton():
@@ -72,3 +80,7 @@ func _on_Skeleton_death():
 
 ##can make a function here, once all skeletons are killed, emit a signal, room cleared or something
 #using func _process(delta) and skeleton_count == 0
+func _process(delta):
+	if skeleton_count == 0 and delta >= 100:
+		emit_signal("all_enemies_defeated")
+		#timer connection goes here to also emit the within time signal constraint

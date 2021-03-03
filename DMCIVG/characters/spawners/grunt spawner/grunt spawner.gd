@@ -14,6 +14,13 @@ var grunt_scene = preload("res://characters/enemies/grunt/grunt.tscn")
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
+# Grunt Spawner Signals
+signal spawning_enemies
+signal all_enemies_defeated
+
+signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
+#this is for a special puzzle room
+
 func _ready():
 	# Get tilemaps references
 #	tilemap = get_tree().root.get_node("Root/TileMap")
@@ -25,6 +32,7 @@ func _ready():
 	# Create grunts
 	for i in range(start_grunts):
 		instance_grunt()
+		emit_signal("spawning_enemies", grunt_count) #returns signal with amt of enemies
 	grunt_count = start_grunts
 
 func instance_grunt():
@@ -68,3 +76,10 @@ func _on_Timer_timeout():
 		
 func _on_grunt_death():
 	grunt_count = grunt_count - 1
+	
+func _process(delta):
+	if grunt_count == 0 and delta >= 100:
+		emit_signal("all_enemies_defeated")
+		#timer connection goes here to also emit the within time signal constraint
+
+

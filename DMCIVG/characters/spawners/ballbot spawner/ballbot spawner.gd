@@ -14,6 +14,13 @@ var ballbot_scene = preload("res://characters/enemies/ballbot/ballbot.tscn")
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
+# Ballbot Spawner Signals
+signal spawning_enemies
+signal all_enemies_defeated
+
+signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
+#this is for a special puzzle room
+
 func _ready():
 	# Get tilemaps references
 #	tilemap = get_tree().root.get_node("Root/TileMap")
@@ -25,6 +32,7 @@ func _ready():
 	# Create ballbots
 	for i in range(start_ballbots):
 		instance_ballbot()
+		emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies
 	ballbot_count = start_ballbots
 
 func instance_ballbot():
@@ -68,3 +76,9 @@ func _on_Timer_timeout():
 		
 func _on_ballbot_death():
 	ballbot_count = ballbot_count - 1
+
+
+func _process(delta):
+	if ballbot_count == 0 and delta >= 100:
+		emit_signal("all_enemies_defeated")
+		#timer connection goes here to also emit the within time signal constraint

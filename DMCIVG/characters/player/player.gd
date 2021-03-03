@@ -3,6 +3,7 @@ extends KinematicBody2D
 # Player movement speed
 export var speed = 400
 
+# Player status helpers
 var attack_playing = false
 var last_direction = "left"
 
@@ -15,6 +16,13 @@ var health_regeneration = 1
 var attack_cooldown_time = 1000 #this equals 5s cooldown
 var next_attack_time = 0
 var attack_damage = 50
+
+# Player Signals
+signal player_stats_changed
+signal health_amount
+signal movement
+signal attacking
+signal death
 
 func _physics_process(delta):
 	# Get player input
@@ -34,10 +42,12 @@ func _physics_process(delta):
 	if not attack_playing:
 		animates_player(direction)
 		#emit signal movement
+		emit_signal("movement")
 		
 	if attack_playing:
 		movement = 0.3 * movement
 		#emit signal player attacking
+		emit_signal("attacking")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
@@ -102,20 +112,22 @@ func _input(event):
 	
 
 func hit(damage):
+	var old_health = health #temp var to hold new to old in case info is needed
 	health -= damage
-	#emit_signal("player_stats_changed", self) #connect this to health bar
+	emit_signal("player_stats_changed", self) #connect this to health bar
 	if health <= 0:
-		pass
 		#emit signal death
+		emit_signal("death")
 	else:
 		$AnimationPlayer.play("hit")
-		#emit signal ouch
+		#emit signal getting hit, show health amount
+		emit_signal("health_amount", old_health, health)
 
 func _on_AnimatedSprite_animation_finished():
 	attack_playing = false
 
-#func _ready(): #connect this to health bar
-#	emit_signal("player_stats_changed", self)
+func _ready(): #connect this to health bar
+	emit_signal("player_stats_changed", self)
 	
 func _process(delta):
 	
@@ -123,4 +135,4 @@ func _process(delta):
 	var new_health = min(health + health_regeneration * delta, health_max)
 	if new_health != health:
 		health = new_health
-		#emit_signal("player_stats_changed", self) #connect this to health bar, send strength to fsm?
+		emit_signal("player_stats_changed", self) #connect this to health bar, send strength to fsm?, possibly dupe state of health_amount

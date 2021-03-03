@@ -25,6 +25,13 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Skeleton Signals
+signal spawn
+signal movement
+signal attacking
+signal detected_player
+signal death
+
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,8 +55,6 @@ func _process(delta):
 		var target = $RayCast2D.get_collider()
 		#print(target)
 		if target != null and target.name == "player" and player.health > 0: #DETECTED TO STATE MACHINE
-				#EMIT SIGNAL FOR ENEMY attacking
-	
 			# Play attack animation
 			other_animation_playing = true
 			
@@ -93,7 +98,11 @@ func _on_Timer_timeout():
 	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
-			#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
+		#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
+		
+		emit_signal("detected_player", player_relative_position.length())
+		#we can move this up so this signal always transmits, 
+		#and strength based on player's position
 
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
@@ -108,11 +117,6 @@ func _on_Timer_timeout():
 		bounce_countdown = bounce_countdown - 1
 
 
-
-#func _on_Timer_timeout():
-#	var animation = "attack"
-#	$AnimatedSprite.play(animation)
-		
 func _physics_process(delta):
 	var movement = direction * speed * delta
 
@@ -128,6 +132,7 @@ func _physics_process(delta):
 	# Animate skeleton based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
+		emit_signal("movement")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
@@ -181,6 +186,7 @@ func animates_monster(direction: Vector2):
 func arise():
 	other_animation_playing = true
 	$AnimatedSprite.play("spawn")
+	emit_signal("spawn")
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spawn": 
@@ -191,8 +197,9 @@ func _on_AnimatedSprite_animation_finished():
 	other_animation_playing = false
 
 
-func _on_AnimatedSprite_frame_changed():
+func _on_AnimatedSprite_frame_changed(): #enemy attacking player
 	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 7:
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
+			emit_signal("attacking")

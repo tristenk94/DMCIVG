@@ -25,6 +25,13 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Ballbot Signals
+signal spawn
+signal movement
+signal attacking
+signal detected_player
+signal death
+
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,6 +106,10 @@ func _on_Timer_timeout():
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
 			#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
+			
+		emit_signal("detected_player", player_relative_position.length())
+		#we can move this up so this signal always transmits, 
+		#and strength based on player's position
 
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
@@ -133,6 +144,7 @@ func _physics_process(delta):
 	# Animate ballbot based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
+		emit_signal("movement")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
@@ -186,6 +198,7 @@ func animates_monster(direction: Vector2):
 func arise():
 	other_animation_playing = true
 	$AnimatedSprite.play("spawn")
+	emit_signal("spawn")
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spawn": 
@@ -201,3 +214,4 @@ func _on_AnimatedSprite_frame_changed():
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
+			emit_signal("attacking")

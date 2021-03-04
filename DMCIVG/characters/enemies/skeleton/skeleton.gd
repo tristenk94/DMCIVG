@@ -89,6 +89,7 @@ func hit(damage):
 func _on_Timer_timeout():
 	# Calculate the position of the player relative to the skeleton
 	var player_relative_position = player.position - position
+	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
 
 	if player_relative_position.length() <= 16:
 		# If player is near, don't move but turn toward it
@@ -98,12 +99,8 @@ func _on_Timer_timeout():
 	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
-		#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
 		
-		emit_signal("detected_player", player_relative_position.length())
-		#we can move this up so this signal always transmits, 
-		#and strength based on player's position
-
+		
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
 		var random_number = rng.randf()

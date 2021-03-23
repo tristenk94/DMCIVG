@@ -5,7 +5,7 @@ var tilemap
 var tree_tilemap
 
 # Spawner variables
-export var spawn_area : Rect2 = Rect2(50, 150, 100, 100) #made this 100 x 100
+export var spawn_area : Rect2 = Rect2(50, 150, 700, 700)
 export var max_skeletons = 4
 export var start_skeletons = 2
 var skeleton_count = 0
@@ -13,13 +13,6 @@ var skeleton_scene = preload("res://characters/enemies/skeleton/skeleton.tscn")
 
 # Random number generator
 var rng = RandomNumberGenerator.new()
-
-# Skeleton Spawner Signals
-signal spawning_enemies
-signal all_enemies_defeated
-
-signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
-#this is for a special puzzle room
 
 func _ready():
 	# Get tilemaps references
@@ -29,10 +22,9 @@ func _ready():
 	# Initialize random number generator
 	rng.randomize()
 	
-	# Create skeleton
+	# Create skeletons
 	for i in range(start_skeletons):
 		instance_skeleton()
-		emit_signal("spawning_enemies", skeleton_count) #returns signal with amt of enemies
 	skeleton_count = start_skeletons
 
 func instance_skeleton():
@@ -53,7 +45,7 @@ func instance_skeleton():
 	# Play skeleton's birth animation
 	skeleton.arise()
 	
-func test_position(position : Vector2): #redefine this function to ensure in bounds, can rename with tiles (the ones that ahrin used here)
+func test_position(position : Vector2):
 	# Check if the cell type in this position is grass or sand
 	var cell_coord = tilemap.world_to_map(position)
 	var cell_type_id = tilemap.get_cellv(cell_coord)
@@ -76,11 +68,3 @@ func _on_Timer_timeout():
 		
 func _on_Skeleton_death():
 	skeleton_count = skeleton_count - 1
-
-
-##can make a function here, once all skeletons are killed, emit a signal, room cleared or something
-#using func _process(delta) and skeleton_count == 0
-func _process(delta):
-	if skeleton_count == 0 and delta >= 100:
-		emit_signal("all_enemies_defeated")
-		#timer connection goes here to also emit the within time signal constraint

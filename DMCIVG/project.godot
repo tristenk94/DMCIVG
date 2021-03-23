@@ -8,16 +8,37 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Enemy_Detection_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Enemy Detection State Machine.gd"
+}, {
+"base": "Node",
+"class": "Health_State_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Health State Machine.gd"
+}, {
+"base": "Node",
+"class": "Minor_Event_Stat_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Minor Event State Machine.gd"
+} ]
 _global_script_class_icons={
-
+"Enemy_Detection_Machine": "",
+"Health_State_Machine": "",
+"Minor_Event_Stat_Machine": ""
 }
 
 [application]
 
 config/name="DMCIVG"
 run/main_scene="res://scenes/levelTest/levelTest.tscn"
-config/icon="res://icon.png"
+config/icon="res://item_icons/icon.png"
+
+[autoload]
+
+JsonData="*res://JSONData.gd"
 
 [display]
 
@@ -28,9 +49,14 @@ window/stretch/aspect="keep"
 
 [input]
 
-attack={
+primary_attack={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+secondary_attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
  ]
 }
 

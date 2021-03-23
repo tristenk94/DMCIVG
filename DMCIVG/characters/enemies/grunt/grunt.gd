@@ -25,11 +25,18 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Grunt Signals
+signal spawn
+signal movement
+signal attacking
+signal detected_player
+signal death
+
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#player = get_tree().root.get_node("Root/player") #in the default code
-	player = get_node("../player") # ok for single instance
+	player = get_tree().root.get_node("Background/player") #in the default code
+	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
 	rng.randomize()
@@ -74,7 +81,7 @@ func _process(delta):
 
 func hit(damage):
 	health -= damage
-	print("hit called")
+	#print("hit called")
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -89,6 +96,8 @@ func hit(damage):
 func _on_Timer_timeout():
 	# Calculate the position of the player relative to the grunt
 	var player_relative_position = player.position - position
+	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+
 
 	if player_relative_position.length() <= 16:
 		# If player is near, don't move but turn toward it
@@ -98,7 +107,6 @@ func _on_Timer_timeout():
 	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
-			#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
 
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
@@ -133,6 +141,7 @@ func _physics_process(delta):
 	# Animate grunt based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
+		emit_signal("movement")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
@@ -186,6 +195,7 @@ func animates_monster(direction: Vector2):
 func arise():
 	other_animation_playing = true
 	$AnimatedSprite.play("spawn")
+	emit_signal("spawn")
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spawn": 
@@ -197,7 +207,8 @@ func _on_AnimatedSprite_animation_finished():
 
 
 func _on_AnimatedSprite_frame_changed():
-	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 1:
+	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 3:
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
+			emit_signal("attacking")

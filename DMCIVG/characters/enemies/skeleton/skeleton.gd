@@ -25,16 +25,23 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Skeleton Signals
+signal spawn
+signal movement
+signal attacking
+signal detected_player
+signal death
+
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#player = get_tree().root.get_node("Root/player") #in the default code
-	player = get_node("../player") # ok for single instance
+	player = get_tree().root.get_node("Background/player") #in the default code
+	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
 	rng.randomize()
 
-#delta is frames passed
+
 #delta is frames passed
 func _process(delta):
 	#base health regen
@@ -48,7 +55,6 @@ func _process(delta):
 		var target = $RayCast2D.get_collider()
 		#print(target)
 		if target != null and target.name == "player" and player.health > 0: #DETECTED TO STATE MACHINE
-			#THIS LINE OF CODE IS NOT WOKRING, THE PLAYER IS NOT BEING DETECTED
 			# Play attack animation
 			other_animation_playing = true
 			
@@ -64,17 +70,11 @@ func _process(delta):
 			$AnimatedSprite.play("attack")
 			# Add cooldown time to current time
 			next_attack_time = now + attack_cooldown_time
-			#print("done")
-			
-#		else:
-#			print("fail1")
-#	else:
-#			print("fail2")
-	
+
 
 func hit(damage):
 	health -= damage
-	print("hit called")
+	#print("hit called")
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -89,6 +89,7 @@ func hit(damage):
 func _on_Timer_timeout():
 	# Calculate the position of the player relative to the skeleton
 	var player_relative_position = player.position - position
+	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
 
 	if player_relative_position.length() <= 16:
 		# If player is near, don't move but turn toward it
@@ -98,8 +99,8 @@ func _on_Timer_timeout():
 	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
-			#PLAYER IS IN RANGE, NOW EMIT SIGNAL TO STATEMACHINE FOR FIGHTING
-
+		
+		
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
 		var random_number = rng.randf()
@@ -113,11 +114,6 @@ func _on_Timer_timeout():
 		bounce_countdown = bounce_countdown - 1
 
 
-
-#func _on_Timer_timeout():
-#	var animation = "attack"
-#	$AnimatedSprite.play(animation)
-		
 func _physics_process(delta):
 	var movement = direction * speed * delta
 
@@ -133,10 +129,11 @@ func _physics_process(delta):
 	# Animate skeleton based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
+		emit_signal("movement")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
-		$RayCast2D.cast_to = direction.normalized() * 32
+		$RayCast2D.cast_to = direction.normalized() * 40
 
 
 #-------------------------------------------ANIMATION FUNCTIONS-------------------------------------------
@@ -186,6 +183,7 @@ func animates_monster(direction: Vector2):
 func arise():
 	other_animation_playing = true
 	$AnimatedSprite.play("spawn")
+	emit_signal("spawn")
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "spawn": 
@@ -196,8 +194,9 @@ func _on_AnimatedSprite_animation_finished():
 	other_animation_playing = false
 
 
-func _on_AnimatedSprite_frame_changed():
-	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 1:
+func _on_AnimatedSprite_frame_changed(): #enemy attacking player
+	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 7:
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
+			emit_signal("attacking")

@@ -17,7 +17,11 @@ _global_script_class_icons={
 
 config/name="DMCIVG"
 run/main_scene="res://scenes/levelTest/levelTest.tscn"
-config/icon="res://icon.png"
+config/icon="res://item_icons/icon.png"
+
+[autoload]
+
+JsonData="*res://JSONData.gd"
 
 [display]
 

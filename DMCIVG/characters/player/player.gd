@@ -40,6 +40,8 @@ var attack_cooldown_time = 1000 #this equals 5s cooldown
 var next_attack_time = 0
 var attack_damage = 100
 
+
+
 func _physics_process(delta):
 	# Get player input
 	var direction: Vector2
@@ -130,3 +132,5 @@ func _process(delta):
 	if new_health != health:
 		health = new_health
 		#emit_signal("player_stats_changed", self) #connect this to health bar
+
+	

@@ -82,6 +82,7 @@ func _process(delta):
 func hit(damage):
 	health -= damage
 	#print("hit called")
+	$HealthDisplay.update_healthbar(health)
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:

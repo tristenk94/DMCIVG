@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -10,8 +10,10 @@
 [ext_resource path="res://characters/spawners/grunt spawner/grunt spawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://characters/enemies/skeleton/skeleton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://characters/spawners/ballbot spawner/ballbot spawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://gui/health.gd" type="Script" id=11]
 
 [node name="Background" type="Node2D"]
+position = Vector2( -1, -1 )
 
 [node name="Floor" type="TileMap" parent="."]
 position = Vector2( 6704.85, 1506.94 )
@@ -26,35 +28,37 @@ position = Vector2( -113.631, -2471.76 )
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+show_behind_parent = true
 position = Vector2( 42.763, -24.26 )
 current = true
 zoom = Vector2( 4, 4 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="player"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
-[node name="Health" type="ColorRect" parent="player/CanvasLayer"]
+[node name="health" type="ColorRect" parent="CanvasLayer"]
 anchor_left = 0.349
 anchor_top = 5.381
 anchor_right = 0.349
 anchor_bottom = 5.381
-margin_left = -463.669
-margin_top = 57.2203
-margin_right = -322.669
-margin_bottom = 87.2203
+margin_left = -1170.04
+margin_top = -3473.91
+margin_right = -670.042
+margin_bottom = -3438.91
 color = Color( 0, 0, 0, 0.627451 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bar" type="ColorRect" parent="player/CanvasLayer/Health"]
+[node name="bar" type="ColorRect" parent="CanvasLayer/health"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.0
-margin_top = 6.0
-margin_right = -1.0
-margin_bottom = -6.0
-color = Color( 1, 0.196078, 0.196078, 1 )
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.00003
+margin_bottom = -2.0
+color = Color( 0.196078, 1, 0.196078, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,3 +108,5 @@ start_merchants = 0
 position = Vector2( -6002.7, -5935.66 )
 max_skeletons = 6
 start_skeletons = 3
+[connection signal="health_amount" from="player" to="CanvasLayer/health" method="_on_player_health_amount"]
+[connection signal="player_stats_changed" from="player" to="CanvasLayer/health" method="_on_player_player_stats_changed"]

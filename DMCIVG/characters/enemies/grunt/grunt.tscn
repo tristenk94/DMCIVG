@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://characters/enemies/grunt/Grunt Idle.png" type="Texture" id=1]
 [ext_resource path="res://characters/enemies/grunt/Grunt Attack.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://characters/enemies/grunt/Grunt Run.png" type="Texture" id=4]
 [ext_resource path="res://characters/enemies/grunt/Grunt Death.png" type="Texture" id=5]
 [ext_resource path="res://characters/enemies/grunt/Grunt Spawn.png" type="Texture" id=6]
+[ext_resource path="res://gui/HealthDisplay.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -107,108 +108,108 @@ region = Rect2( 0, 161, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 161, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 23, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 138, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 46, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 115, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=19]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 69, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 92, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=20]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 92, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 69, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=21]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 115, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 46, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=22]
 flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 138, 41, 23 )
+atlas = ExtResource( 6 )
+region = Rect2( 0, 23, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=23]
 flags = 4
-atlas = ExtResource( 4 )
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=24]
 flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 23, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=25]
 flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 46, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 23, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=26]
 flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 69, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 46, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=27]
 flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 92, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 69, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=28]
 flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 115, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 92, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=29]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 161, 41, 23 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 115, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=30]
 flags = 4
-atlas = ExtResource( 6 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 138, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=31]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 115, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=32]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 92, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 23, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=33]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 69, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 46, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=34]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 46, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 69, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=35]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 23, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 92, 41, 23 )
 
 [sub_resource type="AtlasTexture" id=36]
 flags = 4
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 41, 23 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 115, 41, 23 )
 
 [sub_resource type="SpriteFrames" id=37]
 animations = [ {
@@ -222,20 +223,20 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": false,
+"name": "spawn",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
 "loop": true,
 "name": "attack",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"frames": [ SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": false,
-"name": "spawn",
-"speed": 4.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=38]
@@ -304,6 +305,9 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit = SubResource( 39 )
+
+[node name="HealthDisplay" parent="." instance=ExtResource( 7 )]
+position = Vector2( -23.545, -10 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

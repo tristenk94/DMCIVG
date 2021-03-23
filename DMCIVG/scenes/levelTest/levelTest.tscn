@@ -75,8 +75,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="skele 1" parent="." instance=ExtResource( 3 )]
-position = Vector2( -889.465, 1305.85 )
+[node name="skeleton" parent="." instance=ExtResource( 3 )]
+position = Vector2( -766.568, 2047.47 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
@@ -86,15 +86,14 @@ position = Vector2( 2.1189, 0 )
 build_mode = 1
 polygon = PoolVector2Array( -1249.29, 1707.39, -588.089, 1712.15, -578.575, -466.481, 39.8125, -456.968, 58.8398, -114.476, 1590.54, -90.6921, 1595.29, 1117.54, 896.042, 1141.33, 900.798, 741.753, 63.5964, 751.266, 58.8398, 1816.8, 2289.79, 1835.82, 2304.06, -547.348, 572.577, -533.077, 563.063, -1061.08, -1168.42, -1046.81, -1154.15, 218.502, -2067.46, 228.015, -2072.22, 1697.88 )
 
-[node name="merch" parent="." instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 921.656, 1219.69 )
+[node name="merchant" parent="." instance=ExtResource( 4 )]
+position = Vector2( -1252.36, 2402.05 )
 
 [node name="grunt" parent="." instance=ExtResource( 5 )]
-position = Vector2( -715.238, 1764.23 )
+position = Vector2( -482.156, 2226.16 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( -964.01, 1748.94 )
+[node name="ballbot" parent="." instance=ExtResource( 6 )]
+position = Vector2( -1281.85, 2028.64 )
 
 [node name="Health State Machine" type="Node" parent="."]
 script = ExtResource( 8 )

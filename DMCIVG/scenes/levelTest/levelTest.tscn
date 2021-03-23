@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -6,9 +6,28 @@
 [ext_resource path="res://characters/enemies/merchant/merchant.tscn" type="PackedScene" id=4]
 [ext_resource path="res://characters/enemies/grunt/grunt.tscn" type="PackedScene" id=5]
 [ext_resource path="res://characters/enemies/ballbot/ballbot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/levelTest/0 % Health.gd" type="Script" id=7]
+[ext_resource path="res://scenes/levelTest/Health State Machine.gd" type="Script" id=8]
+[ext_resource path="res://scenes/levelTest/19% Health.gd" type="Script" id=9]
+[ext_resource path="res://scenes/levelTest/100% Health.gd" type="Script" id=10]
+[ext_resource path="res://scenes/levelTest/79% Health.gd" type="Script" id=11]
+[ext_resource path="res://scenes/levelTest/49% Health.gd" type="Script" id=12]
+[ext_resource path="res://scenes/levelTest/Detected.gd" type="Script" id=13]
+[ext_resource path="res://scenes/levelTest/No Enemy.gd" type="Script" id=14]
+[ext_resource path="res://scenes/levelTest/Minor Event State Machine.gd" type="Script" id=15]
+[ext_resource path="res://scenes/levelTest/Threat Level 0.gd" type="Script" id=16]
+[ext_resource path="res://scenes/levelTest/Threat Level 3.gd" type="Script" id=17]
+[ext_resource path="res://scenes/levelTest/Enemy Detection State Machine.gd" type="Script" id=18]
+[ext_resource path="res://scenes/levelTest/Detected 2.gd" type="Script" id=19]
+[ext_resource path="res://scenes/levelTest/Threat Level 1.gd" type="Script" id=20]
+[ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
+[ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
 
 [node name="Background" type="Node2D"]
 position = Vector2( 10901.3, 536.215 )
+__meta__ = {
+"_edit_vertical_guides_": [ -24916.4 ]
+}
 
 [node name="Floor" type="TileMap" parent="."]
 position = Vector2( 10385.3, 14489 )
@@ -76,3 +95,53 @@ position = Vector2( -715.238, 1764.23 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( -964.01, 1748.94 )
+
+[node name="Health State Machine" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="100% Health" type="Node" parent="Health State Machine"]
+script = ExtResource( 10 )
+
+[node name="79% Health" type="Node" parent="Health State Machine"]
+script = ExtResource( 11 )
+
+[node name="49% Health" type="Node" parent="Health State Machine"]
+script = ExtResource( 12 )
+
+[node name="19% Health" type="Node" parent="Health State Machine"]
+script = ExtResource( 9 )
+
+[node name="0 % Health" type="Node" parent="Health State Machine"]
+script = ExtResource( 7 )
+
+[node name="Minor Event State Machine" type="Node" parent="."]
+script = ExtResource( 15 )
+
+[node name="Threat Level 0" type="Node" parent="Minor Event State Machine"]
+script = ExtResource( 16 )
+
+[node name="Threat Level 1" type="Node" parent="Minor Event State Machine"]
+script = ExtResource( 20 )
+
+[node name="Threat Level 2" type="Node" parent="Minor Event State Machine"]
+script = ExtResource( 21 )
+
+[node name="Threat Level 3" type="Node" parent="Minor Event State Machine"]
+script = ExtResource( 17 )
+
+[node name="Threat Level 4" type="Node" parent="Minor Event State Machine"]
+script = ExtResource( 22 )
+
+[node name="Enemy Detection State Machine" type="Node" parent="."]
+script = ExtResource( 18 )
+
+[node name="No Enemy" type="Node" parent="Enemy Detection State Machine"]
+script = ExtResource( 14 )
+
+[node name="Detected" type="Node" parent="Enemy Detection State Machine"]
+script = ExtResource( 13 )
+
+[node name="Detected 2" type="Node" parent="Enemy Detection State Machine"]
+script = ExtResource( 19 )
+[connection signal="death" from="player" to="Health State Machine" method="_on_player_death"]
+[connection signal="health_amount" from="player" to="Health State Machine" method="_on_player_health_amount"]

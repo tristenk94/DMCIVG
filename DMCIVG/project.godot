@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Enemy_Detection_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Enemy Detection State Machine.gd"
+}, {
+"base": "Node",
+"class": "Health_State_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Health State Machine.gd"
+}, {
+"base": "Node",
+"class": "Minor_Event_Stat_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Minor Event State Machine.gd"
+} ]
 _global_script_class_icons={
-
+"Enemy_Detection_Machine": "",
+"Health_State_Machine": "",
+"Minor_Event_Stat_Machine": ""
 }
 
 [application]

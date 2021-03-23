@@ -197,6 +197,7 @@ func hit(damage):
 	var old_health = health #temp var to hold new to old in case info is needed
 	health -= damage
 	emit_signal("player_stats_changed", self) #connect this to health bar
+	$HealthDisplay.update_healthbar(health)
 	if health <= 0:
 		#emit signal death
 		emit_signal("death")

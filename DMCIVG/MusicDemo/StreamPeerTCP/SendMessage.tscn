@@ -1,0 +1,175 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Control.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+margin_top = 0.925415
+margin_right = 1024.0
+margin_bottom = 593.925
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale0" type="Button" parent="Control"]
+margin_left = 585.188
+margin_top = 243.146
+margin_right = 658.188
+margin_bottom = 301.146
+text = "Scale0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale1" type="Button" parent="Control"]
+margin_left = 669.404
+margin_top = 242.22
+margin_right = 742.404
+margin_bottom = 300.22
+text = "Scale1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale2" type="Button" parent="Control"]
+margin_left = 748.992
+margin_top = 242.221
+margin_right = 821.992
+margin_bottom = 300.221
+text = "Scale2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale3" type="Button" parent="Control"]
+margin_left = 831.357
+margin_top = 243.146
+margin_right = 904.357
+margin_bottom = 301.146
+text = "Scale3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scale4" type="Button" parent="Control"]
+margin_left = 917.424
+margin_top = 243.146
+margin_right = 990.424
+margin_bottom = 301.146
+text = "Scale4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BPM" type="HSlider" parent="Control"]
+anchor_left = 0.00125907
+anchor_top = 0.00380854
+anchor_right = 0.00125907
+anchor_bottom = 0.00380854
+margin_left = 82.8133
+margin_top = 81.0012
+margin_right = 282.813
+margin_bottom = 121.001
+min_value = 80.0
+max_value = 240.0
+step = 20.0
+value = 80.0
+tick_count = 8
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/BPM"]
+anchor_top = 0.0237286
+anchor_bottom = 0.0237286
+margin_left = 7.88055
+margin_top = -15.2946
+margin_right = 47.8806
+margin_bottom = -1.29459
+text = "BPM"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoopLength" type="HSlider" parent="Control"]
+margin_left = 86.9921
+margin_top = 169.357
+margin_right = 286.992
+margin_bottom = 209.357
+min_value = 8.0
+max_value = 32.0
+value = 16.0
+tick_count = 24
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/LoopLength"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Loop Length"
+
+[node name="transpose" type="HSlider" parent="Control"]
+margin_left = 87.9174
+margin_top = 254.498
+margin_right = 287.917
+margin_bottom = 294.498
+min_value = -12.0
+max_value = 12.0
+tick_count = 25
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/transpose"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Transpose"
+
+[node name="rhythmProb" type="HSlider" parent="Control"]
+margin_left = 89.7684
+margin_top = 328.534
+margin_right = 289.768
+margin_bottom = 368.534
+max_value = 1.0
+value = 1.0
+tick_count = 2
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/rhythmProb"]
+margin_right = 121.0
+margin_bottom = 14.0
+text = "Rhythm Probability"
+
+[node name="noteProb" type="HSlider" parent="Control"]
+margin_left = 95.321
+margin_top = 407.197
+margin_right = 295.321
+margin_bottom = 447.197
+max_value = 1.0
+value = 1.0
+tick_count = 2
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="Control/noteProb"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Note Probability"
+[connection signal="button_down" from="Control/Scale0" to="Control" method="_on_Scale0_button_down"]
+[connection signal="button_down" from="Control/Scale1" to="Control" method="_on_Scale1_button_down"]
+[connection signal="button_down" from="Control/Scale2" to="Control" method="_on_Scale2_button_down"]
+[connection signal="button_down" from="Control/Scale3" to="Control" method="_on_Scale3_button_down"]
+[connection signal="button_down" from="Control/Scale4" to="Control" method="_on_Scale4_button_down"]
+[connection signal="value_changed" from="Control/BPM" to="Control" method="_on_BPM_value_changed"]
+[connection signal="value_changed" from="Control/LoopLength" to="Control" method="_on_LoopLength_value_changed"]
+[connection signal="value_changed" from="Control/transpose" to="Control" method="_on_transpose_value_changed"]
+[connection signal="value_changed" from="Control/rhythmProb" to="Control" method="_on_rhythmProb_value_changed"]
+[connection signal="value_changed" from="Control/noteProb" to="Control" method="_on_noteProb_value_changed"]

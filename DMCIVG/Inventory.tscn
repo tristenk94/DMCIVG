@@ -14,10 +14,11 @@ position = Vector2( 523.187, 79.6948 )
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -414.0
-margin_top = 2.0
-margin_right = -207.0
-margin_bottom = 114.0
+margin_left = -364.0
+margin_top = -2.0
+margin_right = -155.0
+margin_bottom = 111.0
+rect_scale = Vector2( 0.8, 1 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

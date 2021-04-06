@@ -150,6 +150,10 @@ func _input(event):
 				elif target.name.find("ballbot") >= 0:
 					# Ballbot hit!
 					target.hit(attack_damage)
+				elif target.name.find("boss") >= 0: #add check for pillars or shield down! here
+					# boss hit!
+					target.hit(attack_damage)
+					
 			
 			# Add cooldown time to current time
 			stab_next_attack_time = now + stab_attack_cooldown_time
@@ -176,6 +180,9 @@ func _input(event):
 					target.hit(charge_attack_damage)
 				elif target.name.find("ballbot") >= 0:
 					# Ballbot hit!
+					target.hit(charge_attack_damage)
+				elif target.name.find("boss") >= 0: #add check for pillars or shield down! here
+					# boss hit!
 					target.hit(charge_attack_damage)
 					
 			# Play attack animation

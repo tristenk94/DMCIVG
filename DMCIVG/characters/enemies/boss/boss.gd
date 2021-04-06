@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-# Skeleton stats
-var health = 100
-var health_max = 100
-var health_regeneration = 1
+# boss stats
+var health = 500
+var health_max = 500
+var health_regeneration = 5
 
 # Node references
 var player
@@ -12,21 +12,27 @@ var player
 var rng = RandomNumberGenerator.new()
 
 # Movement variables
-export var speed = 380
+export var speed = 425
 var direction : Vector2
 var last_direction = Vector2(0, 1)
 var bounce_countdown = 0
-var speed_cooldown = 0
 
 # Attack variables
-var attack_damage = 10
-var attack_cooldown_time = 1500
+var attack_damage = 5 #rework meelee dmg? to like medium 20-30 ish
+var attack_cooldown_time = 2000
 var next_attack_time = 0
+
+# Fireball variables
+#var amount_of_fireballs = 3
+var fireball_damage = 5
+var next_fireball_time = 0
+var fireball_cooldown = 10
+var fireball_scene = preload("res://characters/enemies/boss/projectile/fireball.tscn")
 
 # Animation variables
 var other_animation_playing = false
 
-# Skeleton Signals
+# boss Signals
 signal spawn
 signal movement
 signal attacking
@@ -42,14 +48,13 @@ func _ready():
 	
 	rng.randomize()
 
-
 #delta is frames passed
 func _process(delta):
 	#base health regen
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
 	
-	# Check if Skeleton can attack
+	# Check if boss can attack
 	var now = OS.get_ticks_msec()
 	if now >= next_attack_time:
 		# What's the target?
@@ -71,12 +76,19 @@ func _process(delta):
 			$AnimatedSprite.play("attack")
 			# Add cooldown time to current time
 			next_attack_time = now + attack_cooldown_time
-
+			#print("next_attack_time", next_attack_time)
+			#print("done")
+			
+#		else:
+#			print("fail1")
+#	else:
+#			print("fail2")
+	
 
 func hit(damage):
 	health -= damage
 	#print("hit called")
-	$HealthDisplay.update_healthbar(health)
+	#$HealthDisplay.update_healthbar(health)
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -89,23 +101,59 @@ func hit(damage):
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
-	# Calculate the position of the player relative to the skeleton
+	# Calculate the position of the player relative to the boss
 	var player_relative_position = player.position - position
 	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+	#print("pos: ", player_relative_position, " player.position: ", player.position, "position: ", position)
 	#print(player_relative_position.length())
+	#print("fireball cooldown: ", fireball_cooldown)
+	fireball_cooldown-=1
+	
+	#add particle effects as the boss is charging up to shoot fireballs
+	if(fireball_cooldown <= 20):#here we are repurposing the fireball with no speed just so it makes the particles
+		var num_fireballs
+		if fireball_cooldown <= 20:
+			num_fireballs = 2
+		if fireball_cooldown <= 10:
+			num_fireballs = 5
+		elif fireball_cooldown <= 5: #more particles if we get closer to big cast
+			num_fireballs = 10
+	
+		# Create fireballs
+		for i in range(num_fireballs):
+			#print("instancing a fireball")
+			var fireball = fireball_scene.instance()
+			#add_child(fireball)
+			fireball.attack_damage = 0
+			fireball.direction = (player.position - position).normalized() #towards player
+			fireball.position = position + Vector2(rng.randf_range(-200, 200), rng.randf_range(-200, 200)) + last_direction.normalized() * 8 
+			# spawn at a random position up at the boss
+			fireball.explodeHelper()
+			
+			fireball.speed = 0
+			
+			get_tree().root.get_node("Background").add_child(fireball)
 
-	if player_relative_position.length() <= 130:
+	if player_relative_position.length() <= 600:
 		# If player is near, don't move but turn toward it
 		direction = Vector2.ZERO
 		last_direction = player_relative_position.normalized()
+		#possibly add attack cooldown here?
+		#print("near")
 		
-	elif player_relative_position.length() <= 500 and bounce_countdown == 0:
+	elif player_relative_position.length() <= 900 and bounce_countdown == 0:
 		# If player is within range, move toward it
+		#print("in range!")
 		direction = player_relative_position.normalized()
 		
-		
+	##based on a certain distance, call fireball function
+	elif player_relative_position.length() <= 800 and fireball_cooldown <= 0:
+		shootFireballs()
+		fireball_cooldown = 30
+
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
+		#print("toofar!")
 		var random_number = rng.randf()
 		if random_number < 0.05:
 			direction = Vector2.ZERO
@@ -118,13 +166,6 @@ func _on_Timer_timeout():
 
 
 func _physics_process(delta):
-	
-	if speed_cooldown > 1:
-		speed_cooldown -= 1
-		speed = 0
-	else:
-		speed = 380
-	
 	var movement = direction * speed * delta
 
 	var collision = move_and_collide(movement)
@@ -136,14 +177,14 @@ func _physics_process(delta):
 	#else : 
 		#print("nope")
 	
-	# Animate skeleton based on direction
+	# Animate boss based on direction
 	if not other_animation_playing:
 		animates_monster(direction)
 		emit_signal("movement")
 		
 	# Turn RayCast2D toward movement direction
 	if direction != Vector2.ZERO:
-		$RayCast2D.cast_to = direction.normalized() * 40
+		$RayCast2D.cast_to = direction.normalized() * 50
 
 
 #-------------------------------------------ANIMATION FUNCTIONS-------------------------------------------
@@ -178,8 +219,6 @@ func animates_monster(direction: Vector2):
 		
 		# Play the walk animation
 		$AnimatedSprite.play(animation)
-		#print($AnimatedSprite.is_flipped_h())
-		#print("im walking here", direction)
 	else:
 		# Choose idle animation based on last movement direction and play it
 		#var animation = get_animation_direction(last_direction) + "_idle"
@@ -204,11 +243,30 @@ func _on_AnimatedSprite_animation_finished():
 	other_animation_playing = false
 
 
-func _on_AnimatedSprite_frame_changed(): #enemy attacking player
-	if $AnimatedSprite.animation.ends_with("attack") and $AnimatedSprite.frame == 7:
+func _on_AnimatedSprite_frame_changed():
+	if $AnimatedSprite.animation.ends_with("attack") and  $AnimatedSprite.frame == 5: #modify frames 1-4 to be flash and the fifth hurts the player
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking")
-			speed_cooldown = 120 #receive speed penalty for attacking
-			speed = speed * 0.1
+		
+			
+func shootFireballs():
+	#spawn 1-3 fireballs, they will go in player's last position + or - 100 in precision (trying to predict), after 5s they despawn
+	var num_fireballs = rng.randi_range(2, 5)
+	#signal fireballs fired?
+	#print('instancing numfireballs', num_fireballs)
+	# Create fireballs
+	for i in range(num_fireballs):
+		#print("instancing a fireball")
+		var fireball = fireball_scene.instance()
+		#add_child(fireball)
+		fireball.attack_damage = rng.randi_range(20, 40) #random amt of damage
+		fireball.direction = (player.position - position).normalized() #towards player
+		fireball.position = position + Vector2(rng.randf_range(-200, 200), rng.randf_range(-200, 200)) + last_direction.normalized() * 8 
+		# spawn at arandom position up at the boss
+		
+		fireball.speed = 700
+		
+		get_tree().root.get_node("Background").add_child(fireball)
+		#emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies

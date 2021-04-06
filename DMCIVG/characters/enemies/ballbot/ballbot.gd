@@ -16,6 +16,7 @@ export var speed = 425
 var direction : Vector2
 var last_direction = Vector2(0, 1)
 var bounce_countdown = 0
+var speed_cooldown = 0
 
 # Attack variables
 var attack_damage = 10
@@ -98,13 +99,14 @@ func _on_Timer_timeout():
 	# Calculate the position of the player relative to the ballbot
 	var player_relative_position = player.position - position
 	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+	#print(player_relative_position.length())
 	
-	if player_relative_position.length() <= 16:
+	if player_relative_position.length() <= 70:
 		# If player is near, don't move but turn toward it
 		direction = Vector2.ZERO
 		last_direction = player_relative_position.normalized()
 		
-	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
+	elif player_relative_position.length() <= 600 and bounce_countdown == 0:
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
 
@@ -127,6 +129,12 @@ func _on_Timer_timeout():
 #	$AnimatedSprite.play(animation)
 		
 func _physics_process(delta):
+	
+	if speed_cooldown > 1:
+		speed_cooldown -= 1
+	else:
+		speed = 425
+		
 	var movement = direction * speed * delta
 
 	var collision = move_and_collide(movement)
@@ -203,6 +211,8 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
+#	elif $AnimatedSprite.animation == "attack": #resetting speed 
+#		speed = 425
 	other_animation_playing = false
 
 
@@ -211,4 +221,6 @@ func _on_AnimatedSprite_frame_changed():
 		var target = $RayCast2D.get_collider()
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
-			emit_signal("attacking")
+			emit_signal("attacking") #slowing if attacking
+			speed_cooldown = 100 #receive speed penalty for attacking
+			speed = speed * 0.3

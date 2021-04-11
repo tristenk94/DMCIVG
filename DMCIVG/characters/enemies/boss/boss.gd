@@ -141,16 +141,17 @@ func _on_Timer_timeout():
 		#possibly add attack cooldown here?
 		#print("near")
 		
-	elif player_relative_position.length() <= 900 and bounce_countdown == 0:
-		# If player is within range, move toward it
-		#print("in range!")
-		direction = player_relative_position.normalized()
-		
 	##based on a certain distance, call fireball function
 	elif player_relative_position.length() <= 800 and fireball_cooldown <= 0:
 		shootFireballs()
 		fireball_cooldown = 30
-
+		
+	elif player_relative_position.length() <= 900 and bounce_countdown == 0:
+		# If player is within range, move toward it
+		#print("in range!")
+		direction = player_relative_position.normalized()
+	
+	
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
 		#print("toofar!")

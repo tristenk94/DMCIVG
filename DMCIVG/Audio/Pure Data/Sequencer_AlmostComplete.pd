@@ -1,5 +1,5 @@
 #N canvas -8 -8 1920 997 10;
-#X obj 657 955 dac~;
+#X obj 595 971 dac~;
 #N canvas -8 -8 1920 997 9drums 0;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
@@ -2594,7 +2594,7 @@
 #X restore 64 651 pd monomode;
 #X obj 198 136 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 63 256;
-#N canvas 1 82 844 677 monomode 0;
+#N canvas 108 68 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
 #X obj -85 483 *~;
@@ -3231,7 +3231,7 @@
 #X connect 132 3 10 0;
 #X connect 132 4 13 0;
 #X coords 0 -1 1 1 280 160 1 100 100;
-#X restore 637 729 pd 9drums;
+#X restore 594 706 pd 9drums;
 #X msg 1294 302 48 50 57 58 60 62 64 65 69;
 #N canvas 686 116 1083 868 probabilities 0;
 #N canvas 0 50 450 300 (subpatch) 0;
@@ -3254,7 +3254,7 @@
 #X obj -5 309 tabread \$0probs;
 #X obj -4 90 mod;
 #X obj 108 220 hsl 315 8 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 23550 1;
+-1 -1 21587 1;
 #X obj 17 117 /;
 #X obj 53 367 random 1000;
 #X obj -1 48 t f b;
@@ -3706,7 +3706,7 @@
 #X msg 1354 366 48 51 53 55 58 60 63 65 67;
 #X text 1483 322 hang like deep sky;
 #X msg 1314 324 48 51 55 58 60 62 63 65 70;
-#N canvas 43 128 610 640 mym2schorus 0;
+#N canvas 43 128 1015 640 mym2schorus 0;
 #X obj 23 59 inlet~;
 #X obj 466 487 outlet~;
 #X obj 295 500 outlet~;
@@ -3759,7 +3759,7 @@
 #X connect 23 0 20 0;
 #X connect 24 0 22 0;
 #X connect 25 0 11 0;
-#X restore 640 922 pd mym2schorus;
+#X restore 594 882 pd mym2schorus;
 #X text 13 8 random percussion with trigger-probabilitiy controlled
 by a sequencer;
 #X text 14 35 2013 martin brinkmann;
@@ -3782,7 +3782,7 @@ by a sequencer;
 #X msg 851 179 15;
 #X msg 690 77 100 25 100 25 100 25 100 25 100 25 100 25 100 25 100
 25;
-#X msg 736 415 100 50 100 100 50 100 100 50 100;
+#X msg 792 407 100 50 100 100 50 100 100 50 100;
 #X msg 1373 390 48 51 54 48 51 54 60 63 66;
 #X msg 516 59 140;
 #X msg 554 59 160;
@@ -3796,22 +3796,32 @@ by a sequencer;
 #X text 473 38 BPM Any Value;
 #X text 668 10 Probability of Ryhthm within the loop Array of numbers
 (1-100) that are >= the length of the loop;
-#X text 668 166 Density of loop Ryhthmically (1-100);
-#X text 849 160 Overall Length of the Loop (1-32);
+#X text 807 155 Overall Length of the Loop (1-32);
 #X text 362 123 Swing % (1- 100);
 #X text 466 393 The Probability that 1 \, 2 \, or 3 notes can be player
 Simultaneously (0-100);
-#X text 734 372 Probabilities that a given note will be played during
+#X text 790 373 Probabilities that a given note will be played during
 the looping: 9 values (0 - 100);
 #X text 1254 134 Module that selects the notes/scale that the sequencer
 uses. Different integer values result in different scales.;
 #X text 1258 485 Module to Pitch Shift the entire loop Up and Down
 Values can vary.;
-#X text 644 608 Volume control on all insturments: L Top \, L Bot \,
+#X text 588 605 Volume control on all insturments: L Top \, L Bot \,
 R Top \, R Mid \, R Bot 5 values(0-1), f 35;
-#X msg 864 533 0 0 7500 0 0;
-#X text 864 479 Note Length control on all insturments: L Top \, L
+#X msg 821 532 0 0 7500 0 0;
+#X text 820 487 Note Length control on all insturments: L Top \, L
 Bot \, R Top \, R Mid \, R Bot 5 values(0-10000), f 35;
+#X text 628 175 Density of loop Ryhthmically (1-100);
+#X floatatom 698 908 5 0 0 0 - - -;
+#X obj 698 933 dbtorms;
+#X floatatom 698 963 5 0 0 0 - - -;
+#X obj 595 927 *~ 0;
+#X msg 800 876 100;
+#X text 753 914 Master Volume (Range is around 60-100);
+#X msg 693 875 60;
+#X msg 727 876 74;
+#X msg 765 876 88;
+#X msg 835 876 110;
 #X connect 1 0 16 0;
 #X connect 2 0 1 11;
 #X connect 3 0 8 0;
@@ -3832,8 +3842,8 @@ Bot \, R Top \, R Mid \, R Bot 5 values(0-10000), f 35;
 #X connect 12 0 1 11;
 #X connect 13 0 1 11;
 #X connect 15 0 1 11;
-#X connect 16 0 0 0;
-#X connect 16 1 0 1;
+#X connect 16 0 62 0;
+#X connect 16 1 62 0;
 #X connect 19 0 7 0;
 #X connect 20 0 19 0;
 #X connect 21 0 22 0;
@@ -3866,4 +3876,14 @@ Bot \, R Top \, R Mid \, R Bot 5 values(0-10000), f 35;
 #X connect 44 0 8 3;
 #X connect 45 0 8 1;
 #X connect 46 0 1 9;
-#X connect 57 0 1 10;
+#X connect 56 0 1 10;
+#X connect 59 0 60 0;
+#X connect 60 0 61 0;
+#X connect 61 0 62 1;
+#X connect 62 0 0 0;
+#X connect 62 0 0 1;
+#X connect 63 0 59 0;
+#X connect 65 0 59 0;
+#X connect 66 0 59 0;
+#X connect 67 0 59 0;
+#X connect 68 0 59 0;

@@ -57,9 +57,8 @@ func _physics_process(delta):
 	# If input is digital, normalize it for diagonal movement
 	if abs(direction.x) == 1 and abs(direction.y) == 1:
 		direction = direction.normalized()
-	
-	# Apply movement
-	var movement = speed * direction * delta
+		
+	var movement
 	
 	if attack_playing: #adjust movement speed based on attacking
 		#emit signal player attacking
@@ -73,6 +72,9 @@ func _physics_process(delta):
 		elif isCharging: 
 			movement = 0 * movement
 			#print("isCharging")
+			
+	# Apply movement
+	movement = speed * direction * delta
 
 	move_and_collide(movement) #move
 	

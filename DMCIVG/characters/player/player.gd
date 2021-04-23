@@ -58,7 +58,7 @@ func _physics_process(delta):
 	if abs(direction.x) == 1 and abs(direction.y) == 1:
 		direction = direction.normalized()
 		
-	var movement
+	var movement = 0
 	
 	if attack_playing: #adjust movement speed based on attacking
 		#emit signal player attacking
@@ -201,7 +201,22 @@ func _input(event):
 			# Add cooldown time to current time
 			charge_next_attack_time = now + charge_attack_cooldown_time
 	
+	elif event.is_action_pressed("ui_select"): #space to interact with objects/switches
+		var target = $RayCast2D.get_collider()
 
+		if target != null: 
+			if target.name.find("switch") >= 0:
+				print("touched switch ", target.current_color) #sound fx goes here
+				
+				if(target.current_color == "red"):
+					target.switchYellow()
+				elif(target.current_color == "yellow"):
+					target.switchGreen()
+				elif(target.current_color == "green"):
+					target.switchRed()
+				else:
+					target.switchRed()
+		
 func hit(damage):
 	var old_health = health #temp var to hold new to old in case info is needed
 	health -= damage

@@ -99,7 +99,7 @@ func _on_Timer_timeout():
 	# Calculate the position of the player relative to the grunt
 	var player_relative_position = player.position - position
 	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
-	#print(player_relative_position.length())
+	#print("grunt is : ", player_relative_position.length())
 
 	if player_relative_position.length() <= 135:
 		# If player is near, don't move but turn toward it

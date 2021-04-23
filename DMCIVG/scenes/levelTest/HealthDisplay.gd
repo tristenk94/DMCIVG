@@ -25,9 +25,9 @@ func _process(delta):
 #function to call when unit health changes
 func update_healthbar(value):
 	healthbar.texture_progress = bar_green
-	if value < healthbar.max_value * 0.7:
+	if value < healthbar.max_value * 0.5:
 		healthbar.texture_progress = bar_yellow
-	if value < healthbar.max_value * 0.35:
+	if value < healthbar.max_value * 0.15:
 		healthbar.texture_progress = bar_red
 	if value < healthbar.max_value:
 		show()

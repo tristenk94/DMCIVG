@@ -39,7 +39,7 @@ signal death
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().root.get_node("Background/player") #in the default code
+	player = get_node("../player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	

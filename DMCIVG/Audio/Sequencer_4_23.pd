@@ -1,5 +1,5 @@
-#N canvas 62 -1057 1745 997 10;
-#X obj 596 1184 dac~;
+#N canvas 183 -1057 1608 999 10;
+#X obj 517 1431 dac~;
 #N canvas 0 23 1680 997 9drums 0;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
@@ -319,31 +319,31 @@
 #X connect 18 0 16 0;
 #X restore -146 478 pd monomode;
 #X obj 108 202 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 6253 1;
 #X obj 109 185 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2.008 256;
 #X obj 169 184 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 108 242 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 6253 1;
 #X obj 109 225 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2 256;
 #X obj 169 224 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 247 158 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 4979 1;
+-262144 -1 -1 6253 1;
 #X obj 248 141 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2 256;
 #X obj 308 140 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
--1 -1 3150 1;
+-1 -1 2835 1;
 #X obj 247 198 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 6253 1;
 #X obj 248 181 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2.0005 256;
 #X obj 308 180 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 247 237 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 0 1;
+-262144 -1 -1 6253 1;
 #X obj 248 220 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2 256;
 #X obj 308 219 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
@@ -998,7 +998,7 @@
 #X connect 18 0 16 0;
 #X restore -167 443 pd monomode;
 #X obj 106 156 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 52 256;
+-1 -1 51 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -1636,7 +1636,7 @@
 #X connect 18 0 16 0;
 #X restore -48 561 pd monomode;
 #X obj 153 136 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 54 256;
+-1 -1 55 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -2274,7 +2274,7 @@
 #X connect 18 0 16 0;
 #X restore 36 619 pd monomode;
 #X obj 198 116 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 59 256;
+-1 -1 58 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -3231,12 +3231,12 @@
 #X connect 132 3 10 0;
 #X connect 132 4 13 0;
 #X coords 0 -1 1 1 280 160 1 100 100;
-#X restore 595 919 pd 9drums;
-#X msg 1330 675 48 50 57 58 60 62 64 65 69;
+#X restore 516 1166 pd 9drums;
+#X msg 1071 1032 48 50 57 58 60 62 64 65 69;
 #N canvas 597 116 1083 868 probabilities 0;
 #N canvas 0 50 450 300 (subpatch) 0;
 #X array \$0probs 16 float 3;
-#A 0 100 50 100 50 100 50 100 50 100 50 100 50 100 50 100 50;
+#A 0 80 0 50 0 60 0 50 0 80 0 60 0 70 0 100 0;
 #X coords 0 100 16 0 320 100 1 0 0;
 #X restore 105 118 graph;
 #X obj -11 22 inlet;
@@ -3254,7 +3254,7 @@
 #X obj -5 309 tabread \$0probs;
 #X obj -4 90 mod;
 #X obj 108 220 hsl 315 8 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 23550 1;
+-1 -1 3925 1;
 #X obj 17 117 /;
 #X obj 53 367 random 1000;
 #X obj -1 48 t f b;
@@ -3311,9 +3311,9 @@
 #X connect 32 0 10 0;
 #X connect 33 0 22 0;
 #X coords 0 100 16 0 330 130 2 100 100;
-#X restore 458 432 pd probabilities;
-#X text 1499 673 hang like;
-#X obj 397 842 route 0 1 2 3 4 5 6 7 8;
+#X restore 585 604 pd probabilities;
+#X text 1240 1030 hang like;
+#X obj 534 1108 route 0 1 2 3 4 5 6 7 8;
 #N canvas 495 95 486 449 swingpos 0;
 #X obj 221 225 mod 2;
 #X obj 188 302 delay 0;
@@ -3321,7 +3321,7 @@
 #X obj 302 185 *;
 #X obj 219 199 t b f f;
 #X obj 82 119 hsl 100 8 0 100 0 1 empty empty empty -33 4 0 10 -262144
--1 -1 4950 1;
+-1 -1 990 1;
 #X obj 229 330 int;
 #X obj 199 32 inlet;
 #X obj 371 17 inlet;
@@ -3353,7 +3353,7 @@
 #X connect 16 0 3 1;
 #X connect 18 0 5 0;
 #X coords 0 -1 1 1 115 30 1 75 100;
-#X restore 455 394 pd swingpos;
+#X restore 582 566 pd swingpos;
 #N canvas 542 71 1184 711 songpos96-16 0;
 #X obj 318 440 + 1;
 #X obj 267 436 float;
@@ -3367,7 +3367,7 @@
 #X obj 172 17 loadbang;
 #X floatatom 126 113 5 30 300 0 bpm - -;
 #X msg -2 85 set \$1;
-#X msg 5 139 215;
+#X msg 5 139 180;
 #X obj 174 112 bng 15 250 50 0 empty empty empty 6 7 0 10 -261234 -1
 -1;
 #X obj 278 636 outlet;
@@ -3489,14 +3489,14 @@
 #X connect 56 0 17 0;
 #X connect 60 0 10 0;
 #X coords 0 -1 1 1 120 30 1 100 100;
-#X restore 477 352 pd songpos96-16;
+#X restore 604 524 pd songpos96-16;
 #N canvas -8 -8 1920 997 noteproba 0;
 #X obj 145 329 moses;
 #X obj 168 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
 -1 -1 9900 1;
 #X obj 191 350 moses;
 #X obj 183 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 4950 1;
+-1 -1 9900 1;
 #X obj 274 307 +;
 #X obj 296 328 +;
 #X obj 198 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
@@ -3509,7 +3509,7 @@
 #X obj 213 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
 -1 -1 9900 1;
 #X obj 228 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 4950 1;
+-1 -1 9900 1;
 #X obj 243 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
 -1 -1 9900 1;
 #X obj 342 378 +;
@@ -3521,7 +3521,7 @@
 #X obj 258 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
 -1 -1 9900 1;
 #X obj 273 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 4950 1;
+-1 -1 9900 1;
 #X obj 288 115 vsl 8 100 0 100 0 1 empty empty empty 0 -9 0 10 -262144
 -1 -1 9900 1;
 #X obj 441 461 +;
@@ -3698,14 +3698,14 @@
 #X connect 67 0 44 0;
 #X connect 68 0 45 0;
 #X coords 0 -1 1 1 300 120 1 100 100;
-#X restore 286 688 pd noteproba;
-#X floatatom 1283 928 5 0 0 0 - - -;
-#X text 1559 736 penta min;
-#X text 1541 715 penta maj;
-#X msg 1370 718 48 50 52 55 57 60 62 64 67;
-#X msg 1390 739 48 51 53 55 58 60 63 65 67;
-#X text 1519 695 hang like deep sky;
-#X msg 1350 697 48 51 55 58 60 62 63 65 70;
+#X restore 285 961 pd noteproba;
+#X floatatom 836 1209 5 0 0 0 - - -;
+#X text 1300 1093 penta min;
+#X text 1282 1072 penta maj;
+#X msg 1111 1075 48 50 52 55 57 60 62 64 67;
+#X msg 1131 1096 48 51 53 55 58 60 63 65 67;
+#X text 1260 1052 hang like deep sky;
+#X msg 1091 1054 48 51 55 58 60 62 63 65 70;
 #N canvas 43 128 1015 640 mym2schorus 0;
 #X obj 23 59 inlet~;
 #X obj 466 487 outlet~;
@@ -3759,87 +3759,119 @@
 #X connect 23 0 20 0;
 #X connect 24 0 22 0;
 #X connect 25 0 11 0;
-#X restore 595 1095 pd mym2schorus;
-#X msg 989 216 100 50 100 50 100 50 100 50 100 50 100 50 100 50 100
+#X restore 516 1342 pd mym2schorus;
+#X msg 925 477 100 50 100 50 100 50 100 50 100 50 100 50 100 50 100
 50;
-#X msg 970 190 100 25 100 25 100 25 100 25 100 25 100 25 100 25 100
-25;
-#X msg 947 164 100 0 100 0 100 0 100 0 100 0 100 0 100 0 100 0 100
-;
-#X floatatom 306 368 5 0 0 0 - - -;
-#X floatatom 672 404 5 0 0 0 - - -;
-#X floatatom 115 600 5 0 0 0 - - -;
-#X floatatom 163 599 5 0 0 0 - - -;
-#X floatatom 71 602 5 0 0 0 - - -;
-#X text 1339 210 Probability of Ryhthm within the loop Array of numbers
+#X floatatom 493 565 5 0 0 0 - - -;
+#X floatatom 799 576 5 0 0 0 - - -;
+#X floatatom 425 920 5 0 0 0 - - -;
+#X floatatom 496 919 5 0 0 0 - - -;
+#X floatatom 356 920 5 0 0 0 - - -;
+#X text 940 309 Probability of Ryhthm within the loop Array of numbers
 (1-100) that are >= the length of the loop;
-#X text 286 345 Swing % (1- 100);
-#X text 861 627 Probabilities that a given note will be played during
+#X text 473 542 Swing % (1- 100);
+#X text 730 745 Probabilities that a given note will be played during
 the looping: 9 values (0 - 100);
-#X text 679 728 Volume control on all insturments: L Top \, L Bot \,
+#X text 750 992 Volume control on all insturments: L Top \, L Bot \,
 R Top \, R Mid \, R Bot 5 values(0-1), f 35;
-#X text 1056 711 Note Length control on all insturments: L Top \, L
+#X text 1179 766 Note Length control on all insturments: L Top \, L
 Bot \, R Top \, R Mid \, R Bot 5 values(0-10000), f 35;
-#X floatatom 987 1111 5 0 0 0 - - -;
-#X obj 697 1151 dbtorms;
-#X floatatom 699 1176 5 0 0 0 - - -;
-#X obj 596 1140 *~ 0;
-#X text 985 1137 Master Volume (Range is around 60-100);
-#X text 1319 618 Select notes/scale that the sequencer uses.;
-#X obj 677 51 netreceive 4242;
-#X msg 677 24 listen 4242;
-#X obj 585 77 print tcp;
+#X floatatom 803 1382 5 0 0 0 - - -;
+#X obj 618 1398 dbtorms;
+#X floatatom 620 1423 5 0 0 0 - - -;
+#X obj 517 1387 *~ 0;
+#X text 801 1408 Master Volume (Range is around 60-100);
+#X text 1154 973 Select notes/scale that the sequencer uses.;
+#X obj 574 49 netreceive 4242;
+#X msg 574 22 listen 4242;
+#X obj 463 69 print tcp;
 #X text 10 3 random percussion with trigger-probabilitiy controlled
 by a sequencer;
 #X text 9 29 2013 martin brinkmann;
 #X text 157 29 modified by Austin and Tomo 2021;
-#X text 1282 953 Pitch Shift (transpose);
+#X text 835 1234 Pitch Shift (transpose);
 #X obj 38 86 loadbang;
 #X msg 39 125 \; pd dsp 1;
-#X text 472 320 BPM;
-#X msg 818 580 100 50 100 100 50 100 100 50 100;
-#X obj 835 515 select 0 1 2;
-#X msg 835 605 100 50 100 100 50 100 100 50 100;
-#X obj 613 705 select 0 1 2;
-#X text 919 516 noteProbArr;
-#X text 782 26 Message: masterVol bpm scaleSelect pitch swingPercent
-triggerProb loopDensity loopLen noteProb1 noteProb2 noteProb3 noteProbArr
-noteLenArr volArr, f 146;
-#X text 1051 685 noteLenArr;
-#X text 706 703 volArr;
-#X text 998 61 (14 Parameters Total);
-#X obj 678 83 unpack f f f f f f f f f f f f f f;
-#X text 680 388 loopDensity (ryhthmical density) (1-100);
-#X text 39 583 noteProb1;
-#X text 169 581 noteProb3;
-#X text 101 583 noteProb2;
-#X text 13 624 The Probability that 1 \, 2 \, or 3 notes can be played
+#X msg 676 845 100 50 100 100 50 100 100 50 100;
+#X obj 639 779 select 0 1 2;
+#X msg 693 870 100 50 100 100 50 100 100 50 100;
+#X obj 674 967 select 0 1 2;
+#X text 218 846 The Probability that 1 \, 2 \, or 3 notes can be played
 Simultaneously (0-100);
-#X text 1600 787 5 - phrygDom;
-#X text 1585 763 4 - phrygian;
-#X text 1615 814 6 - persian;
-#X text 1624 840 7 - lydian;
-#X msg 1410 765 48 49 51 53 55 56 58 60 61;
-#X msg 1426 788 48 49 52 53 55 56 58 60 61;
-#X msg 1444 811 48 49 52 53 54 56 59 60 61;
-#X msg 1453 837 48 50 52 54 55 57 59 60 62;
-#X obj 1330 646 select 0 1 2 3 4 5 6 7 8;
-#X text 1634 861 8 - mixolydian;
-#X msg 1467 860 48 50 52 53 55 57 58 60 62;
-#X msg 797 557 100 100 100 100 100 100 100 100 100;
-#X text 1054 131 triggerProb (rhythm probability);
-#X obj 946 134 select 0 1 2 3 4;
-#X obj 962 685 select 0 1 2 3;
-#X msg 990 764 0 0 150 0 0;
-#X msg 1003 783 0 0 80 0 0;
-#X msg 976 743 0 0 300 0 0;
-#X msg 963 723 0 0 1000 0 0;
-#X msg 1037 265 85 0 0 0 50 0 0 0 75 0 0 0 0 0 0 0;
-#X msg 1013 240 100 0 0 0 100 0 0 0 100 0 0 0 100 0 0 0;
-#X text 785 418 loopLen (2-32);
-#X msg 613 761 0 0 0.4 0 0;
-#X msg 703 810 0 0 0.5 0 0;
-#X msg 656 786 0 0 0.45 0 0;
+#X text 1341 1144 5 - phrygDom;
+#X text 1326 1120 4 - phrygian;
+#X text 1356 1171 6 - persian;
+#X text 1365 1197 7 - lydian;
+#X msg 1151 1122 48 49 51 53 55 56 58 60 61;
+#X msg 1167 1145 48 49 52 53 55 56 58 60 61;
+#X msg 1185 1168 48 49 52 53 54 56 59 60 61;
+#X msg 1194 1194 48 50 52 54 55 57 59 60 62;
+#X obj 1071 1003 select 0 1 2 3 4 5 6 7 8;
+#X text 1375 1218 8 - mixolydian;
+#X msg 1208 1217 48 50 52 53 55 57 58 60 62;
+#X msg 655 822 100 100 100 100 100 100 100 100 100;
+#X text 942 342 triggerProb (rhythm probability);
+#X obj 835 343 select 0 1 2 3 4;
+#X obj 1094 810 select 0 1 2 3;
+#X msg 835 376 85 0 0 0 50 0 0 0 75 0 0 0 0 0 0 0;
+#X text 1009 592 loopLen (2-32);
+#X msg 657 1007 0 0 0.4 0 0;
+#X msg 756 1054 0 0 0.5 0 0;
+#X msg 709 1030 0 0 0.45 0 0;
+#X text 1061 371 "Least Tension";
+#X text 1102 396 "Less Tension";
+#X text 1156 426 "Normal Tension";
+#X text 1232 447 "More Tension";
+#X text 1267 472 "Max Tension";
+#X msg 853 402 80 0 50 0 60 0 50 0 80 0 60 0 70 0 100 0;
+#X msg 874 428 80 0 70 10 70 0 50 10 80 0 80 0 100 10 80 10;
+#X msg 894 452 80 50 60 25 60 25 60 0 60 25 60 0 60 25 90 25;
+#X text 959 53 (15 Parameters Total);
+#X obj 575 81 unpack f f f f f f f f f f f f f f f;
+#X floatatom 523 410 5 0 0 0 - - -;
+#X obj 311 111 s masterVol;
+#X obj 804 1351 r masterVol;
+#X obj 519 379 r bpm;
+#X obj 369 135 s bpm;
+#X obj 999 144 s bpmSelect;
+#X text 671 20 Message: masterVol bpm scaleSelect pitch swingPercent
+triggerProb loopDensity loopLen noteProb1 noteProb2 noteProb3 noteProbArr
+noteLenArr volArr bpmSelect, f 155;
+#X obj 609 381 r bpmSelect;
+#X obj 1068 973 r scaleSelect;
+#X obj 398 155 s scaleSelect;
+#X obj 463 177 s pitch;
+#X obj 829 1185 r pitch;
+#X obj 508 197 s swingPercent;
+#X obj 425 523 r swingPercent;
+#X obj 593 218 s triggerProb;
+#X obj 844 318 r triggerProb;
+#X obj 663 247 s loopDensity;
+#X obj 846 542 r loopDensity;
+#X obj 940 591 r loopLen;
+#X obj 728 271 s loopLen;
+#X obj 776 254 s noteProb1;
+#X obj 355 884 r noteProb1;
+#X obj 429 884 r noteProb2;
+#X obj 834 237 s noteProb2;
+#X obj 504 884 r noteProb3;
+#X obj 867 222 s noteProb3;
+#X obj 641 747 r noteProbArr;
+#X obj 915 205 s noteProbArr;
+#X obj 1086 784 r noteLenArr;
+#X obj 961 187 s noteLenArr;
+#X obj 670 938 r volArr;
+#X obj 1000 168 s volArr;
+#X text 846 561 (ryhthmical density) (1-100);
+#X msg 1093 843 300 300 1000 300 300;
+#X msg 1106 863 300 300 300 300 300;
+#X msg 1121 884 300 300 150 300 300;
+#X msg 1133 903 300 300 80 300 300;
+#X text 1231 840 NEVER set note length below 80!;
+#X text 1256 858 IT WILL DESTROY YOUR EARS;
+#X obj 577 443 spigot;
+#X text 613 363 0 or 1;
+#X floatatom 640 418 5 0 0 0 - - -;
 #X connect 1 0 16 0;
 #X connect 2 0 1 11;
 #X connect 3 0 8 0;
@@ -3860,77 +3892,96 @@ Simultaneously (0-100);
 #X connect 12 0 1 11;
 #X connect 13 0 1 11;
 #X connect 15 0 1 11;
-#X connect 16 0 33 0;
-#X connect 16 1 33 0;
+#X connect 16 0 31 0;
+#X connect 16 1 31 0;
 #X connect 17 0 3 1;
-#X connect 18 0 3 1;
-#X connect 19 0 3 1;
-#X connect 20 0 6 0;
-#X connect 21 0 3 2;
-#X connect 22 0 8 2;
-#X connect 23 0 8 3;
-#X connect 24 0 8 1;
-#X connect 30 0 31 0;
-#X connect 31 0 32 0;
-#X connect 32 0 33 1;
-#X connect 33 0 0 0;
-#X connect 33 0 0 1;
-#X connect 36 0 38 0;
-#X connect 36 0 55 0;
-#X connect 37 0 36 0;
-#X connect 43 0 44 0;
-#X connect 46 0 8 4;
-#X connect 47 0 72 0;
-#X connect 47 1 46 0;
-#X connect 47 2 48 0;
-#X connect 48 0 8 4;
-#X connect 49 0 83 0;
-#X connect 49 1 85 0;
-#X connect 49 2 84 0;
-#X connect 55 0 30 0;
-#X connect 55 1 7 0;
-#X connect 55 2 69 0;
-#X connect 55 3 9 0;
-#X connect 55 4 20 0;
-#X connect 55 5 74 0;
-#X connect 55 6 21 0;
-#X connect 55 7 3 3;
-#X connect 55 8 24 0;
-#X connect 55 9 22 0;
-#X connect 55 10 23 0;
-#X connect 55 11 47 0;
-#X connect 55 12 75 0;
-#X connect 55 13 49 0;
-#X connect 65 0 1 11;
-#X connect 66 0 1 11;
-#X connect 67 0 1 11;
-#X connect 68 0 1 11;
-#X connect 69 0 2 0;
-#X connect 69 1 15 0;
-#X connect 69 2 12 0;
-#X connect 69 3 13 0;
-#X connect 69 4 65 0;
-#X connect 69 5 66 0;
-#X connect 69 6 67 0;
-#X connect 69 7 68 0;
-#X connect 69 8 71 0;
-#X connect 71 0 1 11;
-#X connect 72 0 8 4;
-#X connect 74 0 19 0;
-#X connect 74 1 18 0;
-#X connect 74 2 17 0;
-#X connect 74 3 81 0;
-#X connect 74 4 80 0;
-#X connect 75 0 79 0;
-#X connect 75 1 78 0;
-#X connect 75 2 76 0;
-#X connect 75 3 77 0;
-#X connect 76 0 1 10;
-#X connect 77 0 1 10;
-#X connect 78 0 1 10;
-#X connect 79 0 1 10;
-#X connect 80 0 3 1;
-#X connect 81 0 3 1;
-#X connect 83 0 1 9;
-#X connect 84 0 1 9;
-#X connect 85 0 1 9;
+#X connect 18 0 6 0;
+#X connect 19 0 3 2;
+#X connect 20 0 8 2;
+#X connect 21 0 8 3;
+#X connect 22 0 8 1;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 1;
+#X connect 31 0 0 0;
+#X connect 31 0 0 1;
+#X connect 34 0 36 0;
+#X connect 34 0 77 0;
+#X connect 35 0 34 0;
+#X connect 41 0 42 0;
+#X connect 43 0 8 4;
+#X connect 44 0 59 0;
+#X connect 44 1 43 0;
+#X connect 44 2 45 0;
+#X connect 45 0 8 4;
+#X connect 46 0 65 0;
+#X connect 46 1 67 0;
+#X connect 46 2 66 0;
+#X connect 52 0 1 11;
+#X connect 53 0 1 11;
+#X connect 54 0 1 11;
+#X connect 55 0 1 11;
+#X connect 56 0 2 0;
+#X connect 56 1 15 0;
+#X connect 56 2 12 0;
+#X connect 56 3 13 0;
+#X connect 56 4 52 0;
+#X connect 56 5 53 0;
+#X connect 56 6 54 0;
+#X connect 56 7 55 0;
+#X connect 56 8 58 0;
+#X connect 58 0 1 11;
+#X connect 59 0 8 4;
+#X connect 61 0 63 0;
+#X connect 61 1 73 0;
+#X connect 61 2 74 0;
+#X connect 61 3 75 0;
+#X connect 61 4 17 0;
+#X connect 62 0 111 0;
+#X connect 62 1 112 0;
+#X connect 62 2 113 0;
+#X connect 62 3 114 0;
+#X connect 63 0 3 1;
+#X connect 65 0 1 9;
+#X connect 66 0 1 9;
+#X connect 67 0 1 9;
+#X connect 73 0 3 1;
+#X connect 74 0 3 1;
+#X connect 75 0 3 1;
+#X connect 77 0 79 0;
+#X connect 77 1 82 0;
+#X connect 77 2 87 0;
+#X connect 77 3 88 0;
+#X connect 77 4 90 0;
+#X connect 77 5 92 0;
+#X connect 77 6 94 0;
+#X connect 77 7 97 0;
+#X connect 77 8 98 0;
+#X connect 77 9 101 0;
+#X connect 77 10 103 0;
+#X connect 77 11 105 0;
+#X connect 77 12 107 0;
+#X connect 77 13 109 0;
+#X connect 77 14 83 0;
+#X connect 78 0 117 0;
+#X connect 80 0 28 0;
+#X connect 81 0 78 0;
+#X connect 85 0 117 1;
+#X connect 85 0 119 0;
+#X connect 86 0 56 0;
+#X connect 89 0 9 0;
+#X connect 91 0 18 0;
+#X connect 93 0 61 0;
+#X connect 95 0 19 0;
+#X connect 96 0 3 3;
+#X connect 99 0 22 0;
+#X connect 100 0 20 0;
+#X connect 102 0 21 0;
+#X connect 104 0 44 0;
+#X connect 106 0 62 0;
+#X connect 108 0 46 0;
+#X connect 111 0 1 10;
+#X connect 112 0 1 10;
+#X connect 113 0 1 10;
+#X connect 114 0 1 10;
+#X connect 117 0 7 0;

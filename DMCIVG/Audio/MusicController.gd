@@ -3,7 +3,7 @@ extends Node
 var socket
 
 ## --- Pure Data global variables
-var masterVol = 95 setget setMasterVol
+var masterVol = 100 setget setMasterVol
 var bpm = MIN_BPM setget setBPM
 var scaleSelect = 1 # 0 - 4
 var pitch = 0 setget setPitch, getPitch
@@ -24,13 +24,15 @@ var noteLenArr = 0 # 0 -> 3, --> decreasing note length
 # select array of instruments' volumes
 var volArr = 0 # 0 -> 2, --> increasing volume
 
+var bpmSelect = 0 setget setBPMSelect # 1 = change bpm, 0 = don't change bpm.
+
 ## -- Global constants
 enum {LOW, MEDIUM, HIGH}
 enum NoteLength {LONGEST, LONG, SHORT, SHORTEST} # tension/staccato
 enum Scales {HANG, HANG_DEEP, MAJOR_PENT, MINOR_PENT, PHRYGIAN, PHRYG_DOM, PERSIAN, LYDIAN, MIXOLYDIAN}
 enum TriggerProb {MIN_TENSION, LESS_TENSION, NORMAL_TENSION, MORE_TENSION, MAX_TENSION}
 
-const MAX_MASTER_VOLUME = 105
+const MAX_MASTER_VOLUME = 108 # since volArr values never exceeds 0.5
 const MIN_MASTER_VOLUME = 95
 const MAX_BPM = 215
 const MIN_BPM = 80
@@ -47,16 +49,17 @@ var area2_visited = false
 var area3_visited = false 
 var in_boss_room = false
 var enemy_count = 0 setget setEnemyCount
+var dangerZone_enemy_count = 0 setget setDangerZoneCount
 var player
 
 # Other variables
 var rng = RandomNumberGenerator.new()
-var format_message = "%s %s %s %s %s %s %s %s %s %s %s %s %s %s;" # 14 parameters
+var format_message = "%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s;" # 15 parameters
 
 ## --- Functions
 func sendMessage():
 	var message = format_message % [masterVol, bpm, scaleSelect, pitch, swingPercent, triggerProb, loopDensity, 
-		loopLen, noteProb1, noteProb2, noteProb3, noteProbArr, noteLenArr, volArr]
+		loopLen, noteProb1, noteProb2, noteProb3, noteProbArr, noteLenArr, volArr, bpmSelect]
 	socket.put_data(message.to_ascii())
 	# print(message)
 
@@ -72,7 +75,7 @@ func _ready():
 
 
 
-func setMessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13):
+func setMessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14):
 	masterVol = var0
 	bpm = var1
 	scaleSelect = var2
@@ -87,6 +90,7 @@ func setMessage(var0, var1, var2, var3, var4, var5, var6, var7, var8, var9, var1
 	noteProbArr = var11
 	noteLenArr = var12
 	volArr = var13
+	bpmSelect = var14
 
 # --------- Pure Data Setters ---------
 func setMasterVol(new_masterVol):
@@ -136,22 +140,30 @@ func setNoteLenArr(new_arr):
 
 func setVolArr(new_arr):
 	volArr = new_arr
+	
+func setBPMSelect(set):
+	if (set == 0 || set == 1):
+		bpmSelect = set
+
 # --------------------
 
 ## Other setters
+# Enemy Count affects scale selection.
 func setEnemyCount(increment):
 	enemy_count += increment
-	if enemy_count == 0:
-		setTriggerProb(0) # TODO: configure trigger probs in PD
-		if (!area3_visited):
-			setNoteLenArr(NoteLength.LONGEST)
-	if enemy_count == 1:
-		if (!in_boss_room):
-			setNoteLenArr(NoteLength.LONG)
-		setTriggerProb(1)
-	if enemy_count >= 2:
-		setTriggerProb(2)
+	if enemy_count == 0: # 0 enemies detected
+		# set instrument volumes (volArr)
+		pass
+	if enemy_count == 1: 
+		pass
+	if enemy_count == 2:
+		pass
+	if enemy_count >= 3:
+		pass
 
+
+func setDangerZoneCount(increment):
+	dangerZone_enemy_count += increment
 
 func setRandomScale():
 	rng.randomize()
@@ -173,6 +185,19 @@ func getPitch():
 ## --- Signals --- ##
 
 ## Main Screen
+#	setMasterVol(100)
+#	setBPM(90)
+#	setScale(Scales.MINOR_PENT)
+#	setPitch(-2)
+#	setSwingPercent(10)
+#	setTriggerProb(TriggerProb.LEAST_TENSION)
+#	setLoopDensity(MEDIAN_VALUE)
+#	setLoopLen(TRIPLE_TIME_LOOPLENGTH)
+#	setNoteProb(10, 10, 10)
+#	setNoteProbArr(LOW)
+#	setNoteLenArr(NoteLength.LONGEST)
+#	setVolArr(MEDIUM)
+#	sendMessage()
 
 ## Pause Menu
 
@@ -189,16 +214,17 @@ func _on_Area1_body_entered(body):
 			if area1_visited == false:
 				setPitch(DEFAULT_PITCH)
 				area1_visited = true
-			
 			setSwingPercent(MEDIAN_VALUE)
-			setTriggerProb(LOW)
+			setTriggerProb(TriggerProb.NORMAL_TENSION)
 			setLoopDensity(MEDIAN_VALUE)
 			setLoopLen(DEFAULT_LOOPLENGTH)
 			setNoteProb(10, 10, 10)
 			setNoteProbArr(LOW)
 			setNoteLenArr(NoteLength.LONGEST)
 			setVolArr(MEDIUM)
+			setBPMSelect(1) # IMPORTANT: Only change BPM for areas/menus (otherwise "stuttering" occurs often).
 			sendMessage()
+			setBPMSelect(0) # Remember to turn off BPM change
 
 
 func _on_Area2_body_entered(body):
@@ -212,14 +238,16 @@ func _on_Area2_body_entered(body):
 			setScale(Scales.PHRYG_DOM)
 			#setPitch(DEFAULT_PITCH) # pitch is based on health
 			setSwingPercent(MEDIAN_VALUE)
-			setTriggerProb(MEDIUM)
+			setTriggerProb(TriggerProb.MORE_TENSION)
 			setLoopDensity(MEDIAN_VALUE)
 			setLoopLen(DEFAULT_LOOPLENGTH)
 			setNoteProb(50, 50, 50)
 			setNoteProbArr(MEDIUM)
 			setNoteLenArr(NoteLength.LONGEST)
 			setVolArr(MEDIUM)
+			setBPMSelect(1)
 			sendMessage()
+			setBPMSelect(0) # Turn off BPM change
 
 
 func _on_Area3_body_entered(body):
@@ -234,14 +262,16 @@ func _on_Area3_body_entered(body):
 			setScale(Scales.PERSIAN)
 			#setPitch(DEFAULT_PITCH) # pitch is based on health
 			setSwingPercent(MEDIAN_VALUE)
-			setTriggerProb(HIGH)
+			setTriggerProb(TriggerProb.MAX_TENSION)
 			setLoopDensity(MEDIAN_VALUE)
 			setLoopLen(DEFAULT_LOOPLENGTH)
 			setNoteProb(70, 70, 80)
 			setNoteProbArr(MEDIUM)
-			setNoteLenArr(NoteLength.SHORT)
+			setNoteLenArr(NoteLength.SHORT) # note length is always short/shortest in bossroom
 			setVolArr(HIGH)
+			setBPMSelect(1)
 			sendMessage()
+			setBPMSelect(0) # Turn off BPM change
 			
 func _on_Area3_body_exited(body):
 	in_boss_room = false
@@ -280,7 +310,7 @@ func _on_0__Health_health_min():
 	setScale(Scales.MINOR_PENT)
 	setPitch(-2)
 	setSwingPercent(10)
-	setTriggerProb(LOW)
+	setTriggerProb(TriggerProb.LESS_TENSION)
 	setLoopDensity(MEDIAN_VALUE)
 	setLoopLen(DEFAULT_LOOPLENGTH)
 	setNoteProb(10, 10, 10)
@@ -342,27 +372,23 @@ func _on_PlayerDetectionArea_body_exited(body):
 
 func _on_DangerZone1_body_entered(body):
 	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
-		setNoteLenArr(NoteLength.SHORT)
-		print("danger zone 1.")
-		sendMessage()
+		setDangerZoneCount(1)
+		if dangerZone_enemy_count >= 1:
+			if (in_boss_room):
+				setNoteLenArr(NoteLength.SHORTEST)
+			else:
+				setNoteLenArr(NoteLength.SHORT)
+			print("danger zone.")
+			sendMessage()
 
 
 func _on_DangerZone1_body_exited(body):
 	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
-		setNoteLenArr(NoteLength.LONG)
-		print("danger zone 1 exited.")
-		sendMessage()
-
-
-func _on_DangerZone2_body_entered(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
-		setNoteLenArr(NoteLength.SHORTEST)
-		print("danger zone 2.")
-		sendMessage()
-
-
-func _on_DangerZone2_body_exited(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
-		setNoteLenArr(NoteLength.SHORT)
-		print("danger zone 1")
-		sendMessage()
+		setDangerZoneCount(-1)
+		if dangerZone_enemy_count == 0:
+			if (in_boss_room):
+				setNoteLenArr(NoteLength.SHORT)
+			else:
+				setNoteLenArr(NoteLength.LONG)
+			print("danger zone exited.")
+			sendMessage()

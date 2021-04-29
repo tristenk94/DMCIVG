@@ -31,13 +31,13 @@
 [ext_resource path="res://Audio/MusicController.gd" type="Script" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1436.48, 804.12 )
+extents = Vector2( 1330.88, 735.646 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 711.227
+radius = 628.317
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 440.74
+radius = 281.77
 
 [node name="Main" type="Node"]
 
@@ -68,6 +68,7 @@ zoom = Vector2( 6, 6 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/Camera2D/PlayerDetectionArea"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="DangerZone1" type="Area2D" parent="Background/player"]
@@ -81,7 +82,7 @@ shape = SubResource( 2 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/DangerZone2"]
-position = Vector2( -24.9355, 19.3008 )
+position = Vector2( -25.6357, 21.3623 )
 shape = SubResource( 3 )
 
 [node name="skeleton" parent="Background" instance=ExtResource( 3 )]
@@ -249,6 +250,8 @@ script = ExtResource( 29 )
 [connection signal="threat_3" from="Background/Minor Event State Machine/Threat Level 3" to="MusicController" method="_on_Threat_Level_3_threat_3"]
 [connection signal="threat_4" from="Background/Minor Event State Machine/Threat Level 4" to="MusicController" method="_on_Threat_Level_4_threat_4"]
 [connection signal="body_entered" from="Background/Area1" to="MusicController" method="_on_Area1_body_entered"]
+[connection signal="body_exited" from="Background/Area1" to="MusicController" method="_on_Area1_body_exited"]
 [connection signal="body_entered" from="Background/Area2" to="MusicController" method="_on_Area2_body_entered"]
+[connection signal="body_exited" from="Background/Area2" to="MusicController" method="_on_Area2_body_exited"]
 [connection signal="body_entered" from="Background/Area3" to="MusicController" method="_on_Area3_body_entered"]
 [connection signal="body_exited" from="Background/Area3" to="MusicController" method="_on_Area3_body_exited"]

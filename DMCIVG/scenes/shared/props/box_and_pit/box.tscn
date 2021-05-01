@@ -6,6 +6,10 @@
 extents = Vector2( 32.1897, 31.9733 )
 
 [node name="box" type="RigidBody2D"]
+z_index = 1
+z_as_relative = false
+collision_layer = 2
+collision_mask = 2
 gravity_scale = 0.0
 linear_damp = 10.0
 angular_damp = 2.0

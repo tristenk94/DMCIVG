@@ -58,23 +58,25 @@ func _physics_process(delta):
 	if abs(direction.x) == 1 and abs(direction.y) == 1:
 		direction = direction.normalized()
 		
-	var movement  = speed * direction * delta
+	var movement_modifier = speed #initalized to speed when started
+	var movement = 0
 	
 	if attack_playing: #adjust movement speed based on attacking
 		#emit signal player attacking
 		emit_signal("attacking")
 		if isStabbing:
-			movement = 0.95 * movement
+			movement_modifier = 0.95 * speed
 			#print("isStabbing")
 		elif isSlashing:
-			movement = 0.7 * movement
+			movement_modifier = 0.7 * speed
 			#print("isSlashing")
 		elif isCharging: 
-			movement = 0 * movement
+			movement_modifier = 0 * speed
 			#print("isCharging")
+	
 			
 	# Apply movement
-	movement = speed * direction * delta
+	movement = movement_modifier * direction * delta
 
 	move_and_collide(movement) #move
 	
@@ -162,7 +164,7 @@ func _input(event):
 
 		
 	elif event.is_action_pressed("secondary_attack"): #if we have secondary attack + charge left, shoot the super laser
-		print("secondary attack pressed")
+		#print("secondary attack pressed")
 		# Check if player can attack
 		var now = OS.get_ticks_msec()
 		if charges_remaining >= 1 && now >= next_attack_time:	
@@ -200,6 +202,22 @@ func _input(event):
 			$pivot/AnimatedSprite.play("laser")
 			# Add cooldown time to current time
 			charge_next_attack_time = now + charge_attack_cooldown_time
+
+	elif event.is_action_pressed("ui_select"): #space to interact with objects/switches
+		var target = $RayCast2D.get_collider()
+
+		if target != null: 
+			if target.name.find("switch") >= 0:
+				print("touched switch ", target.current_color) #sound fx goes here
+				
+				if(target.current_color == "red"):
+					target.switchYellow()
+				elif(target.current_color == "yellow"):
+					target.switchGreen()
+				elif(target.current_color == "green"):
+					target.switchRed()
+				else:
+					target.switchRed()
 	
 
 func hit(damage):
@@ -209,8 +227,10 @@ func hit(damage):
 	if health <= 0:
 		#emit signal death
 		emit_signal("death")
+		speed = 0 #cannot move anymore, add anim for death?
 	else:
-		$AnimationPlayer.play("hit")
+		$pivot/AnimatedSprite.play("get hit") #play hit anim
+		$AnimationPlayer.play("hit") #flash red
 		#emit signal getting hit, show health amount
 		emit_signal("health_amount", old_health, health)
 

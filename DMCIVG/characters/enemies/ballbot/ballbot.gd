@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+# link to main node
+var main_node_ref 
+
 # ballbot stats
 var health = 100
 var health_max = 100
@@ -47,6 +50,7 @@ func _ready():
 	self.connect('detected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_detected_player')
 	self.connect('undetected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_undetected_player')
 	player = get_tree().root.get_node("Background/player") #in the default code
+	main_node_ref = get_tree().root.get_node("Background")
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
@@ -258,8 +262,7 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
-#	elif $AnimatedSprite.animation == "attack": #resetting speed 
-#		speed = 425
+		main_node_ref.score += 5000
 	other_animation_playing = false
 
 

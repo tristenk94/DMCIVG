@@ -4,9 +4,9 @@ onready var sprite : Sprite = $Sprite #reference to the sprite in case we need t
 
 var puzzle_completed = false
 
-func _ready():
-	print("puzzle loaded")
-	
+#func _ready():
+#	print("puzzle loaded")
+#
 
 func _on_pit_body_entered(body: RigidBody2D):
 	print("body entered: ", body)

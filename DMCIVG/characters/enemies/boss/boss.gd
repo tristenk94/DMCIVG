@@ -134,7 +134,7 @@ func _on_Timer_timeout():
 			
 			get_tree().root.get_node("Background").add_child(fireball)
 
-	if player_relative_position.length() <= 600:
+	if player_relative_position.length() <= 500:
 		# If player is near, don't move but turn toward it
 		direction = Vector2.ZERO
 		last_direction = player_relative_position.normalized()
@@ -144,7 +144,7 @@ func _on_Timer_timeout():
 	##based on a certain distance, call fireball function
 	elif player_relative_position.length() <= 800 and fireball_cooldown <= 0:
 		shootFireballs()
-		fireball_cooldown = 30
+		fireball_cooldown = 50
 		
 	elif player_relative_position.length() <= 900 and bounce_countdown == 0:
 		# If player is within range, move toward it
@@ -267,7 +267,7 @@ func shootFireballs():
 		fireball.position = position + Vector2(rng.randf_range(-200, 200), rng.randf_range(-200, 200)) + last_direction.normalized() * 8 
 		# spawn at arandom position up at the boss
 		
-		fireball.speed = 700
+		fireball.speed = 600
 		
 		get_tree().root.get_node("Background").add_child(fireball)
 		#emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies

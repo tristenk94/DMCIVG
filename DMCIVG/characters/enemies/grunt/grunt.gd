@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+# link to main node
+var main_node_ref 
+
 # grunt stats
 var health = 100
 var health_max = 100
@@ -43,6 +46,7 @@ signal death
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().root.get_node("Background/player") #in the default code
+	main_node_ref = get_tree().root.get_node("Background")
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	self.connect('detected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_detected_player')
@@ -257,6 +261,7 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
+		main_node_ref.score += 1500
 	other_animation_playing = false
 
 

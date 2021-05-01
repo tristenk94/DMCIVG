@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = true
+const DEBUG = false
 signal music_bpm
 
 var fsm: Health_State_Machine

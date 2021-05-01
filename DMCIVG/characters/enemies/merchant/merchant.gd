@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+# link to main node
+var main_node_ref 
+
 # merchant stats
 var health = 100
 var health_max = 100
@@ -249,6 +252,7 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
+		main_node_ref.score += 1000
 	other_animation_playing = false
 
 

@@ -1,6 +1,7 @@
 extends Node
 
 const DEBUG = false
+signal health_min
 
 var fsm: Health_State_Machine
 var new_state
@@ -9,7 +10,7 @@ var new_state
 func enter():
 	if DEBUG:
 		print("0% Health otherwise known as dead")
-	emit_signal("music_bpm", 60)
+	emit_signal("health_min")
 	
 
 func exit(next_state):

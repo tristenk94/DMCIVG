@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -22,15 +22,33 @@
 [ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
 [ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
 [ext_resource path="res://scenes/levelTest/levelTest.gd" type="Script" id=28]
+[ext_resource path="res://characters/enemies/boss/boss.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/shared/props/box_and_pit/box_and_pit_puzzle.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/shared/props/door/door_open.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/shared/props/door/door_locked.tscn" type="PackedScene" id=26]
+[ext_resource path="res://gui/greenhp.png" type="Texture" id=27]
+[ext_resource path="res://gui/GUI.gd" type="Script" id=28]
+[ext_resource path="res://Audio/MusicController.gd" type="Script" id=29]
 
-[node name="Background" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1330.88, 735.646 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 628.317
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 281.77
+
+[node name="Main" type="Node"]
+
+[node name="Background" type="Node2D" parent="."]
 position = Vector2( 10901.3, 536.215 )
 script = ExtResource( 28 )
 __meta__ = {
 "_edit_vertical_guides_": [ -24916.4 ]
 }
 
-[node name="Floor" type="TileMap" parent="."]
+[node name="Floor" type="TileMap" parent="Background"]
 position = Vector2( 10385.3, 14489 )
 scale = Vector2( 8, 8 )
 tile_set = ExtResource( 2 )
@@ -43,8 +61,8 @@ position = Vector2( 1031.74, 10890.5 )
 z_as_relative = false
 speed = 1800
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2( -104.654, 255.221 )
+[node name="Camera2D" type="Camera2D" parent="Background/player"]
+position = Vector2( -31.1898, 22.8757 )
 current = true
 zoom = Vector2( 6, 6 )
 
@@ -121,53 +139,91 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[node name="PlayerDetectionArea" type="Area2D" parent="Background/player/Camera2D"]
+visible = false
 
-[node name="Health State Machine" type="Node" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/Camera2D/PlayerDetectionArea"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="DangerZone1" type="Area2D" parent="Background/player"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/DangerZone1"]
+position = Vector2( -26.2051, 27.0225 )
+shape = SubResource( 2 )
+
+[node name="DangerZone2" type="Area2D" parent="Background/player"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/DangerZone2"]
+position = Vector2( -25.6357, 21.3623 )
+shape = SubResource( 3 )
+
+[node name="skeleton" parent="Background" instance=ExtResource( 3 )]
+position = Vector2( 1540.45, 10891.3 )
+
+[node name="skeleton2" parent="Background" instance=ExtResource( 3 )]
+position = Vector2( 3479.09, 10645.5 )
+
+[node name="skeleton3" parent="Background" instance=ExtResource( 3 )]
+position = Vector2( 2584.86, 11034.6 )
+
+[node name="merchant" parent="Background" instance=ExtResource( 4 )]
+position = Vector2( -2156.33, 8028.54 )
+
+[node name="grunt" parent="Background" instance=ExtResource( 5 )]
+position = Vector2( 2925.23, 8612.66 )
+
+[node name="ballbot" parent="Background" instance=ExtResource( 6 )]
+position = Vector2( 4499.02, 8738.43 )
+
+[node name="Health State Machine" type="Node" parent="Background"]
 script = ExtResource( 8 )
 
-[node name="100% Health" type="Node" parent="Health State Machine"]
+[node name="100% Health" type="Node" parent="Background/Health State Machine"]
 script = ExtResource( 10 )
 
-[node name="79% Health" type="Node" parent="Health State Machine"]
+[node name="79% Health" type="Node" parent="Background/Health State Machine"]
 script = ExtResource( 11 )
 
-[node name="49% Health" type="Node" parent="Health State Machine"]
+[node name="49% Health" type="Node" parent="Background/Health State Machine"]
 script = ExtResource( 12 )
 
-[node name="19% Health" type="Node" parent="Health State Machine"]
+[node name="19% Health" type="Node" parent="Background/Health State Machine"]
 script = ExtResource( 9 )
 
-[node name="0 % Health" type="Node" parent="Health State Machine"]
+[node name="0 % Health" type="Node" parent="Background/Health State Machine"]
 script = ExtResource( 7 )
 
-[node name="Minor Event State Machine" type="Node" parent="."]
+[node name="Minor Event State Machine" type="Node" parent="Background"]
 script = ExtResource( 15 )
 
-[node name="Threat Level 0" type="Node" parent="Minor Event State Machine"]
+[node name="Threat Level 0" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 16 )
 
-[node name="Threat Level 1" type="Node" parent="Minor Event State Machine"]
+[node name="Threat Level 1" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 20 )
 
-[node name="Threat Level 2" type="Node" parent="Minor Event State Machine"]
+[node name="Threat Level 2" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 21 )
 
-[node name="Threat Level 3" type="Node" parent="Minor Event State Machine"]
+[node name="Threat Level 3" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 17 )
 
-[node name="Threat Level 4" type="Node" parent="Minor Event State Machine"]
+[node name="Threat Level 4" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 22 )
 
-[node name="Enemy Detection State Machine" type="Node" parent="."]
+[node name="Enemy Detection State Machine" type="Node" parent="Background"]
 script = ExtResource( 18 )
 
-[node name="No Enemy" type="Node" parent="Enemy Detection State Machine"]
+[node name="No Enemy" type="Node" parent="Background/Enemy Detection State Machine"]
 script = ExtResource( 14 )
 
-[node name="Detected" type="Node" parent="Enemy Detection State Machine"]
+[node name="Detected" type="Node" parent="Background/Enemy Detection State Machine"]
 script = ExtResource( 13 )
 
-[node name="Detected 2" type="Node" parent="Enemy Detection State Machine"]
+[node name="Detected 2" type="Node" parent="Background/Enemy Detection State Machine"]
 script = ExtResource( 19 )
 
 [node name="puzzle room collision" type="StaticBody2D" parent="."]
@@ -179,3 +235,76 @@ collision_mask = 3
 polygon = PoolVector2Array( -685.044, 10268, -3247.27, 10253.8, -3247.27, 9238.14, -2092.66, 9231.02, -2089.1, 9612.32, -1971.5, 9608.76, -1971.5, 9220.33, -1337.18, 9223.89, -1337.18, 9116.98, -3368.43, 9124.11, -3368.43, 10360.7, -685.044, 10374.9 )
 [connection signal="death" from="player" to="Health State Machine" method="_on_player_death"]
 [connection signal="health_amount" from="player" to="Health State Machine" method="_on_player_health_amount"]
+[node name="boss" parent="Background" instance=ExtResource( 23 )]
+position = Vector2( -764.355, 3665.35 )
+
+[node name="box_and_pit_puzzle" parent="Background" instance=ExtResource( 24 )]
+position = Vector2( 2982.6, 9742.63 )
+puzzle_spawn_area = Rect2( 0, 0, 500, 500 )
+
+[node name="door_open" parent="Background" instance=ExtResource( 25 )]
+position = Vector2( -749.31, 9177.36 )
+scale = Vector2( 8.22811, 8 )
+
+[node name="door_locked" parent="Background" instance=ExtResource( 26 )]
+position = Vector2( 2962.38, 9175.7 )
+
+[node name="GUI" type="CanvasLayer" parent="Background"]
+script = ExtResource( 28 )
+
+[node name="AttackCharge" type="Control" parent="Background/GUI"]
+margin_left = 8.0
+margin_top = 230.0
+margin_right = 159.0
+margin_bottom = 247.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area1" type="Area2D" parent="Background"]
+visible = false
+position = Vector2( -3333.56, 11494.5 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area1"]
+polygon = PoolVector2Array( -13.7456, -9.12695, 7.54053, -2337.86, 7447.68, -2327.22, 7443.02, -3474.57, 8865.94, -3482.99, 8871.93, -10.7695 )
+
+[node name="Area2" type="Area2D" parent="Background"]
+visible = false
+position = Vector2( -3321.78, 9105.47 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area2"]
+polygon = PoolVector2Array( -18.5557, -24.9111, 0.601074, -3007.01, 5267.67, -3002.31, 5282.72, -4803.74, 7439.88, -4801.38, 7420.35, -1090.49, 7420.72, 19.7881, -18.5557, -18.5264 )
+
+[node name="Area3" type="Area2D" parent="Background"]
+visible = false
+position = Vector2( -3321.85, 6061.62 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area3"]
+polygon = PoolVector2Array( -7.30176, -10.5044, 2.36133, -3411.57, 1417.17, -3411.57, 1395.86, -6251.31, 3734.29, -6246, 3736.08, -3404.67, 5248.21, -3399.15, 5230.95, -0.152344 )
+
+[node name="MusicController" type="Node" parent="."]
+script = ExtResource( 29 )
+[connection signal="death" from="Background/player" to="Background/Health State Machine" method="_on_player_death"]
+[connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]
+[connection signal="body_entered" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_entered"]
+[connection signal="body_exited" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_exited"]
+[connection signal="body_entered" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_entered"]
+[connection signal="body_exited" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_exited"]
+[connection signal="body_entered" from="Background/player/DangerZone2" to="MusicController" method="_on_DangerZone2_body_entered"]
+[connection signal="body_exited" from="Background/player/DangerZone2" to="MusicController" method="_on_DangerZone2_body_exited"]
+[connection signal="health_max" from="Background/Health State Machine/100% Health" to="MusicController" method="_on_100_Health_health_max"]
+[connection signal="health_1" from="Background/Health State Machine/79% Health" to="MusicController" method="_on_79_Health_health_1"]
+[connection signal="health_2" from="Background/Health State Machine/49% Health" to="MusicController" method="_on_49_Health_health_2"]
+[connection signal="health_3" from="Background/Health State Machine/19% Health" to="MusicController" method="_on_19_Health_health_3"]
+[connection signal="health_min" from="Background/Health State Machine/0 % Health" to="MusicController" method="_on_0__Health_health_min"]
+[connection signal="threat_0" from="Background/Minor Event State Machine/Threat Level 0" to="MusicController" method="_on_Threat_Level_0_threat_0"]
+[connection signal="threat_1" from="Background/Minor Event State Machine/Threat Level 1" to="MusicController" method="_on_Threat_Level_1_threat_1"]
+[connection signal="threat_2" from="Background/Minor Event State Machine/Threat Level 2" to="MusicController" method="_on_Threat_Level_2_threat_2"]
+[connection signal="threat_3" from="Background/Minor Event State Machine/Threat Level 3" to="MusicController" method="_on_Threat_Level_3_threat_3"]
+[connection signal="threat_4" from="Background/Minor Event State Machine/Threat Level 4" to="MusicController" method="_on_Threat_Level_4_threat_4"]
+[connection signal="body_entered" from="Background/Area1" to="MusicController" method="_on_Area1_body_entered"]
+[connection signal="body_exited" from="Background/Area1" to="MusicController" method="_on_Area1_body_exited"]
+[connection signal="body_entered" from="Background/Area2" to="MusicController" method="_on_Area2_body_entered"]
+[connection signal="body_exited" from="Background/Area2" to="MusicController" method="_on_Area2_body_exited"]
+[connection signal="body_entered" from="Background/Area3" to="MusicController" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="Background/Area3" to="MusicController" method="_on_Area3_body_exited"]

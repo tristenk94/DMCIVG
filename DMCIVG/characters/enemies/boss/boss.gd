@@ -42,7 +42,7 @@ signal death
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().root.get_node("Background/player") #in the default code
+	player = get_node("../player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
@@ -132,7 +132,7 @@ func _on_Timer_timeout():
 			
 			fireball.speed = 0
 			
-			get_tree().root.get_node("Background").add_child(fireball)
+			get_node("../").add_child(fireball)
 
 	if player_relative_position.length() <= 500:
 		# If player is near, don't move but turn toward it
@@ -269,5 +269,5 @@ func shootFireballs():
 		
 		fireball.speed = 600
 		
-		get_tree().root.get_node("Background").add_child(fireball)
+		get_tree().root.get_node("Main/Background").add_child(fireball)
 		#emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies

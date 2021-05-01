@@ -1,8 +1,7 @@
 extends Node
 
 const DEBUG = false
-
-signal scale_trans
+signal threat_0
 
 var fsm: Minor_Event_Stat_Machine
 var new_state
@@ -10,7 +9,7 @@ var new_state
 func enter():
 	if DEBUG:
 		print("Threat Level 0 ")
-	emit_signal("scale_trans", 0)
+	emit_signal("threat_0")
 
 func exit(next_state):
 	fsm.change_to(next_state)

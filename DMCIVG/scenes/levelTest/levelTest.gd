@@ -180,7 +180,7 @@ func load_spawn(enemy_spawn):
 	
 	#enemy.connect("")
 
-	get_tree().root.get_node("Background").add_child(enemy)
+	get_tree().root.get_node("Main/Background").add_child(enemy)
 
 	if(type == "grunt"):
 		enemy.add_to_group("grunt")#record the instance of grunt
@@ -203,7 +203,7 @@ func load_switches(switch_location):
 	switch.target_color = switch_location[3]
 	switch.lamp_association = switch_location[4]
 	
-	get_tree().root.get_node("Background").add_child(switch)
+	get_tree().root.get_node("Main/Background").add_child(switch)
 	switch.add_to_group("switches")
 
 func load_lamps(lamp_location):
@@ -212,7 +212,7 @@ func load_lamps(lamp_location):
 	lamp.position.x = lamp_location[0]
 	lamp.position.y = lamp_location[1]
 	
-	get_tree().root.get_node("Background").add_child(lamp)
+	get_tree().root.get_node("Main/Background").add_child(lamp)
 	lamp.add_to_group("lamps")
 
 
@@ -222,7 +222,7 @@ func load_puzzles(puzzle_location):
 	puzzle.position.x = puzzle_location[0]
 	puzzle.position.y = puzzle_location[1]
 	
-	get_tree().root.get_node("Background").add_child(puzzle)
+	get_tree().root.get_node("Main/Background").add_child(puzzle)
 	puzzle.add_to_group("puzzles")
 
 func load_keys(key_location):
@@ -233,7 +233,7 @@ func load_keys(key_location):
 	
 	key.door_association = key_location[2]
 	
-	get_tree().root.get_node("Background").add_child(key)
+	get_tree().root.get_node("Main/Background").add_child(key)
 	key.add_to_group("keys")
 
 func load_doors(door_location, unlocked_door): #recieve door info and instance it
@@ -250,7 +250,7 @@ func load_doors(door_location, unlocked_door): #recieve door info and instance i
 	door.position.x = door_location[0]
 	door.position.y = door_location[1]
 
-	get_tree().root.get_node("Background").add_child(door)
+	get_tree().root.get_node("Main/Background").add_child(door)
 	
 	if(unlocked_door == 1): #lock the door once initialized
 		door.lock()

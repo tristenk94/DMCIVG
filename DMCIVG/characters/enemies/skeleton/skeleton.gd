@@ -47,13 +47,13 @@ signal death
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	main_node_ref = get_tree().root.get_node("Background")
+	main_node_ref = get_tree().root.get_node("Main/Background")
 	
 	player = get_node("../player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
-	self.connect('detected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_detected_player')
-	self.connect('undetected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_undetected_player')
+	self.connect('detected_player',get_tree().root.get_node("Main/Background/Minor Event State Machine"), '_on_detected_player')
+	self.connect('undetected_player',get_tree().root.get_node("Main/Background/Minor Event State Machine"), '_on_undetected_player')
 	
 	rng.randomize()
 	self.connect("detected_player", get_node('res://scenes/levelTest/No Enemy.gd'), 'detected_player(x)')

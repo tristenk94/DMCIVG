@@ -21,8 +21,8 @@ onready var game_over = get_node("Game Over Screen")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	background_scene = get_tree().root.get_node("Background")
-	player = get_tree().root.get_node("Background/player")
+	background_scene = get_tree().root.get_node("Main/Background")
+	player = get_tree().root.get_node("Main/Background/player")
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
 	

@@ -45,6 +45,8 @@ func _ready():
 	player = get_tree().root.get_node("Background/player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
+	self.connect('detected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_detected_player')
+	self.connect('undetected_player',get_tree().root.get_node("Background/Minor Event State Machine"), '_on_undetected_player')
 	
 	rng.randomize()
 

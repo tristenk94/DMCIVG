@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = false
+const DEBUG = true
 
 var fsm: Health_State_Machine
 var new_state

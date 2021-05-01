@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://scenes/levelTest/Health State Machine.gd"
 }, {
 "base": "Node",
+"class": "Major_Event_Stat_Machine",
+"language": "GDScript",
+"path": "res://scenes/levelTest/Major Event State Machine.gd"
+}, {
+"base": "Node",
 "class": "Minor_Event_Stat_Machine",
 "language": "GDScript",
 "path": "res://scenes/levelTest/Minor Event State Machine.gd"
@@ -27,6 +32,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Enemy_Detection_Machine": "",
 "Health_State_Machine": "",
+"Major_Event_Stat_Machine": "",
 "Minor_Event_Stat_Machine": ""
 }
 

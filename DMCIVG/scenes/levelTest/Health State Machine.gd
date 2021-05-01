@@ -35,8 +35,9 @@ func _enter_state():
 #signal reciever that has two parameters, uses health from player node
 #Will determine what node to move to depending on the value set in health
 func _on_player_health_amount(old_health, health):
-	#print(old_health)
-	#print(health)
+	if DEBUG:
+		print(old_health)
+		print(health)
 	
 	#if else if determine what state to place the player in, has three conditionals 
 	#to ensure that it only changes when when it hits the threshold instead of

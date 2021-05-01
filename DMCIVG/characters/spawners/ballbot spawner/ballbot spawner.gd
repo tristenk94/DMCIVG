@@ -3,6 +3,7 @@ extends Node2D
 # Nodes references
 var tilemap
 var tree_tilemap
+var value = 0
 
 # Spawner variables
 export var spawn_area : Rect2 = Rect2(50, 150, 100, 100) #made this 100 x 100
@@ -20,6 +21,8 @@ signal all_enemies_defeated
 
 signal enemies_not_killed_in_time #come back to this signal later...attach a timer timeout to this 
 #this is for a special puzzle room
+
+signal detected_player
 
 func _ready():
 	# Get tilemaps references
@@ -41,7 +44,9 @@ func instance_ballbot():
 	add_child(ballbot)
 	
 	# Connect ballbot's death signal to the spawner
-	ballbot.connect("death", self, "_on_Ballbot_death")
+	ballbot.connect("death", self, "_on_ballbot_death")
+	ballbot.connect("detected_player", self, "_on_detected_player")
+	ballbot.connect("undetected_player", self, "_on_undetected_player")
 	
 	# Place the ballbot in a valid position
 	var valid_position = false
@@ -76,6 +81,15 @@ func _on_Timer_timeout():
 		
 func _on_ballbot_death():
 	ballbot_count = ballbot_count - 1
+	print("deleted")
+
+func _on_detected_player():
+	var threat_value = 1
+	emit_signal("detected_player", threat_value)
+
+func _on_undetected_player():
+	var threat_value = -1
+	emit_signal("detected_player", threat_value)
 
 
 func _process(delta):

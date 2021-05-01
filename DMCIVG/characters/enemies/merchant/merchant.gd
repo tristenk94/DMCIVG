@@ -18,6 +18,12 @@ var last_direction = Vector2(0, 1)
 var bounce_countdown = 0
 var speed_cooldown = 0
 
+#state machine uses
+var state = "idle"
+var only_once = 0
+var _1_attack = 0 
+var can_attack = false
+
 # Attack variables
 var attack_damage = 10
 var attack_cooldown_time = 1500
@@ -45,23 +51,65 @@ func _ready():
 	
 	rng.randomize()
 
-#delta is frames passed
 func _process(delta):
 	#base health regen
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
 	
-	# Check if merchant can attack
-	var now = OS.get_ticks_msec()
-	if now >= next_attack_time:
-		# What's the target?
+	match state:
+		"idle":
+			
+			can_attack()
+			if(can_attack == true):
+				#print("i can attack if need be")
+				state = "attacking"
+			elif(can_attack == false):
+				pass
+				#print("cannot attack right now :c")
+		"attacking":
+			_1_attack += 1
+			if(_1_attack == 1):
+				only_once = 0
+				emit_signal("detected_player",1)
+			attack()
+			yield(get_tree().create_timer(1.5), "timeout")
+			#print("done attacking")
+			state = "searching"
+			
+		"searching":
+			#print("I will now hunt you down")
+			
+			can_attack()
+			if(can_attack == true):
+				#print("no need to search i'll attack")
+				state = "attacking"
+			elif(can_attack == false):
+				
+				only_once += 1
+				if (only_once == 1):
+					_1_attack = 0
+					#print("darn, i lost you")
+					emit_signal("detected_player",-1)
+				state = "idle"
+
+func can_attack():
+	#Check if Skeleton can attack
 		var target = $RayCast2D.get_collider()
 		#print(target)
 		if target != null and target.name == "player" and player.health > 0: #DETECTED TO STATE MACHINE
+			can_attack = true
+			
+			
+		else: 
+			#print("nope")
+			can_attack = false
 
-			# Play attack animation
+#function to run attack animation
+func attack():
+# Play attack animation
 			other_animation_playing = true
 			
+			#print("detected")
 			
 			var dir = get_animation_direction(last_direction)
 			if(dir == "left"): 
@@ -70,11 +118,12 @@ func _process(delta):
 				get_node( "AnimatedSprite" ).set_flip_h( false )
 				
 			#var animation = get_animation_direction(last_direction) + "_attack"
-			$AnimatedSprite.play("attack") #NO ATTACKING ANIMATION, RUNS AWAY?, comment this out to take out attacking
+			$AnimatedSprite.play("attack")
+			
+			
+			
 			# Add cooldown time to current time
-			next_attack_time = now + attack_cooldown_time
 
-	
 
 func hit(damage):
 	health -= damage
@@ -94,7 +143,7 @@ func hit(damage):
 func _on_Timer_timeout():
 	# Calculate the position of the player relative to the merchant
 	var player_relative_position = player.position - position
-	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+	#emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
 	#print(player_relative_position.length())
 	
 	if player_relative_position.length() <= 120:

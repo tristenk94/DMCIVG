@@ -58,7 +58,7 @@ func _physics_process(delta):
 	if abs(direction.x) == 1 and abs(direction.y) == 1:
 		direction = direction.normalized()
 		
-	var movement
+	var movement  = speed * direction * delta
 	
 	if attack_playing: #adjust movement speed based on attacking
 		#emit signal player attacking
@@ -230,5 +230,6 @@ func _process(delta):
 	var new_health = min(health + health_regeneration * delta, health_max)
 	if new_health != health:
 		health = new_health
-		emit_signal("player_stats_changed", self) #connect this to health bar, send strength to fsm?, 
+		emit_signal("player_stats_changed", self)
+		emit_signal("health_amount", new_health, health) #connect this to health bar, send strength to fsm?, 
 		#possibly dupe state of health_amount

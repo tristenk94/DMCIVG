@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = false
+const DEBUG = true
 
 var fsm: Enemy_Detection_Machine
 var new_state

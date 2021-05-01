@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = false
+const DEBUG = true
 
 signal scale_trans
 
@@ -10,7 +10,7 @@ var new_state
 func enter():
 	if DEBUG:
 		print("Threat Level 2")
-	emit_signal("scale_trans", 2)
+	#emit_signal("scale_trans", 2)
 
 func exit(next_state):
 	fsm.change_to(next_state)

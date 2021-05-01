@@ -1,12 +1,13 @@
 extends Node
 
-const DEBUG = false
+const DEBUG = true
 
 var fsm: Enemy_Detection_Machine
 var new_state
 var detected = false
 var attacked
 signal threat_up
+var holding = 0
 
 func enter():
 	if DEBUG:
@@ -34,3 +35,16 @@ func enemy_attacking():
 		else:
 			pass
  
+
+
+func detected_player(value):
+	holding += value
+	#attacked = holding
+	print("signal recieved")
+	print(holding)
+	if(fsm.state.name == "No Enemy"):
+		attacked += 1
+		if(holding == 1):
+			detected = true
+			emit_signal("threat_up", attacked)
+			exit("Detected")

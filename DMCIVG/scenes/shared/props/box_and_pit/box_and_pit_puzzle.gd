@@ -5,11 +5,6 @@ export var num_pits = 2
 export var num_boxes = 2
 export var puzzle_spawn_area : Rect2 = Rect2(0, 500, 500, 500) #made this 500 x 500
 
-var puzzle_solved = false
-
-#REFACTOR THIS TO HAVE EXPORTS ARRAY: 1 FOR ALL BOX AND 1 FOR ALL PITS
-#OR JUST MAKE NEW FUNCTIONALITY THAT HAS THE RANDOMIZED STUFF COMMENTED OUT FOR NOW
-
 var rng = RandomNumberGenerator.new()
 
 #preload pits & boxes
@@ -26,10 +21,10 @@ func _ready():
 	emit_signal("box_and_pit_puzzle_unsolved")
 	rng.randomize()
 	
-	for _i in range(num_pits):
+	for i in range(num_pits):
 		instance_pit()
 		
-	for _i in range(num_boxes):
+	for i in range(num_boxes):
 		instance_box()
 	
 	
@@ -46,8 +41,7 @@ func _process(delta): #constantly check if puzzle solved
 	#print("we have solved ", solved_count, " puzzles")
 	if solved_count == num_pits: #we must complete all puzzles to pass
 		emit_signal("box_and_pit_puzzle_solved")
-		puzzle_solved = true
-		#print("puzzle solved!")
+		print("puzzle solved!")
 
 
 	

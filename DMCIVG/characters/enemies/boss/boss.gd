@@ -120,7 +120,7 @@ func _on_Timer_timeout():
 			num_fireballs = 10
 	
 		# Create fireballs
-		for _i in range(num_fireballs):
+		for i in range(num_fireballs):
 			#print("instancing a fireball")
 			var fireball = fireball_scene.instance()
 			#add_child(fireball)

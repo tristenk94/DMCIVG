@@ -49,7 +49,6 @@ func _ready():
 	player = get_tree().root.get_node("Background/player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
-	#print('referenceing player: ', player)
 	
 	rng.randomize()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -21,10 +21,6 @@
 [ext_resource path="res://scenes/levelTest/Threat Level 1.gd" type="Script" id=20]
 [ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
 [ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
-[ext_resource path="res://characters/enemies/boss/boss.tscn" type="PackedScene" id=23]
-[ext_resource path="res://scenes/shared/props/box_and_pit/box_and_pit_puzzle.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/shared/props/door/door_open.tscn" type="PackedScene" id=25]
-[ext_resource path="res://scenes/shared/props/door/door_locked.tscn" type="PackedScene" id=26]
 [ext_resource path="res://scenes/levelTest/levelTest.gd" type="Script" id=28]
 [ext_resource path="res://Audio/MusicController.gd" type="Script" id=29]
 
@@ -146,12 +142,14 @@ __meta__ = {
 }
 
 [node name="DangerZone1" type="Area2D" parent="Background/player"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/DangerZone1"]
 position = Vector2( -26.2051, 27.0225 )
 shape = SubResource( 2 )
 
 [node name="DangerZone2" type="Area2D" parent="Background/player"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/player/DangerZone2"]
 position = Vector2( -25.6357, 21.3623 )
@@ -204,20 +202,6 @@ script = ExtResource( 13 )
 
 [node name="Detected 2" type="Node" parent="Background/Enemy Detection State Machine"]
 script = ExtResource( 19 )
-
-[node name="boss" parent="Background" instance=ExtResource( 23 )]
-position = Vector2( -764.355, 3665.35 )
-
-[node name="box_and_pit_puzzle" parent="Background" instance=ExtResource( 24 )]
-position = Vector2( 2982.6, 9742.63 )
-puzzle_spawn_area = Rect2( 0, 0, 500, 500 )
-
-[node name="door_open" parent="Background" instance=ExtResource( 25 )]
-position = Vector2( -749.31, 9177.36 )
-scale = Vector2( 8.22811, 8 )
-
-[node name="door_locked" parent="Background" instance=ExtResource( 26 )]
-position = Vector2( 2962.38, 9175.7 )
 
 [node name="Area1" type="Area2D" parent="Background"]
 visible = false

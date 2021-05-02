@@ -107,8 +107,15 @@ custom_fonts/font = ExtResource( 5 )
 align = 1
 valign = 1
 
-[node name="Game Over Screen" type="ColorRect" parent="Background/player/GUI"]
-visible = false
+[node name="Game Over Pop-Up" type="Popup" parent="Background/player/GUI"]
+visible = true
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Red Screen" type="ColorRect" parent="Background/player/GUI/Game Over Pop-Up"]
 margin_right = 480.0
 margin_bottom = 270.0
 mouse_filter = 2
@@ -117,7 +124,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="gg" type="Label" parent="Background/player/GUI/Game Over Screen"]
+[node name="gg" type="Label" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
 margin_left = 110.0
 margin_top = 30.0
 margin_right = 365.0
@@ -129,7 +136,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="no re" type="Label" parent="Background/player/GUI/Game Over Screen"]
+[node name="no re" type="Label" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
 margin_left = 180.0
 margin_top = 140.0
 margin_right = 291.0
@@ -137,6 +144,28 @@ margin_bottom = 161.0
 custom_fonts/font = ExtResource( 5 )
 text = "GAME OVER"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit " type="Button" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
+pause_mode = 2
+margin_left = 300.0
+margin_top = 200.0
+margin_right = 411.0
+margin_bottom = 226.0
+text = "QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
+pause_mode = 2
+margin_left = 80.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 225.0
+text = "RESTART"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -238,6 +267,8 @@ script = ExtResource( 29 )
 [connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]
 [connection signal="body_entered" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_entered"]
 [connection signal="body_exited" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_exited"]
+[connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Quit " to="Background/player/GUI" method="_on_Quit__pressed"]
+[connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Restart" to="Background/player/GUI" method="_on_Restart_pressed"]
 [connection signal="body_entered" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_entered"]
 [connection signal="body_exited" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_exited"]
 [connection signal="body_entered" from="Background/player/DangerZone2" to="MusicController" method="_on_DangerZone2_body_entered"]

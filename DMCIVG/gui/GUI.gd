@@ -15,9 +15,10 @@ var background_scene
 onready var playerhealth = get_node("Health/Bar")
 onready var score_board = get_node("Score Area/Score Label")
 
-onready var game_over_screen = get_node("Game Over Screen") #not ready for use yet
-onready var defeated_label = get_node("Game Over Screen")
-onready var game_over = get_node("Game Over Screen")
+#game over menus
+onready var game_over_screen = get_node("Game Over Pop-Up") #not ready for use yet
+
+var game_over_selected_menu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,8 +26,8 @@ func _ready():
 	player = get_tree().root.get_node("Main/Background/player")
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
+	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game
 	
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -41,12 +42,28 @@ func update_healthbar():
 		playerhealth.texture_progress = bar_red
 	playerhealth.value = new_hp
 	
-#	if playerhealth.value == 0: #end the game if player loses all health
-#		end_game()
+	if playerhealth.value == 0: #end the game if player loses all health
+		end_game()
+
 
 func end_game(): #displays game over scren, shows option to quit or restart along with score
-	pass
+	#_on_Game_Over_PopUp_draw() #dont need to use the pause function
+	game_over_screen.popup()
+	get_tree().paused = true #pasuses game
 
 func update_scoreboard():
 	var to_update = background_scene.score
 	score_board.text = str(to_update) #removed the other display, "Score: " + str(to_update)
+
+func _on_Quit__pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET TO PROCESS NOT INHERIT
+	# Quit game
+	#print("quit clicked")
+	get_tree().paused = false #need to unpause game over screen to continue this command
+	get_tree().quit()
+
+func _on_Restart_pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET TO PROCESS NOT INHERIT
+	# Restart game
+	#print("restart clicked")
+	get_tree().paused = false #need to unpause game over screen to continue this command
+	get_tree().change_scene("res://scenes/levelTest/levelTest.tscn")
+

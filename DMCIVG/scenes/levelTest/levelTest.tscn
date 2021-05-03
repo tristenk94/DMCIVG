@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -11,13 +11,9 @@
 [ext_resource path="res://scenes/levelTest/100% Health.gd" type="Script" id=10]
 [ext_resource path="res://scenes/levelTest/79% Health.gd" type="Script" id=11]
 [ext_resource path="res://scenes/levelTest/49% Health.gd" type="Script" id=12]
-[ext_resource path="res://scenes/levelTest/Detected.gd" type="Script" id=13]
-[ext_resource path="res://scenes/levelTest/No Enemy.gd" type="Script" id=14]
 [ext_resource path="res://scenes/levelTest/Minor Event State Machine.gd" type="Script" id=15]
 [ext_resource path="res://scenes/levelTest/Threat Level 0.gd" type="Script" id=16]
 [ext_resource path="res://scenes/levelTest/Threat Level 3.gd" type="Script" id=17]
-[ext_resource path="res://scenes/levelTest/Enemy Detection State Machine.gd" type="Script" id=18]
-[ext_resource path="res://scenes/levelTest/Detected 2.gd" type="Script" id=19]
 [ext_resource path="res://scenes/levelTest/Threat Level 1.gd" type="Script" id=20]
 [ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
 [ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
@@ -219,18 +215,6 @@ script = ExtResource( 17 )
 
 [node name="Threat Level 4" type="Node" parent="Background/Minor Event State Machine"]
 script = ExtResource( 22 )
-
-[node name="Enemy Detection State Machine" type="Node" parent="Background"]
-script = ExtResource( 18 )
-
-[node name="No Enemy" type="Node" parent="Background/Enemy Detection State Machine"]
-script = ExtResource( 14 )
-
-[node name="Detected" type="Node" parent="Background/Enemy Detection State Machine"]
-script = ExtResource( 13 )
-
-[node name="Detected 2" type="Node" parent="Background/Enemy Detection State Machine"]
-script = ExtResource( 19 )
 
 [node name="Area1" type="Area2D" parent="Background"]
 visible = false

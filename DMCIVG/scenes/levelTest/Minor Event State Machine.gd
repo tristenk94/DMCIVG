@@ -2,7 +2,7 @@ extends Node
 
 class_name Minor_Event_Stat_Machine
 
-const DEBUG = true
+const DEBUG = false
 
 
 

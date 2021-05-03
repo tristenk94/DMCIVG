@@ -166,6 +166,72 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Area1 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area1 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 1: Lab Entrance"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area2 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 2: Lab Interior "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area3 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area3 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 3: Lab Boss"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DangerZone1" type="Area2D" parent="Background/player"]
 visible = false
 
@@ -268,9 +334,12 @@ script = ExtResource( 29 )
 [connection signal="threat_2" from="Background/Minor Event State Machine/Threat Level 2" to="MusicController" method="_on_Threat_Level_2_threat_2"]
 [connection signal="threat_3" from="Background/Minor Event State Machine/Threat Level 3" to="MusicController" method="_on_Threat_Level_3_threat_3"]
 [connection signal="threat_4" from="Background/Minor Event State Machine/Threat Level 4" to="MusicController" method="_on_Threat_Level_4_threat_4"]
+[connection signal="body_entered" from="Background/Area1" to="Background/player/GUI" method="_on_Area1_body_entered"]
 [connection signal="body_entered" from="Background/Area1" to="MusicController" method="_on_Area1_body_entered"]
 [connection signal="body_exited" from="Background/Area1" to="MusicController" method="_on_Area1_body_exited"]
+[connection signal="body_entered" from="Background/Area2" to="Background/player/GUI" method="_on_Area2_body_entered"]
 [connection signal="body_entered" from="Background/Area2" to="MusicController" method="_on_Area2_body_entered"]
 [connection signal="body_exited" from="Background/Area2" to="MusicController" method="_on_Area2_body_exited"]
+[connection signal="body_entered" from="Background/Area3" to="Background/player/GUI" method="_on_Area3_body_entered"]
 [connection signal="body_entered" from="Background/Area3" to="MusicController" method="_on_Area3_body_entered"]
 [connection signal="body_exited" from="Background/Area3" to="MusicController" method="_on_Area3_body_exited"]

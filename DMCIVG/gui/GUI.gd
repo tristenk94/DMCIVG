@@ -17,6 +17,9 @@ onready var score_board = get_node("Score Area/Score Label")
 
 #game over menus
 onready var game_over_screen = get_node("Game Over Pop-Up") #not ready for use yet
+onready var display_area1 = get_node("Area1 Display")
+onready var display_area2 = get_node("Area2 Display")
+onready var display_area3 = get_node("Area3 Display")
 
 var game_over_selected_menu
 
@@ -67,3 +70,39 @@ func _on_Restart_pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET T
 	get_tree().paused = false #need to unpause game over screen to continue this command
 	get_tree().change_scene("res://scenes/levelTest/levelTest.tscn")
 
+
+
+func _on_Area1_body_entered(body):
+	yield(get_tree().create_timer(.5), "timeout")
+
+	if body != null:
+		if body.name == "player":
+			display_area1.popup()
+			yield(get_tree().create_timer(1.5), "timeout")
+			hide_pop()
+
+func _on_Area2_body_entered(body):
+	yield(get_tree().create_timer(.5), "timeout")
+
+	if body != null:
+		if body.name == "player":
+			display_area2.popup()
+			yield(get_tree().create_timer(1.5), "timeout")
+			hide_pop()
+
+func _on_Area3_body_entered(body):
+	yield(get_tree().create_timer(.5), "timeout")
+
+	if body != null:
+		if body.name == "player":
+			display_area3.popup()
+			yield(get_tree().create_timer(1.5), "timeout")
+			hide_pop()
+
+func hide_pop():
+	if get_node("Area1 Display").is_visible():
+		get_node("Area1 Display").hide()
+	elif get_node("Area2 Display").is_visible():
+		get_node("Area2 Display").hide()
+	elif get_node("Area3 Display").is_visible():
+		get_node("Area3 Display").hide()

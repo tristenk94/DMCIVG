@@ -42,6 +42,7 @@ signal spawn
 signal movement
 signal attacking
 signal detected_player
+signal undetected_player
 signal death
 
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------

@@ -17,6 +17,8 @@ onready var score_board = get_node("Score Area/Score Label")
 
 #game over menus
 onready var game_over_screen = get_node("Game Over Pop-Up") #not ready for use yet
+
+#Area Display popups 
 onready var display_area1 = get_node("Area1 Display")
 onready var display_area2 = get_node("Area2 Display")
 onready var display_area3 = get_node("Area3 Display")
@@ -29,7 +31,14 @@ func _ready():
 	player = get_tree().root.get_node("Main/Background/player")
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
-	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game
+	get_tree().paused = false 
+	
+	#work around so that the area 1 text actually displays 
+	#should only run once
+	yield(get_tree().create_timer(.5), "timeout")
+	display_area1.popup()
+	yield(get_tree().create_timer(2.5), "timeout")
+	hide_pop()#just in case we have an outlier in pausing/restarting game, unpause the game
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,9 +80,9 @@ func _on_Restart_pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET T
 	get_tree().change_scene("res://scenes/levelTest/levelTest.tscn")
 
 
-
+#Funtions Used in Area text Display ############################################
 func _on_Area1_body_entered(body):
-	yield(get_tree().create_timer(.5), "timeout")
+	hide_pop()
 
 	if body != null:
 		if body.name == "player":
@@ -82,7 +91,7 @@ func _on_Area1_body_entered(body):
 			hide_pop()
 
 func _on_Area2_body_entered(body):
-	yield(get_tree().create_timer(.5), "timeout")
+	hide_pop()
 
 	if body != null:
 		if body.name == "player":
@@ -91,14 +100,16 @@ func _on_Area2_body_entered(body):
 			hide_pop()
 
 func _on_Area3_body_entered(body):
-	yield(get_tree().create_timer(.5), "timeout")
-
+	hide_pop()
+	
 	if body != null:
 		if body.name == "player":
 			display_area3.popup()
 			yield(get_tree().create_timer(1.5), "timeout")
 			hide_pop()
 
+###############################################################################
+#Funtion to hide the Area Text when ever triggered 
 func hide_pop():
 	if get_node("Area1 Display").is_visible():
 		get_node("Area1 Display").hide()

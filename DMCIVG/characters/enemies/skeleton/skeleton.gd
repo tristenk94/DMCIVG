@@ -57,7 +57,6 @@ func _ready():
 	self.connect('undetected_player',get_tree().root.get_node("Main/Background/Minor Event State Machine"), '_on_undetected_player')
 	
 	rng.randomize()
-	self.connect("detected_player", get_node('res://scenes/levelTest/No Enemy.gd'), 'detected_player(x)')
 
 
 #delta is frames passed

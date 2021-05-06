@@ -117,6 +117,10 @@ var skeleton_scene = preload("res://characters/enemies/skeleton/skeleton.tscn")
 var ballbot_scene = preload("res://characters/enemies/ballbot/ballbot.tscn")
 var boss_scene = preload("res://characters/enemies/boss/boss.tscn")
 
+# Particles
+onready var key_particles = get_node("KeyParticles")
+var particle_timer = 3000 #timer to keep particles going
+
 # READY FUNCTION WILL ALWAYS SPAWN IN THIS ORDER
 # - DOORS
 # - KEYS
@@ -235,6 +239,11 @@ func load_keys(key_location):
 	
 	get_tree().root.get_node("Main/Background").add_child(key)
 	key.add_to_group("keys")
+	
+	key_particles.position.x = key_location[0] - 35 #the key vs particles if offscale, this fixes it
+	key_particles.position.y = key_location[1]
+	key_particles.set_emitting(true)
+	key_particles.show()
 
 func load_doors(door_location, unlocked_door): #recieve door info and instance it
 	var door

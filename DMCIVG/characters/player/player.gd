@@ -40,6 +40,12 @@ var charge_next_attack_time = 0
 var charge_attack_damage = 100
 var charges_remaining = 1
 
+# Particle References
+onready var sword_particles = get_node("pivot/SwordParticles")
+var swordPickup = false #once sword is picked up, permanentely increase base attack damage, spawn particles
+
+onready var speed_particles = get_node("pivot/SpeedParticles")
+var speedPickup = false #once speedboost is picked up, permanentely increase base speed, spawn particles
 
 # Player Signals
 signal player_stats_changed
@@ -244,6 +250,15 @@ func _on_AnimatedSprite_animation_finished():
 func _ready(): #connect this to health bar
 	emit_signal("player_stats_changed", self)
 	
+	
+	#particle clean up
+	sword_particles.set_emitting(false)
+	sword_particles.hide()
+	
+	speed_particles.set_emitting(false)
+	speed_particles.hide()
+
+	
 func _process(delta):
 	
 	# Regenerates health
@@ -253,3 +268,12 @@ func _process(delta):
 		emit_signal("player_stats_changed", self)
 		emit_signal("health_amount", new_health, health) #connect this to health bar, send strength to fsm?, 
 		#possibly dupe state of health_amount
+
+# check to be implemented when sword and speed ready
+#	if swordPickup:
+#		sword_particles.set_emitting(true)
+#		sword_particles.show()
+#
+#	if speedPickup:
+#		speed_particles.set_emitting(true)
+#		speed_particles.show()

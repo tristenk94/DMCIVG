@@ -30,7 +30,6 @@ var game_over_selected_menu
 func _ready():
 	background_scene = get_tree().root.get_node("Main/Background")
 	player = get_tree().root.get_node("Main/Background/player")
-<<<<<<< Updated upstream
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
 	get_tree().paused = false 
@@ -41,10 +40,8 @@ func _ready():
 	display_area1.popup()
 	yield(get_tree().create_timer(2.5), "timeout")
 	hide_pop()#just in case we have an outlier in pausing/restarting game, unpause the game
-=======
 	initialize()
 	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game
->>>>>>> Stashed changes
 	
 # function for initializing health
 func initialize():

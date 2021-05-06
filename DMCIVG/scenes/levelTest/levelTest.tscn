@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=24 format=2]
-=======
-[gd_scene load_steps=29 format=2]
->>>>>>> Stashed changes
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]

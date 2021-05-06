@@ -7,9 +7,6 @@ var health_regeneration = 5
 
 # Node references
 var player
-onready var bossgui = get_tree().root.get_node("Main/Background/player/GUI/boss_hp")
-onready var healthbar = get_tree().root.get_node("Main/Background/player/GUI/boss_hp/health")
-onready var healthbarnumber = get_tree().root.get_node("Main/Background/player/GUI/boss_hp/health/value")
 
 # Random number generator
 var rng = RandomNumberGenerator.new()
@@ -46,7 +43,6 @@ signal death
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node("../player") #in the default code
-	hp_init() #initialize boss healthbar GUI
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
@@ -57,9 +53,6 @@ func _process(delta):
 	#base health regen
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
-	
-	#update boss healthbar
-	update_bosshp()
 	
 	# Check if boss can attack
 	var now = OS.get_ticks_msec()
@@ -91,10 +84,6 @@ func _process(delta):
 #	else:
 #			print("fail2")
 	
-func hp_init():
-	bossgui.visible = false
-	healthbar.max_value = health_max
-	healthbar.value = health
 
 func hit(damage):
 	health -= damage
@@ -109,14 +98,6 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
-		
-func update_bosshp():
-	healthbar.value = health
-	healthbarnumber.text = str(round((health / health_max) * 100), "%")
-
-#show boss healthbar
-func _on_boss_detected_player():
-	bossgui.visible = true
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():

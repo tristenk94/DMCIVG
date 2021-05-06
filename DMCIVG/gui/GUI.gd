@@ -1,19 +1,18 @@
 extends CanvasLayer
 
 
-#health textures
-var bar_red = preload("res://gui/orangehp.png")
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var bar_red = preload("res://gui/redhp.png")
 var bar_green = preload("res://gui/greenhp.png")
 var bar_yellow = preload("res://gui/yellowhp.png")
 
 #references to the game
 var player
-var boss
 var background_scene
 
-onready var playerhealth = get_node("player_hp/Health/Bar")
-onready var playerhealthvalue = get_node("player_hp/Health/value")
-onready var laservalue = get_node("laser/number")
+onready var playerhealth = get_node("Health/Bar")
 onready var score_board = get_node("Score Area/Score Label")
 
 #game over menus
@@ -30,7 +29,6 @@ var game_over_selected_menu
 func _ready():
 	background_scene = get_tree().root.get_node("Main/Background")
 	player = get_tree().root.get_node("Main/Background/player")
-<<<<<<< Updated upstream
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
 	get_tree().paused = false 
@@ -41,36 +39,24 @@ func _ready():
 	display_area1.popup()
 	yield(get_tree().create_timer(2.5), "timeout")
 	hide_pop()#just in case we have an outlier in pausing/restarting game, unpause the game
-=======
-	initialize()
-	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game
->>>>>>> Stashed changes
 	
-# function for initializing health
-func initialize():
-	playerhealth.max_value = player.health_max
-	playerhealth.value = player.health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	update_player()
+	update_healthbar()
 	update_scoreboard()
 	
-func update_player():
-	#player hp
-	var healthpercent = (player.health / player.health_max) * 100
-	if player.health < playerhealth.max_value * 0.5:
+func update_healthbar():
+	var new_hp = player.health
+	if new_hp < playerhealth.max_value * 0.5:
 		playerhealth.texture_progress = bar_yellow
-	if player.health < playerhealth.max_value * 0.15:
+	if new_hp < playerhealth.max_value * 0.15:
 		playerhealth.texture_progress = bar_red
-	playerhealth.value = player.health
-	playerhealthvalue.text = str(round(healthpercent), "%")
+	playerhealth.value = new_hp
 	
 	if playerhealth.value == 0: #end the game if player loses all health
 		end_game()
-		
-	#player attack charge
-	laservalue.text = str("x", player.charges_remaining)
+
 
 func end_game(): #displays game over scren, shows option to quit or restart along with score
 	#_on_Game_Over_PopUp_draw() #dont need to use the pause function

@@ -265,7 +265,10 @@ func _on_Area1_body_entered(body):
 			setBPMSelect(0) # IMPORTANT: Remember to turn off BPM change
 
 func _on_Area1_body_exited(body):
-	in_area1 = false
+	if body.name == "player":
+		in_area1 = false
+		print("Area 1 exited.")
+	
 
 func _on_Area2_body_entered(body):
 	in_area2 = true
@@ -293,7 +296,9 @@ func _on_Area2_body_entered(body):
 			setBPMSelect(0) # Turn off BPM change
 
 func _on_Area2_body_exited(body):
-	in_area2 = false
+	if body.name == "player":
+		in_area2 = false
+		print("Area 2 exited.")
 
 
 func _on_Area3_body_entered(body):
@@ -323,8 +328,9 @@ func _on_Area3_body_entered(body):
 			setBPMSelect(0) # Turn off BPM change
 
 func _on_Area3_body_exited(body):
-	in_boss_room = false
-	print("Area3 exited.")
+	if body.name == "player":
+		in_boss_room = false
+		print("Area 3 exited.")
 	
 
 ## Health Levels 0 - 4 

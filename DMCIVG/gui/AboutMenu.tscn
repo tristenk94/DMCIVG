@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/TitleFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/TextFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/SubtitleFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://gui/Back.tscn" type="PackedScene" id=4]
+
+[node name="AboutMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 468.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AboutTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_right = 468.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 1 )
+text = "ABOUT"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 468.0
+margin_bottom = 313.0
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_right = 468.0
+margin_bottom = 107.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="About" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_right = 448.0
+margin_bottom = 107.0
+custom_fonts/font = ExtResource( 2 )
+text = "DMCIVG (Dynamic Music Composition In Video Games) is a Senior Design Project for the Computer Science program at CSUN. Our project explores the use of real-time music generation which adapts to gameplay. "
+autowrap = true
+
+[node name="MembersTitle" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_top = 111.0
+margin_right = 468.0
+margin_bottom = 135.0
+custom_fonts/font = ExtResource( 3 )
+text = "MEMBERS"
+align = 1
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer"]
+margin_top = 139.0
+margin_right = 468.0
+margin_bottom = 273.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="Members" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+margin_left = 20.0
+margin_right = 448.0
+margin_bottom = 134.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_right = 428.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 2 )
+text = "Ahrin Meguerian"
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_top = 23.0
+margin_right = 428.0
+margin_bottom = 42.0
+custom_fonts/font = ExtResource( 2 )
+text = "Austin Lucky"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_top = 46.0
+margin_right = 428.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 2 )
+text = "Keith Choi"
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_top = 69.0
+margin_right = 428.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 2 )
+text = "Roberto Loya"
+
+[node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_top = 92.0
+margin_right = 428.0
+margin_bottom = 111.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tomo Buchberg"
+
+[node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/MarginContainer2/Members"]
+margin_top = 115.0
+margin_right = 428.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tristen Khatibi"
+
+[node name="Back" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 317.0
+margin_bottom = 384.0

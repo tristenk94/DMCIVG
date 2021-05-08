@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="DMCIVG"
-run/main_scene="res://scenes/levelTest/levelTest.tscn"
+run/main_scene="res://scenes/TitleScreen.tscn"
 config/icon="res://item_icons/icon.png"
 
 [autoload]

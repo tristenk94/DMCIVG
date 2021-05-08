@@ -1,16 +1,19 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://gui/GUI.gd" type="Script" id=3]
 [ext_resource path="res://gui/greenhp.png" type="Texture" id=4]
-[ext_resource path="res://fonts/orbitron.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/ButtonFont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/TitleFont.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scenes/levelTest/0 % Health.gd" type="Script" id=7]
 [ext_resource path="res://scenes/levelTest/Health State Machine.gd" type="Script" id=8]
 [ext_resource path="res://scenes/levelTest/19% Health.gd" type="Script" id=9]
 [ext_resource path="res://scenes/levelTest/100% Health.gd" type="Script" id=10]
 [ext_resource path="res://scenes/levelTest/79% Health.gd" type="Script" id=11]
 [ext_resource path="res://scenes/levelTest/49% Health.gd" type="Script" id=12]
+[ext_resource path="res://fonts/orbitron.tres" type="DynamicFont" id=13]
+[ext_resource path="res://scenes/TitleScreen.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/levelTest/Minor Event State Machine.gd" type="Script" id=15]
 [ext_resource path="res://scenes/levelTest/Threat Level 0.gd" type="Script" id=16]
 [ext_resource path="res://scenes/levelTest/Threat Level 3.gd" type="Script" id=17]
@@ -30,6 +33,9 @@ radius = 628.317
 radius = 281.77
 
 [node name="Main" type="Node"]
+
+[node name="TitleScreen" parent="." instance=ExtResource( 14 )]
+visible = false
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2( 10901.3, 536.215 )
@@ -67,6 +73,7 @@ shape = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Health" type="Control" parent="Background/player/GUI"]
+visible = false
 margin_left = 0.840897
 margin_top = 228.739
 margin_right = 201.841
@@ -87,6 +94,7 @@ __meta__ = {
 }
 
 [node name="Score Area" type="ColorRect" parent="Background/player/GUI"]
+visible = false
 margin_left = 346.009
 margin_top = 2.0
 margin_right = 477.009
@@ -104,7 +112,6 @@ align = 1
 valign = 1
 
 [node name="Game Over Pop-Up" type="Popup" parent="Background/player/GUI"]
-visible = true
 margin_right = 480.0
 margin_bottom = 270.0
 __meta__ = {
@@ -115,30 +122,34 @@ __meta__ = {
 margin_right = 480.0
 margin_bottom = 270.0
 mouse_filter = 2
-color = Color( 0.631373, 0.168627, 0.168627, 1 )
+color = Color( 0.631373, 0.168627, 0.168627, 0.392157 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="gg" type="Label" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
 margin_left = 110.0
-margin_top = 30.0
+margin_top = 25.0
 margin_right = 365.0
 margin_bottom = 75.0
-custom_fonts/font = ExtResource( 5 )
-text = "YOU HAVE BEEN DEFEATED"
+custom_fonts/font = ExtResource( 6 )
+text = "GAME OVER"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="no re" type="Label" parent="Background/player/GUI/Game Over Pop-Up/Red Screen"]
-margin_left = 180.0
-margin_top = 140.0
-margin_right = 291.0
-margin_bottom = 161.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.5
+margin_top = -10.5
+margin_right = 127.5
+margin_bottom = 10.5
 custom_fonts/font = ExtResource( 5 )
-text = "GAME OVER"
+text = "YOU HAVE BEEN DEFEATED"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -149,7 +160,8 @@ pause_mode = 2
 margin_left = 300.0
 margin_top = 200.0
 margin_right = 411.0
-margin_bottom = 226.0
+margin_bottom = 227.0
+custom_fonts/font = ExtResource( 5 )
 text = "QUIT"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,57 +173,45 @@ margin_left = 80.0
 margin_top = 200.0
 margin_right = 190.0
 margin_bottom = 225.0
+custom_fonts/font = ExtResource( 5 )
 text = "RESTART"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Area1 Display" type="Popup" parent="Background/player/GUI"]
-visible = true
 anchor_right = 10.0
 margin_top = 197.0
 margin_right = -4322.0
 margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Background/player/GUI/Area1 Display"]
 margin_left = 1.0
 margin_top = 2.0
 margin_right = 476.0
 margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 13 )
 text = "Area 1: Lab Entrance"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Area2 Display" type="Popup" parent="Background/player/GUI"]
-visible = true
 anchor_right = 10.0
 margin_top = 197.0
 margin_right = -4322.0
 margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Background/player/GUI/Area2 Display"]
 margin_left = 1.0
 margin_top = 2.0
 margin_right = 476.0
 margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 13 )
 text = "Area 2: Lab Interior "
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Area3 Display" type="Popup" parent="Background/player/GUI"]
-visible = true
 anchor_right = 10.0
 margin_top = 197.0
 margin_right = -4322.0
@@ -225,9 +225,90 @@ margin_left = 1.0
 margin_top = 2.0
 margin_right = 476.0
 margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 13 )
 text = "Area 3: Lab Boss"
 align = 1
+
+[node name="Pause Menu" type="Popup" parent="Background/player/GUI"]
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Background/player/GUI/Pause Menu"]
+margin_right = 480.0
+margin_bottom = 270.0
+mouse_filter = 2
+color = Color( 0.168627, 0.458824, 0.631373, 0.0588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/player/GUI/Pause Menu/ColorRect"]
+anchor_right = 1.0
+margin_bottom = 21.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="Label" parent="Background/player/GUI/Pause Menu/ColorRect/VBoxContainer"]
+margin_top = 25.0
+margin_right = 480.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 6 )
+text = "PAUSE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="Background/player/GUI/Pause Menu/ColorRect"]
+pause_mode = 2
+visible = false
+margin_left = 80.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 225.0
+custom_fonts/font = ExtResource( 5 )
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="Button" parent="Background/player/GUI/Pause Menu/ColorRect"]
+pause_mode = 2
+visible = false
+margin_left = 80.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 225.0
+custom_fonts/font = ExtResource( 5 )
+text = "MAIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="Button" parent="Background/player/GUI/Pause Menu/ColorRect"]
+pause_mode = 2
+margin_left = 80.0
+margin_top = 200.0
+margin_right = 190.0
+margin_bottom = 225.0
+custom_fonts/font = ExtResource( 5 )
+text = "OPTIONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit " type="Button" parent="Background/player/GUI/Pause Menu/ColorRect"]
+pause_mode = 2
+margin_left = 300.0
+margin_top = 200.0
+margin_right = 411.0
+margin_bottom = 226.0
+custom_fonts/font = ExtResource( 5 )
+text = "QUIT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -304,6 +385,7 @@ position = Vector2( -3321.85, 6061.62 )
 polygon = PoolVector2Array( -7.30176, -10.5044, 2.36133, -3411.57, 1417.17, -3411.57, 1395.86, -6251.31, 3734.29, -6246, 3736.08, -3404.67, 5248.21, -3399.15, 5230.95, -0.152344 )
 
 [node name="puzzle room collision" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( -2, 0 )
 collision_layer = 3
 collision_mask = 3
@@ -313,13 +395,16 @@ polygon = PoolVector2Array( -685.044, 10268, -3247.27, 10253.8, -3247.27, 9238.1
 
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource( 29 )
-
 [connection signal="death" from="Background/player" to="Background/Health State Machine" method="_on_player_death"]
 [connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]
 [connection signal="body_entered" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_entered"]
 [connection signal="body_exited" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_exited"]
 [connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Quit " to="Background/player/GUI" method="_on_Quit__pressed"]
 [connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Restart" to="Background/player/GUI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="Background/player/GUI/Pause Menu/ColorRect/Continue" to="Background/player/GUI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="Background/player/GUI/Pause Menu/ColorRect/Main" to="Background/player/GUI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="Background/player/GUI/Pause Menu/ColorRect/Options" to="Background/player/GUI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="Background/player/GUI/Pause Menu/ColorRect/Quit " to="Background/player/GUI" method="_on_Quit__pressed"]
 [connection signal="body_entered" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_entered"]
 [connection signal="body_exited" from="Background/player/DangerZone1" to="MusicController" method="_on_DangerZone1_body_exited"]
 [connection signal="body_entered" from="Background/player/DangerZone2" to="MusicController" method="_on_DangerZone2_body_entered"]

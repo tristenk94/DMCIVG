@@ -2,7 +2,8 @@ extends CanvasLayer
 
 
 #health textures
-var bar_red = preload("res://gui/orangehp.png")
+var bar_red = preload("res://gui/redhp.png")
+var bar_orange = preload("res://gui/orangehp.png")
 var bar_green = preload("res://gui/greenhp.png")
 var bar_yellow = preload("res://gui/yellowhp.png")
 
@@ -56,10 +57,15 @@ func _process(_delta):
 func update_player():
 	#player hp
 	var healthpercent = (player.health / player.health_max) * 100
-	if player.health < playerhealth.max_value * 0.5:
+	
+	if player.health <= playerhealth.max_value * 0.75 and player.health > playerhealth.max_value * 0.5:
 		playerhealth.texture_progress = bar_yellow
-	if player.health < playerhealth.max_value * 0.15:
+	elif player.health <= playerhealth.max_value * 0.5 and player.health > playerhealth.max_value * 0.25:
+		playerhealth.texture_progress = bar_orange
+	elif player.health <= playerhealth.max_value * 0.25:
 		playerhealth.texture_progress = bar_red
+	else:
+		playerhealth.texture_progress = bar_green
 	playerhealth.value = player.health
 	playerhealthvalue.text = str(round(healthpercent), "%")
 	

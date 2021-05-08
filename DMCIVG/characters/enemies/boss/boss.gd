@@ -35,6 +35,9 @@ var fireball_scene = preload("res://characters/enemies/boss/projectile/fireball.
 # Animation variables
 var other_animation_playing = false
 
+# Minimap variables
+var mm_icon = "boss"
+
 # boss Signals
 signal spawn
 signal movement

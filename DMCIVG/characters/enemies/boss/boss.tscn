@@ -19,6 +19,11 @@ animations = [ {
 "name": "idle",
 "speed": 0.5
 }, {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "spawn",
+"speed": 2.0
+}, {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
 "loop": false,
 "name": "attack",
@@ -27,11 +32,6 @@ animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": false,
 "name": "death",
-"speed": 2.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "spawn",
 "speed": 2.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 2 ) ],
@@ -59,7 +59,9 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="boss" type="KinematicBody2D"]
+[node name="boss" type="KinematicBody2D" groups=[
+"minimap_objects",
+]]
 script = ExtResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://gui/orangehp.png" type="Texture" id=1]
+[ext_resource path="res://gui/redhp.png" type="Texture" id=1]
 [ext_resource path="res://fonts/orbitron.tres" type="DynamicFont" id=2]
 
 [node name="boss_hp" type="Control"]
@@ -37,7 +37,10 @@ margin_left = 50.0
 margin_right = 150.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
-text = "BOSS MAN"
+custom_colors/font_color = Color( 0.929412, 0.105882, 0.105882, 1 )
+text = "MR. BOSS"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -32,9 +32,11 @@ var attack_damage = 10
 var attack_cooldown_time = 1500
 var next_attack_time = 0
 
-
 # Animation variables
 var other_animation_playing = false
+
+# Minimap variables
+var mm_icon = "enemy"
 
 # Ballbot Signals
 signal spawn

@@ -5,7 +5,7 @@
 
 [node name="player_hp" type="Control"]
 margin_top = 244.0
-margin_right = 480.0
+margin_right = 400.0
 margin_bottom = 270.0
 __meta__ = {
 "_edit_use_anchors_": false

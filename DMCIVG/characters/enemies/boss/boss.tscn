@@ -19,6 +19,11 @@ animations = [ {
 "name": "idle",
 "speed": 0.5
 }, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "attack",
+"speed": 2.0
+}, {
 "frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": false,
 "name": "death",
@@ -33,11 +38,6 @@ animations = [ {
 "loop": true,
 "name": "walk",
 "speed": 3.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "attack",
-"speed": 2.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -84,6 +84,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit = SubResource( 3 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

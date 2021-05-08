@@ -92,14 +92,13 @@ func _process(delta):
 #			print("fail2")
 	
 func hp_init():
-	bossgui.visible = false
+	bossgui.hide()
 	healthbar.max_value = health_max
 	healthbar.value = health
 
 func hit(damage):
 	health -= damage
 	#print("hit called")
-	#$HealthDisplay.update_healthbar(health)
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -107,16 +106,24 @@ func hit(damage):
 		direction = Vector2.ZERO
 		set_process(false)
 		other_animation_playing = true
+		bossgui.hide()
 		$AnimatedSprite.play("death")
 		emit_signal("death")
 		
 func update_bosshp():
+	var player_relative_position = player.position - position
+	
+	#show healthbar if player is close
+	if player_relative_position.length() <= 1600:
+		bossgui.show()
+	else:
+		bossgui.hide()
+	
+	#update healthbar gui
 	healthbar.value = health
 	healthbarnumber.text = str(round((health / health_max) * 100), "%")
+	
 
-#show boss healthbar
-func _on_boss_detected_player():
-	bossgui.visible = true
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
@@ -169,7 +176,7 @@ func _on_Timer_timeout():
 		# If player is within range, move toward it
 		#print("in range!")
 		direction = player_relative_position.normalized()
-	
+		
 	
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move

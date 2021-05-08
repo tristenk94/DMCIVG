@@ -175,7 +175,7 @@ func _input(event):
 		var now = OS.get_ticks_msec()
 		if charges_remaining >= 1 && now >= next_attack_time:	
 			# What's the target?,, calculate target ad do the charge damage since we know this attack is a charge
-			print("charges left : ", charges_remaining)
+			print("charges left : ", charges_remaining - 1)
 			var target = $RayCast2D.get_collider()
 			#print(target.name)
 			if target != null: #seperated into if's in case we want to send specific sfx or states to sequencer

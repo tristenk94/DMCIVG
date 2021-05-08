@@ -268,12 +268,20 @@ func _process(delta):
 		emit_signal("player_stats_changed", self)
 		emit_signal("health_amount", new_health, health) #connect this to health bar, send strength to fsm?, 
 		#possibly dupe state of health_amount
-
-# check to be implemented when sword and speed ready
+	# check to be implemented when sword and speed ready
 #	if swordPickup:
 #		sword_particles.set_emitting(true)
 #		sword_particles.show()
 #
-#	if speedPickup:
-#		speed_particles.set_emitting(true)
-#		speed_particles.show()
+	if speedPickup:
+		speed_particles.set_emitting(true)
+		speed_particles.show()
+
+
+func _on_health_potion(potion_value):
+	health += potion_value
+	emit_signal("player_stats_changed",self)
+	emit_signal("health_amount",0,health)
+
+
+

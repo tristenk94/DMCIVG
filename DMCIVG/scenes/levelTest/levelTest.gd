@@ -58,6 +58,14 @@ var solved_puzzles = 0 # counter of solved puzzles
 
 var puzzle_scene = preload("res://scenes/shared/props/box_and_pit/box_and_pit_puzzle.tscn")
 
+#POTION
+#x , y,  0/1 (charges or no charges)
+export var potion_locations = [[1930.2,11215.311,0],[1900,11100,1],[3089.015,10631.96,2]]
+var potion_scene = preload("res://scenes/shared/props/potion/potion.tscn")
+var player_reference
+
+
+
 #REDEFINE THIS ARRAY TO HAVE LOCATIONS OF BOXES AND PITS FOR A PUZZLE ABSTRACTED, THEN PASS THIS ARRAY TO BE INSTANCED INDIVIDUALLY
 #export var box_locations = [[247.355, 9551.71], [669.604, 9510.438]]
 #export var pit_locations = [[675.953, 9323.124], [275.928, 672.352]]
@@ -128,6 +136,7 @@ var particle_timer = 3000 #timer to keep particles going
 # - LAMPS
 # - SWITCHES
 # - ENEMIES
+# - POTIONS
 
 # MAIN SCRIPT
 func _ready():
@@ -160,6 +169,14 @@ func _ready():
 	for i in range(enemy_spawns.size()):
 		load_spawn(enemy_spawns[i])
 		print("enemy spawned: ", enemy_spawns[i])
+	
+		#load potions(need load potion function)
+	for i in range(potion_locations.size()):
+		load_potion(potion_locations[i])
+		print("potion spawned: ", potion_locations[i])
+		
+	player_reference = get_tree().root.get_node("Main/Background/player")
+
 
 #### LOAD FUNCTIONS
 func load_spawn(enemy_spawn):
@@ -264,6 +281,26 @@ func load_doors(door_location, unlocked_door): #recieve door info and instance i
 	if(unlocked_door == 1): #lock the door once initialized
 		door.lock()
 
+#potion
+func load_potion(potion_location):
+	var potion = potion_scene.instance()
+	
+	potion.position.x = potion_location[0]
+	potion.position.y = potion_location[1]
+	potion.potion_type = potion_location[2]
+	
+	
+	get_tree().root.get_node("Main/Background").add_child(potion)
+	potion.add_to_group("potions")
+	
+	if(potion.potion_type == 0):
+		potion.switch_health()
+	elif(potion.potion_type == 1):
+		potion.switch_charge()
+	elif(potion.potion_type ==2):
+		potion.switch_speed()
+
+
 
 #### PROCESSING FUNCTIONS
 func _process(delta):
@@ -272,6 +309,8 @@ func _process(delta):
 	check_switches()
 	
 	check_puzzles_solved() 
+	
+	check_potions_collection()
 	
 	if !boss_slain: #if the boss hasnt been slain, check
 		check_boss()
@@ -349,4 +388,21 @@ func check_key_collection(): #connect this to an timer to not spam?
 			get_tree().queue_delete(keys)
 			#sound fx for key pickup here
 			score += 1000
+			
+
+#check potion collection
+func check_potions_collection(): #connect this to an timer to not spam?
+	var all_potions = get_tree().get_nodes_in_group("potions")
+	
+	for potions in all_potions:
+		if potions.collected:
+			if potions.potion_type == 0:
+				player_reference.health += 20
+			elif potions.potion_type == 1:
+				player_reference.charges_remaining += 1
+			elif potions.potion_type == 2:
+				player_reference.speed += 100
+				player_reference.speedPickup = true
+			print("potion deleted")
+			get_tree().queue_delete(potions)
 			

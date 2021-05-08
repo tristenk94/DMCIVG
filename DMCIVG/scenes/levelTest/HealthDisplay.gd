@@ -1,10 +1,8 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var bar_red = preload("res://gui/redhp.png")
+# health textures
+var bar_red = preload("res://gui/orangehp.png")
 var bar_green = preload("res://gui/greenhp.png")
 var bar_yellow = preload("res://gui/yellowhp.png")
 

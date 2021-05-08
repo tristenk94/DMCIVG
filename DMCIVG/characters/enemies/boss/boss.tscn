@@ -19,25 +19,25 @@ animations = [ {
 "name": "idle",
 "speed": 0.5
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
-"loop": false,
-"name": "death",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "spawn",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "attack",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "death",
 "speed": 2.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "walk",
 "speed": 3.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "attack",
-"speed": 2.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -59,7 +59,9 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="boss" type="KinematicBody2D"]
+[node name="boss" type="KinematicBody2D" groups=[
+"minimap_objects",
+]]
 script = ExtResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -84,6 +86,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit = SubResource( 3 )
+
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

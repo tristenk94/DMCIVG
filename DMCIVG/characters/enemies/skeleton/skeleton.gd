@@ -37,6 +37,9 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Minimap variables
+var mm_icon = "enemy"
+
 # Skeleton Signals
 signal spawn
 signal movement

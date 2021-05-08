@@ -8,8 +8,8 @@ var collected = false
 var potion_type
 var potion_value = 20
 
-func _ready():
-	self.connect('health_potion',get_tree().root.get_node("Main/Background/player"),'_on_health_potion')
+#func _ready():
+#	self.connect('health_potion',get_tree().root.get_node("Main/Background/player"),'_on_health_potion')
 
 func _on_Potion_body_entered(body: KinematicBody2D):
 	#print("body entered: ", body)

@@ -147,6 +147,7 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
@@ -276,5 +277,6 @@ func _on_AnimatedSprite_frame_changed():
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking")
+			$Swing.play()
 			speed_cooldown = 140
 			speed = 0

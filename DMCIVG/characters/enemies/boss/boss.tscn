@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://characters/enemies/boss/death/GoblinKing_Death_1.png" type="Texture" id=1]
 [ext_resource path="res://characters/enemies/boss/walk/GoblinKing_Walk_3.png" type="Texture" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://characters/enemies/boss/boss.gd" type="Script" id=9]
 [ext_resource path="res://characters/enemies/boss/attack/GoblinKing_Attack_1.png" type="Texture" id=10]
 [ext_resource path="res://characters/enemies/boss/attack/GoblinKing_Attack_2.png" type="Texture" id=11]
+[ext_resource path="res://Audio/Sound Effects/Boss Lasers Attack.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Sound Effects/Enemy Death 3.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio/Sound Effects/Boss LAND.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Sound Effects/Boss JUMP.wav" type="AudioStream" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -24,14 +28,14 @@ animations = [ {
 "name": "spawn",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
-"loop": false,
-"name": "attack",
-"speed": 2.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 6 ), ExtResource( 4 ) ],
 "loop": false,
 "name": "death",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "attack",
 "speed": 2.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 2 ) ],
@@ -87,6 +91,21 @@ autostart = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit = SubResource( 3 )
 
+[node name="LASERS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -20.0
+
+[node name="JUMP" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -15.0
+
+[node name="LAND" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -15.0
+
+[node name="DIE" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -20.0
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

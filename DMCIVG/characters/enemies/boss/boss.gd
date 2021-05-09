@@ -112,6 +112,7 @@ func hit(damage):
 		bossgui.hide()
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
 		
 func update_bosshp():
 	var player_relative_position = player.position - position
@@ -279,6 +280,7 @@ func _on_AnimatedSprite_frame_changed():
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking")
+			$LAND.play()
 		
 			
 func shootFireballs():
@@ -300,3 +302,4 @@ func shootFireballs():
 		
 		get_tree().root.get_node("Main/Background").add_child(fireball)
 		#emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies
+		$LASERS.play()

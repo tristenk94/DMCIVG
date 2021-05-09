@@ -146,6 +146,7 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():

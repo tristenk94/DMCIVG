@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Health Potion.wav-a7a44b3c56d49dc57c86e78f6ca87472.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Health Potion.wav"
+dest_files=[ "res://.import/Health Potion.wav-a7a44b3c56d49dc57c86e78f6ca87472.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

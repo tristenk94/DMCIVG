@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -13,9 +13,12 @@
 [ext_resource path="res://scenes/levelTest/79% Health.gd" type="Script" id=11]
 [ext_resource path="res://scenes/levelTest/49% Health.gd" type="Script" id=12]
 [ext_resource path="res://gui/minimap.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Audio/Sound Effects/Health Potion.wav" type="AudioStream" id=14]
 [ext_resource path="res://scenes/levelTest/Minor Event State Machine.gd" type="Script" id=15]
 [ext_resource path="res://scenes/levelTest/Threat Level 0.gd" type="Script" id=16]
 [ext_resource path="res://scenes/levelTest/Threat Level 3.gd" type="Script" id=17]
+[ext_resource path="res://Audio/Sound Effects/Speed Boost.wav" type="AudioStream" id=18]
+[ext_resource path="res://Audio/Sound Effects/Charge Potion.wav" type="AudioStream" id=19]
 [ext_resource path="res://scenes/levelTest/Threat Level 1.gd" type="Script" id=20]
 [ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
 [ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
@@ -728,6 +731,20 @@ orbit_velocity = 202.9
 scale_amount = 2.0
 scale_amount_random = 1.0
 color = Color( 0.811765, 0.827451, 0.14902, 1 )
+
+[node name="Potion Sounds" type="Node" parent="Background"]
+
+[node name="SoundHealth" type="AudioStreamPlayer" parent="Background/Potion Sounds"]
+stream = ExtResource( 14 )
+volume_db = -20.0
+
+[node name="SoundCharge" type="AudioStreamPlayer" parent="Background/Potion Sounds"]
+stream = ExtResource( 19 )
+volume_db = -20.0
+
+[node name="SoundSpeed" type="AudioStreamPlayer" parent="Background/Potion Sounds"]
+stream = ExtResource( 18 )
+volume_db = -20.0
 
 [node name="puzzle room collision" type="StaticBody2D" parent="."]
 visible = false

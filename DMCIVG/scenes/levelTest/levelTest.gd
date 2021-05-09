@@ -398,10 +398,13 @@ func check_potions_collection(): #connect this to an timer to not spam?
 		if potions.collected:
 			if potions.potion_type == 0:
 				player_reference.health += 20
+				$"Potion Sounds/SoundHealth".play()
 			elif potions.potion_type == 1:
 				player_reference.charges_remaining += 1
+				$"Potion Sounds/SoundCharge".play()
 			elif potions.potion_type == 2:
 				player_reference.speed += 100
+				$"Potion Sounds/SoundSpeed".play()
 				player_reference.speedPickup = true
 			print("potion deleted")
 			get_tree().queue_delete(potions)

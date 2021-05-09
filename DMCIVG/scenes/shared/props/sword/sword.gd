@@ -8,12 +8,13 @@ var collected = false
 var sword
 
 
-func _on_Sword_body_entered(body: KinematicBody2D):
-	#print("body entered: ", body)
+func _on_sword_body_entered(body: KinematicBody2D):
+	print("body entered: ", body)
 	if body != null:
 		if not body.name.find("player") >= 0:
 			return
 	collected = true 
+
 
 #increment the damage
 #stab_attack_damage

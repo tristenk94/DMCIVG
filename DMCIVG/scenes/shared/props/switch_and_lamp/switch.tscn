@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/shared/props/switch_and_lamp/switch_red.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shared/props/switch_and_lamp/switch.gd" type="Script" id=2]
@@ -8,11 +8,11 @@
 [ext_resource path="res://Audio/Sound Effects/Switch Red and Yellow.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 4 )
+atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="SpriteFrames" id=3]
@@ -24,12 +24,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 1 ) ],
 "loop": false,
-"name": "red",
+"name": "yellow",
 "speed": 0.1
 }, {
 "frames": [ SubResource( 2 ) ],
 "loop": false,
-"name": "yellow",
+"name": "red",
 "speed": 0.1
 } ]
 

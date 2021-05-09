@@ -49,7 +49,6 @@ export var key_locations = [[5396.495, 9949.679, 2], #opens puzzle room
  ] 
 # then third index keeps track of index of door in the door array its associated with
 var keys_collected = 0 #counter of keys
-
 var key_scene = preload("res://scenes/shared/props/key/key.tscn")
 
 # PUZZLES
@@ -64,6 +63,11 @@ export var potion_locations = [[1930.2,11215.311,0],[1900,11100,1],[3089.015,106
 var potion_scene = preload("res://scenes/shared/props/potion/potion.tscn")
 var player_reference
 
+
+#SWORD
+export var sword_locations=[[3962.316,10302.201,0]]
+var sword_collected = 0
+var sword_scene = preload("res://scenes/shared/props/sword/sword.tscn")
 
 
 #REDEFINE THIS ARRAY TO HAVE LOCATIONS OF BOXES AND PITS FOR A PUZZLE ABSTRACTED, THEN PASS THIS ARRAY TO BE INSTANCED INDIVIDUALLY
@@ -137,7 +141,7 @@ var particle_timer = 3000 #timer to keep particles going
 # - SWITCHES
 # - ENEMIES
 # - POTIONS
-
+# - SWORD
 # MAIN SCRIPT
 func _ready():
 	#load doors
@@ -174,6 +178,10 @@ func _ready():
 	for i in range(potion_locations.size()):
 		load_potion(potion_locations[i])
 		print("potion spawned: ", potion_locations[i])
+		
+	for i in range(sword_locations.size()):
+		load_sword(sword_locations[i])
+		print("sword spawned: ", sword_locations[i])
 		
 	player_reference = get_tree().root.get_node("Main/Background/player")
 
@@ -300,7 +308,14 @@ func load_potion(potion_location):
 	elif(potion.potion_type ==2):
 		potion.switch_speed()
 
-
+#sword
+func load_sword(sword_location):
+	var sword = sword_scene.instance()
+	sword.position.x = sword_location[0]
+	sword.position.y = sword_location[1]
+	
+	get_tree().root.get_node("Main/Background").add_child(sword)
+	sword.add_to_group("swords")
 
 #### PROCESSING FUNCTIONS
 func _process(delta):
@@ -311,6 +326,8 @@ func _process(delta):
 	check_puzzles_solved() 
 	
 	check_potions_collection()
+	
+	check_sword_collection()
 	
 	if !boss_slain: #if the boss hasnt been slain, check
 		check_boss()
@@ -398,14 +415,25 @@ func check_potions_collection(): #connect this to an timer to not spam?
 		if potions.collected:
 			if potions.potion_type == 0:
 				player_reference.health += 20
-				$"Potion Sounds/SoundHealth".play()
+#				$"Potion Sounds/SoundHealth".play()
 			elif potions.potion_type == 1:
 				player_reference.charges_remaining += 1
-				$"Potion Sounds/SoundCharge".play()
+#				$"Potion Sounds/SoundCharge".play()
 			elif potions.potion_type == 2:
 				player_reference.speed += 100
-				$"Potion Sounds/SoundSpeed".play()
+#				$"Potion Sounds/SoundSpeed".play()
 				player_reference.speedPickup = true
 			print("potion deleted")
 			get_tree().queue_delete(potions)
 			
+
+#check sword collection
+func check_sword_collection(): #connect this to an timer to not spam?
+	var all_swords = get_tree().get_nodes_in_group("swords")
+	
+	for sword in all_swords:
+		if sword.collected:
+			sword_collected += 1
+			player_reference.stab_attack_damage += 20
+			player_reference.slash_attack_damage += 20
+			get_tree().queue_delete(sword)

@@ -16,14 +16,17 @@ var lamp_association
 # fuct to change color displayed to red
 func switchRed():
 	switch_sprite.play("red")
+	$RedYellow.play()
 	current_color = "red"
 
 # fuct to change color displayed to green
 func switchGreen():
 	switch_sprite.play("green")
+	$Green.play()
 	current_color = "green"
 	
 # fuct to change color displayed to yellow
 func switchYellow():
 	switch_sprite.play("yellow")
+	$RedYellow.play()
 	current_color = "yellow"

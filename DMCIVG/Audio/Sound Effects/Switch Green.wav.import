@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Switch Green.wav-ff4f8e4d582a54cdf6cac91b11a1fa6f.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Switch Green.wav"
+dest_files=[ "res://.import/Switch Green.wav-ff4f8e4d582a54cdf6cac91b11a1fa6f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

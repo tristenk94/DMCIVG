@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -22,6 +22,17 @@
 [ext_resource path="res://gui/laser.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/levelTest/levelTest.gd" type="Script" id=28]
 [ext_resource path="res://Audio/MusicController.gd" type="Script" id=29]
+[ext_resource path="res://Audio/Sound Effects/Atmosphere1.wav" type="AudioStream" id=30]
+[ext_resource path="res://Audio/Sound Effects/Atmosphere2.wav" type="AudioStream" id=31]
+[ext_resource path="res://Audio/Sound Effects/Atmosphere3.wav" type="AudioStream" id=32]
+[ext_resource path="res://Audio/Sound Effects/Module 1.wav" type="AudioStream" id=33]
+[ext_resource path="res://Audio/Sound Effects/Mdoule 2.wav" type="AudioStream" id=34]
+[ext_resource path="res://Audio/Sound Effects/Module 3.wav" type="AudioStream" id=35]
+[ext_resource path="res://Audio/Sound Effects/Module 4.wav" type="AudioStream" id=36]
+[ext_resource path="res://Audio/Sound Effects/Module 5.wav" type="AudioStream" id=37]
+[ext_resource path="res://Audio/Sound Effects/Module 6.wav" type="AudioStream" id=38]
+[ext_resource path="res://Audio/Sound Effects/GUI Hover Over Button.wav" type="AudioStream" id=39]
+[ext_resource path="res://Audio/Sound Effects/Player Death.wav" type="AudioStream" id=40]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1330.88, 735.646 )
@@ -245,6 +256,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Death" type="AudioStreamPlayer" parent="Background/player/GUI"]
+stream = ExtResource( 40 )
+volume_db = -15.0
+
+[node name="Replay" type="AudioStreamPlayer" parent="Background/player/GUI"]
+stream = ExtResource( 39 )
+volume_db = -15.0
+
 [node name="DangerZone1" type="Area2D" parent="Background/player"]
 visible = false
 
@@ -309,6 +328,384 @@ position = Vector2( -3321.78, 9105.47 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area2"]
 polygon = PoolVector2Array( -18.5557, -24.9111, 0.601074, -3007.01, 5267.67, -3002.31, 5282.72, -4803.74, 7439.88, -4801.38, 7420.35, -1090.49, 7420.72, 19.7881, -18.5557, -18.5264 )
 
+[node name="Atmosphere Sounds" type="Node2D" parent="Background"]
+position = Vector2( -418.454, 7033.29 )
+scale = Vector2( 200, 200 )
+
+[node name="Bottom Left A1-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( -8.12445, 16.4574 )
+stream = ExtResource( 30 )
+autoplay = true
+
+[node name="Bottom Left A1-2" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 2.67953, 16.5095 )
+stream = ExtResource( 30 )
+autoplay = true
+
+[node name="Bottom Right A2-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 16.5806, 16.468 )
+stream = ExtResource( 31 )
+autoplay = true
+
+[node name="Bottom Right A2-2" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 24.2681, 14.0474 )
+stream = ExtResource( 31 )
+autoplay = true
+
+[node name="Middle Left A2-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( -6.30614, 2.62856 )
+stream = ExtResource( 31 )
+autoplay = true
+attenuation = 0.5
+
+[node name="Middle Left A2-2" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 4.58778, 2.91985 )
+stream = ExtResource( 31 )
+autoplay = true
+attenuation = 0.5
+
+[node name="Middle Right A1-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 17.3515, 1.53519 )
+stream = ExtResource( 30 )
+autoplay = true
+attenuation = 0.5
+
+[node name="Top Left A3-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( -9.02962, -14.123 )
+stream = ExtResource( 32 )
+autoplay = true
+attenuation = 0.25
+
+[node name="Top Left A3-2" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 5.66983, -13.9404 )
+stream = ExtResource( 32 )
+autoplay = true
+attenuation = 0.25
+
+[node name="Top Right A2-1" type="AudioStreamPlayer2D" parent="Background/Atmosphere Sounds"]
+position = Vector2( 17.0952, -8.75655 )
+autoplay = true
+max_distance = 1000.0
+attenuation = 0.203063
+
+[node name="Bottom Left Module Sounds" type="Node2D" parent="Background"]
+
+[node name="BL Comp1-1" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -1970.97, 11032.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp1-2" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -1460.97, 11032.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp1-3" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -946.973, 11034.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp1-4" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -434.973, 11034.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp1-5" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( 77.0273, 11032.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp1-6" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( 591.027, 11034.8 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp2-1" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -1715.96, 11031.4 )
+stream = ExtResource( 34 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp3-1" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -1202.78, 11036.7 )
+stream = ExtResource( 35 )
+volume_db = -30.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp3-2" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( 332.291, 11023.1 )
+stream = ExtResource( 35 )
+volume_db = -30.0
+autoplay = true
+max_distance = 800.0
+
+[node name="BL Comp4-1" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
+position = Vector2( -178.848, 11032.5 )
+stream = ExtResource( 36 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+
+[node name="Middle Right Module Sounds" type="Node2D" parent="Background"]
+
+[node name="Top Comp1-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2488.15, 8647.32 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 1000.0
+attenuation = 0.25
+
+[node name="Top Comp1-2" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3036.15, 8647.32 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.25
+
+[node name="Top Comp1-3" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3572.15, 8647.32 )
+stream = ExtResource( 33 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.25
+
+[node name="Top Comp2-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2554.35, 8533.55 )
+stream = ExtResource( 34 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="Top Comp2-2" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3510.69, 8522.33 )
+stream = ExtResource( 34 )
+volume_db = -40.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="Top Comp3-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2542.97, 8642.15 )
+stream = ExtResource( 35 )
+volume_db = -30.0
+autoplay = true
+max_distance = 750.0
+attenuation = 0.5
+
+[node name="Top Comp4-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3349.32, 8642.15 )
+stream = ExtResource( 36 )
+volume_db = -40.0
+autoplay = true
+max_distance = 750.0
+attenuation = 0.5
+
+[node name="Down Comp1-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2495.92, 9795.71 )
+stream = ExtResource( 33 )
+volume_db = -30.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.757858
+
+[node name="Down Comp1-2" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3518.86, 9785.38 )
+stream = ExtResource( 33 )
+volume_db = -30.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.757858
+
+[node name="Down Comp3-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2428.21, 9793.49 )
+stream = ExtResource( 35 )
+volume_db = -25.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.76
+
+[node name="Down Comp4-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 3444.07, 9785.01 )
+stream = ExtResource( 36 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.76
+
+[node name="Down Comp5-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 2566.36, 9788.8 )
+stream = ExtResource( 37 )
+volume_db = -45.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.757858
+
+[node name="Right Comp1-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 5028.53, 8595.65 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="Right Comp3-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 4696.1, 8595.29 )
+stream = ExtResource( 35 )
+volume_db = -40.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="Right Comp4-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 4811, 8597.53 )
+stream = ExtResource( 36 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
+position = Vector2( 4933.64, 8606.89 )
+stream = ExtResource( 38 )
+volume_db = -35.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.5
+
+[node name="Top Modules" type="Node2D" parent="Background"]
+
+[node name="Right Comp1-1" type="AudioStreamPlayer2D" parent="Background/Top Modules"]
+position = Vector2( 2596.47, 5037.98 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Right Comp2-1" type="AudioStreamPlayer2D" parent="Background/Top Modules"]
+position = Vector2( 2966.02, 5029.68 )
+stream = ExtResource( 34 )
+volume_db = -35.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Right Comp4-1" type="AudioStreamPlayer2D" parent="Background/Top Modules"]
+position = Vector2( 3273.58, 5018.17 )
+stream = ExtResource( 36 )
+volume_db = -30.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Right Comp5-1" type="AudioStreamPlayer2D" parent="Background/Top Modules"]
+position = Vector2( 3536.6, 5010.99 )
+stream = ExtResource( 37 )
+volume_db = -42.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Misc Modules" type="Node2D" parent="Background"]
+
+[node name="Middle Comp1-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( 1370.65, 6533.18 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 600.0
+attenuation = 0.5
+
+[node name="MiddleLeft Comp1-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( -1913.73, 8129.41 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 600.0
+attenuation = 0.5
+
+[node name="MiddleLeft Comp1-2" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( -2744.54, 6730.15 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 600.0
+attenuation = 0.5
+
+[node name="MiddleLeft Comp5-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( -2452.62, 6741.87 )
+stream = ExtResource( 37 )
+volume_db = -40.0
+autoplay = true
+max_distance = 600.0
+attenuation = 0.5
+
+[node name="Top Comp1-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( -2229.12, 4704.44 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Top Comp1-2" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( -2237.21, 3338.66 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Top Comp1-3" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( 712.025, 3338.66 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="Top Comp1-4" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( 721.539, 4708.62 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 800.0
+attenuation = 0.25
+
+[node name="BottomRight Comp1-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( 5190.83, 10060 )
+stream = ExtResource( 33 )
+volume_db = -40.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.757858
+
+[node name="BottomRight Comp1-2" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
+position = Vector2( 5221.03, 10063.8 )
+stream = ExtResource( 35 )
+volume_db = -40.0
+autoplay = true
+max_distance = 500.0
+attenuation = 0.757858
+
 [node name="Area3" type="Area2D" parent="Background"]
 visible = false
 position = Vector2( -3321.85, 6061.62 )
@@ -344,7 +741,6 @@ polygon = PoolVector2Array( -685.044, 10268, -3247.27, 10253.8, -3247.27, 9238.1
 
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource( 29 )
-
 [connection signal="death" from="Background/player" to="Background/Health State Machine" method="_on_player_death"]
 [connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]
 [connection signal="body_entered" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_entered"]

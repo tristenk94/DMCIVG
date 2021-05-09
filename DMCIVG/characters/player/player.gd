@@ -130,6 +130,7 @@ func _input(event):
 				#print("stabbing is true")
 				isSlashing = true
 				$pivot/AnimatedSprite.play("slash")
+				$Slashing.play()
 				isStabbing = false
 				attack_damage = slash_attack_damage
 				#slash_next_attack_time = now + stab_next_attack_time
@@ -138,6 +139,7 @@ func _input(event):
 				isStabbing = true
 				attack_damage = stab_attack_damage
 				$pivot/AnimatedSprite.play("stab")
+				$Stabbing.play()
 				
 			if last_direction == "left": 
 				get_node( "pivot/AnimatedSprite" ).set_flip_h( true )
@@ -206,6 +208,7 @@ func _input(event):
 				get_node( "pivot/AnimatedSprite" ).set_flip_h( false )
 				
 			$pivot/AnimatedSprite.play("laser")
+			$Charging.play()
 			# Add cooldown time to current time
 			charge_next_attack_time = now + charge_attack_cooldown_time
 

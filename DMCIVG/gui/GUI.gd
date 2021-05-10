@@ -41,6 +41,7 @@ func _ready():
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
 	get_tree().paused = false 
+	level_map.hide() #hide the map on launch so it doesnt come up first thing
 	
 	#work around so that the area 1 text actually displays 
 	#should only run once

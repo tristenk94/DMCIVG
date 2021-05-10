@@ -15,6 +15,6 @@ func _on_key_body_entered(body: KinematicBody2D):
 	if body != null:
 		if not body.name.find("player") >= 0:
 			return
-	collected = true #collect the key if player touched it
+		collected = true #collect the key if player touched it
 	#get_tree().queue_delete(self)
 		#$Sprite.modulate = Color(0.56, 0.93, 0.56, 1) # light green, it is solved!

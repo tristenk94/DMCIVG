@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/shared/props/potion/speed_potion.png" type="Texture" id=2]
 [ext_resource path="res://item_icons/Potion.png" type="Texture" id=3]
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/bluepotion.png-8b8cb823231d9acbd7ed439ac7bcab18.stex"
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
@@ -19,7 +19,7 @@ animations = [ {
 "name": "health",
 "speed": 0.1
 }, {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": false,
 "name": "charge",
 "speed": 0.1
@@ -35,7 +35,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -1.86265e-07, 0.374577 )
 scale = Vector2( 1, 1.04682 )
-frames = SubResource( 2 )
+frames = SubResource( 5 )
 animation = "speed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -465,3 +465,11 @@ func _on_DangerZone2_body_exited(body):
 			print("danger zone 2 exited.")
 			sendMessage()
 
+
+## @ TOMO todo...
+func _on_Area4_body_exited(body):
+	pass # Replace with function body.
+
+
+func _on_Area4_body_entered(body):
+	pass # Replace with function body.

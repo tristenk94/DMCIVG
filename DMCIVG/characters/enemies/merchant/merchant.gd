@@ -259,6 +259,7 @@ func _on_AnimatedSprite_animation_finished():
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
 		main_node_ref.score += 1000
+		main_node_ref.load_potion([position.x, position.y, rng.randi_range(0,1)]) #merchant will drop health or charge potion
 	other_animation_playing = false
 
 

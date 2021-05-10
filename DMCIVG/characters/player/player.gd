@@ -253,7 +253,6 @@ func _on_AnimatedSprite_animation_finished():
 func _ready(): #connect this to health bar
 	emit_signal("player_stats_changed", self)
 	
-	
 	#particle clean up
 	sword_particles.set_emitting(false)
 	sword_particles.hide()
@@ -264,18 +263,18 @@ func _ready(): #connect this to health bar
 	
 func _process(delta):
 	
-	# Regenerates health
-	var new_health = min(health + health_regeneration * delta, health_max)
+	# Regenerates health --> nerfed since i divided delta/1000
+	var new_health = min(health + health_regeneration * (delta/1000), health_max)
 	if new_health != health:
 		health = new_health
 		emit_signal("player_stats_changed", self)
 		emit_signal("health_amount", new_health, health) #connect this to health bar, send strength to fsm?, 
 		#possibly dupe state of health_amount
-	# check to be implemented when sword and speed ready
-#	if swordPickup:
-#		sword_particles.set_emitting(true)
-#		sword_particles.show()
-#
+
+	if swordPickup:
+		sword_particles.set_emitting(true)
+		sword_particles.show()
+
 	if speedPickup:
 		speed_particles.set_emitting(true)
 		speed_particles.show()
@@ -285,6 +284,3 @@ func _on_health_potion(potion_value):
 	health += potion_value
 	emit_signal("player_stats_changed",self)
 	emit_signal("health_amount",0,health)
-
-
-

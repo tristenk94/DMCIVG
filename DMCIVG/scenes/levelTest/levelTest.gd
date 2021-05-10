@@ -59,20 +59,25 @@ var puzzle_scene = preload("res://scenes/shared/props/box_and_pit/box_and_pit_pu
 
 #POTION
 #x , y,  0/1 (charges or no charges)
-export var potion_locations = [[1930.2,11215.311,0],[1900,11100,1],[3089.015,10631.96,2]]
-var potion_scene = preload("res://scenes/shared/props/potion/potion.tscn")
-var player_reference
+export var potion_locations = [
+#health	
+[-1536.482, 6240.099, 0], [-3197.72, 7494.503, 0], [3579.771, 10803.899, 0],
 
+#charges
+[1294.402, 7375.842, 1], [2963.175, 8654.292, 1], [5265.514, 9361.4, 1], [1186.923, 0996.231, 1],
+
+#speed boost
+[-1770.941, 8117.495, 2]]
+var potion_scene = preload("res://scenes/shared/props/potion/potion.tscn")
 
 #SWORD
-export var sword_locations=[[3962.316,10302.201,0]]
+export var sword_locations=[[3025.342,5151.644,0]] #in puzzle room 2
 var sword_collected = 0
 var sword_scene = preload("res://scenes/shared/props/sword/sword.tscn")
 
 
-#REDEFINE THIS ARRAY TO HAVE LOCATIONS OF BOXES AND PITS FOR A PUZZLE ABSTRACTED, THEN PASS THIS ARRAY TO BE INSTANCED INDIVIDUALLY
-#export var box_locations = [[247.355, 9551.71], [669.604, 9510.438]]
-#export var pit_locations = [[675.953, 9323.124], [275.928, 672.352]]
+var player_reference
+var player_in_area_4 = false
 
 
 # LAMPS
@@ -133,6 +138,10 @@ var boss_scene = preload("res://characters/enemies/boss/boss.tscn")
 onready var key_particles = get_node("KeyParticles")
 var particle_timer = 3000 #timer to keep particles going
 
+# Signals
+signal victory #we won the game
+
+
 # READY FUNCTION WILL ALWAYS SPAWN IN THIS ORDER
 # - DOORS
 # - KEYS
@@ -147,32 +156,32 @@ func _ready():
 	#load doors
 	for i in range(door_locations.size()): #load doors based on above configurations
 		load_doors(door_locations[i], unlocked_doors[i])
-		print("door loaded : ", door_locations[i], " at ", unlocked_doors[i])
+		#print("door loaded : ", door_locations[i], " at ", unlocked_doors[i])
 		
 	#load keys
 	for i in range(key_locations.size()):
 		load_keys(key_locations[i])
-		print("key loaded: ", key_locations[i])
+		#print("key loaded: ", key_locations[i])
 		
 	#load puzzles
 	for i in range(puzzle_locations.size()): #load puzzles, for now just box and pits
 		load_puzzles(puzzle_locations[i])
-		print("puzzle loaded: ", puzzle_locations[i])
+		#print("puzzle loaded: ", puzzle_locations[i])
 		
 	#load lamps
 	for i in range(lamp_locations.size()):
 		load_lamps(lamp_locations[i])
-		print("lamp loaded: ", lamp_locations[i])
+		#print("lamp loaded: ", lamp_locations[i])
 	
 	#load switches
 	for i in range(switch_locations.size()):
 		load_switches(switch_locations[i])
-		print("switch loaded: ", switch_locations[i])
+		#print("switch loaded: ", switch_locations[i])
 	
 	#load enemies
 	for i in range(enemy_spawns.size()):
 		load_spawn(enemy_spawns[i])
-		print("enemy spawned: ", enemy_spawns[i])
+		#print("enemy spawned: ", enemy_spawns[i])
 	
 		#load potions(need load potion function)
 	for i in range(potion_locations.size()):
@@ -339,7 +348,7 @@ func check_boss():#check if the boss has been slain or not
 	#print("the boss recieved", theboss)
 	if(theboss.size() == 0): #if he has been removed + defeated, 
 		#also added time check to prevent it from running onload
-		print("boss defeated")
+		#print("boss defeated")
 		load_keys([-757.649, 4054.487, 6]) #spanws a key to open safe room door
 		#sound fx for unlocking the safe room?
 		boss_slain = true #boss has been slain, used to short circuit this funct
@@ -351,7 +360,7 @@ func check_puzzles_solved():
 	
 	for puzzle in all_puzzles:
 		if puzzle.puzzle_solved:
-			print("puzzles: ", puzzle, " solved!")
+			#print("puzzles: ", puzzle, " solved!")
 			solved_puzzles += 1
 			get_tree().queue_delete(puzzle)
 			
@@ -377,6 +386,10 @@ func update_lamp(lamp_spot, target_color):
 	if solved_lamps == 4: #if we solved 4 lamps, or completed the puzzle sidequest, we can unlock the prize!
 		load_keys([3592.301, 6617.383, 4]) #opens second door puzzle key
 		score += 3000
+		
+	if player_in_area_4:
+		emit_signal("victory") #solving a lamp while in area 4 will end the game
+		#print("victory")
 
 
 func check_switches():
@@ -415,17 +428,21 @@ func check_potions_collection(): #connect this to an timer to not spam?
 		if potions.collected:
 			if potions.potion_type == 0:
 				player_reference.health += 20
-#				$"Potion Sounds/SoundHealth".play()
+				$"Potion Sounds/SoundHealth".play()
+				#print("health potion collected")
 			elif potions.potion_type == 1:
 				player_reference.charges_remaining += 1
-#				$"Potion Sounds/SoundCharge".play()
+				$"Potion Sounds/SoundCharge".play()
+				#print("charge potion collected")
 			elif potions.potion_type == 2:
 				player_reference.speed += 100
-#				$"Potion Sounds/SoundSpeed".play()
+				$"Potion Sounds/SoundSpeed".play()
+				#print("speed potion collected")
 				player_reference.speedPickup = true
-			print("potion deleted")
+			#print("potion deleted")
 			get_tree().queue_delete(potions)
 			
+
 
 #check sword collection
 func check_sword_collection(): #connect this to an timer to not spam?
@@ -436,4 +453,11 @@ func check_sword_collection(): #connect this to an timer to not spam?
 			sword_collected += 1
 			player_reference.stab_attack_damage += 20
 			player_reference.slash_attack_damage += 20
+			player_reference.swordPickup = true
+			$"Potion Sounds/SoundSpeed".play() #reusing speed potion for sword pickup
 			get_tree().queue_delete(sword)
+
+func _on_GUI_player_in_area_4(response): #receives signal from gui
+	player_in_area_4 = response
+	print("player in area 4", player_in_area_4, response)
+

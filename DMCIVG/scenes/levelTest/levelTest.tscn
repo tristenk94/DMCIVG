@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://characters/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/shared/assets/tileset.tres" type="TileSet" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://scenes/levelTest/Threat Level 2.gd" type="Script" id=21]
 [ext_resource path="res://scenes/levelTest/Threat Level 4.gd" type="Script" id=22]
 [ext_resource path="res://gui/laser.tscn" type="PackedScene" id=23]
-[ext_resource path="res://gui/map.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/levelTest/levelTest.gd" type="Script" id=28]
 [ext_resource path="res://Audio/MusicController.gd" type="Script" id=29]
 [ext_resource path="res://Audio/Sound Effects/Atmosphere1.wav" type="AudioStream" id=30]
@@ -85,7 +84,6 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="GUI" type="CanvasLayer" parent="Background/player"]
-pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="player_hp" parent="Background/player/GUI" instance=ExtResource( 4 )]
@@ -104,7 +102,6 @@ rect_scale = Vector2( 0.5, 0.5 )
 [node name="laser" parent="Background/player/GUI" instance=ExtResource( 23 )]
 
 [node name="minimap" parent="Background/player/GUI" instance=ExtResource( 13 )]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 margin_left = -70.0
@@ -113,93 +110,6 @@ margin_right = 170.0
 margin_bottom = 170.0
 player = NodePath("../..")
 zoom = 1.0
-
-[node name="Area1 Display" type="Popup" parent="Background/player/GUI"]
-anchor_right = 10.0
-margin_top = 197.0
-margin_right = -4322.0
-margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Background/player/GUI/Area1 Display"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 476.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
-text = "Area 1: Lab Entrance"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area2 Display" type="Popup" parent="Background/player/GUI"]
-anchor_right = 10.0
-margin_top = 197.0
-margin_right = -4322.0
-margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Background/player/GUI/Area2 Display"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 476.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
-text = "Area 2: Lab Interior "
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area3 Display" type="Popup" parent="Background/player/GUI"]
-anchor_right = 10.0
-margin_top = 197.0
-margin_right = -4322.0
-margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Background/player/GUI/Area3 Display"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 476.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
-text = "Area 3: Lab Boss"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Area4 Display" type="Popup" parent="Background/player/GUI"]
-anchor_right = 10.0
-margin_top = 197.0
-margin_right = -4322.0
-margin_bottom = 225.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Background/player/GUI/Area4 Display"]
-margin_left = 1.0
-margin_top = 2.0
-margin_right = 476.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 5 )
-text = "Area 4: Safe Room
-"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="map" parent="Background/player/GUI" instance=ExtResource( 24 )]
 
 [node name="Score Area" type="ColorRect" parent="Background/player/GUI"]
 margin_left = 346.009
@@ -383,6 +293,95 @@ margin_right = 411.0
 margin_bottom = 126.0
 text = "QUIT"
 
+[node name="Area1 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area1 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 1: Lab Entrance"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area2 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 2: Lab Interior "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area3 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area3 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 3: Lab Boss"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area4 Display" type="Popup" parent="Background/player/GUI"]
+visible = true
+anchor_right = 10.0
+margin_top = 197.0
+margin_right = -4322.0
+margin_bottom = 225.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background/player/GUI/Area4 Display"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 476.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 5 )
+text = "Area 4: Safe Room
+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Death" type="AudioStreamPlayer" parent="Background/player/GUI"]
 stream = ExtResource( 40 )
 volume_db = -15.0
@@ -455,23 +454,7 @@ position = Vector2( -3321.78, 9105.47 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area2"]
 polygon = PoolVector2Array( -18.5557, -24.9111, 0.601074, -3007.01, 5267.67, -3002.31, 5282.72, -4803.74, 7439.88, -4801.38, 7420.35, -1090.49, 7420.72, 19.7881, -18.5557, -18.5264 )
 
-[node name="Area3" type="Area2D" parent="Background"]
-visible = false
-position = Vector2( -3321.85, 6061.62 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area3"]
-polygon = PoolVector2Array( -7.30176, -10.5044, 2.36133, -3411.57, 1417.17, -3411.57, 3749.76, -3416.19, 3753.02, -3400.9, 5248.21, -3399.15, 5230.95, -0.152344 )
-
-[node name="Area4" type="Area2D" parent="Background"]
-visible = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area4"]
-position = Vector2( 115.913, 0 )
-scale = Vector2( 12.5913, 1 )
-polygon = PoolVector2Array( 26.9373, -204.677, -161.968, -189.575, -160.169, 2574.09, 23.9388, 2574.09 )
-
 [node name="Atmosphere Sounds" type="Node2D" parent="Background"]
-visible = false
 position = Vector2( -418.454, 7033.29 )
 scale = Vector2( 200, 200 )
 
@@ -532,7 +515,6 @@ max_distance = 1000.0
 attenuation = 0.203063
 
 [node name="Bottom Left Module Sounds" type="Node2D" parent="Background"]
-visible = false
 
 [node name="BL Comp1-1" type="AudioStreamPlayer2D" parent="Background/Bottom Left Module Sounds"]
 position = Vector2( -1970.97, 11032.8 )
@@ -605,7 +587,6 @@ autoplay = true
 max_distance = 800.0
 
 [node name="Middle Right Module Sounds" type="Node2D" parent="Background"]
-visible = false
 
 [node name="Top Comp1-1" type="AudioStreamPlayer2D" parent="Background/Middle Right Module Sounds"]
 position = Vector2( 2488.15, 8647.32 )
@@ -736,7 +717,6 @@ max_distance = 500.0
 attenuation = 0.5
 
 [node name="Top Modules" type="Node2D" parent="Background"]
-visible = false
 
 [node name="Right Comp1-1" type="AudioStreamPlayer2D" parent="Background/Top Modules"]
 position = Vector2( 2596.47, 5037.98 )
@@ -771,7 +751,6 @@ max_distance = 800.0
 attenuation = 0.25
 
 [node name="Misc Modules" type="Node2D" parent="Background"]
-visible = false
 
 [node name="Middle Comp1-1" type="AudioStreamPlayer2D" parent="Background/Misc Modules"]
 position = Vector2( 1370.65, 6533.18 )
@@ -853,8 +832,14 @@ autoplay = true
 max_distance = 500.0
 attenuation = 0.757858
 
-[node name="KeyParticles" type="CPUParticles2D" parent="Background"]
+[node name="Area3" type="Area2D" parent="Background"]
+position = Vector2( -3321.85, 6061.62 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area3"]
 visible = false
+polygon = PoolVector2Array( -7.30176, -10.5044, 2.36133, -3411.57, 1417.17, -3411.57, 3749.76, -3416.19, 3753.02, -3400.9, 5248.21, -3399.15, 5230.95, -0.152344 )
+
+[node name="KeyParticles" type="CPUParticles2D" parent="Background"]
 material = SubResource( 4 )
 position = Vector2( -3200.27, 11861.3 )
 scale = Vector2( 10, 10 )
@@ -869,6 +854,14 @@ orbit_velocity = 202.9
 scale_amount = 2.0
 scale_amount_random = 1.0
 color = Color( 0.811765, 0.827451, 0.14902, 1 )
+
+[node name="Area4" type="Area2D" parent="Background"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/Area4"]
+visible = false
+position = Vector2( 115.913, 0 )
+scale = Vector2( 12.5913, 1 )
+polygon = PoolVector2Array( 26.9373, -204.677, -161.968, -189.575, -160.169, 2574.09, 23.9388, 2574.09 )
 
 [node name="Potion Sounds" type="Node" parent="Background"]
 

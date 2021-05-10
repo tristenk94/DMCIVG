@@ -889,6 +889,7 @@ polygon = PoolVector2Array( -685.044, 10268, -3247.27, 10253.8, -3247.27, 9238.1
 
 [node name="MusicController" type="Node" parent="."]
 script = ExtResource( 29 )
+
 [connection signal="victory" from="Background" to="Background/player/GUI" method="_on_Background_victory"]
 [connection signal="death" from="Background/player" to="Background/Health State Machine" method="_on_player_death"]
 [connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]

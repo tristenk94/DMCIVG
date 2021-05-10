@@ -81,7 +81,7 @@ func _process(delta):
 				only_once = 0
 				emit_signal("detected_player", 3)
 			attack()
-			yield(get_tree().create_timer(1.5), "timeout")
+			yield(get_tree().create_timer(.5), "timeout")
 			#print("done attacking")
 			state = "searching"
 			

@@ -16,6 +16,7 @@ onready var playerhealth = get_node("player_hp/Health/Bar")
 onready var playerhealthvalue = get_node("player_hp/Health/value")
 onready var laservalue = get_node("laser/number")
 onready var score_board = get_node("Score Area/Score Label")
+onready var level_map = get_node("map")
 onready var victory_score_board = get_node("Victory Pop-Up/Blue Screen/Score Area2/Score Label")
 onready var game_over_score_board = get_node("Game Over Pop-Up/Red Screen/Score Area2/Score Label")
 
@@ -50,15 +51,30 @@ func _ready():
 	initialize()
 	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game
 	
+	
+	# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	update_player()
+	update_scoreboard()
+	
+	
 # function for initializing health
 func initialize():
 	playerhealth.max_value = player.health_max
 	playerhealth.value = player.health
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	update_player()
-	update_scoreboard()
+	
+	
+func _input(event):
+	# display static image of entire map
+	# TODO: zoom function
+	if event.is_action_pressed("map"):
+		if get_tree().paused == false:
+			get_tree().paused = true #pause game while map is displayed
+			level_map.show()
+		elif get_tree().paused == true:
+			level_map.hide()
+			get_tree().paused = false #unpause game when closing map
+	
 	
 func update_player():
 	#player hp
@@ -81,11 +97,13 @@ func update_player():
 	#player attack charge
 	laservalue.text = str("x", player.charges_remaining)
 
+
 func end_game(): #displays game over scren, shows option to quit or restart along with score
 	#_on_Game_Over_PopUp_draw() #dont need to use the pause function
 	game_over_screen.popup()
 	get_tree().paused = true #pauses game
 	score_board.hide()
+	
 	
 func update_scoreboard():
 	var to_update = background_scene.score
@@ -93,11 +111,13 @@ func update_scoreboard():
 	game_over_score_board.text = "Your Score: " + str(to_update)
 	victory_score_board.text = "Your Score: " + str(to_update)
 
+
 func _on_Quit__pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET TO PROCESS NOT INHERIT
 	# Quit game
 	print("quit clicked")
 	get_tree().paused = false #need to unpause game over screen to continue this command
 	get_tree().quit()
+
 
 func _on_Restart_pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET TO PROCESS NOT INHERIT
 	# Restart game
@@ -116,6 +136,7 @@ func _on_Area1_body_entered(body):
 			yield(get_tree().create_timer(1.5), "timeout")
 			hide_pop()
 
+
 func _on_Area2_body_entered(body):
 	hide_pop()
 	
@@ -125,6 +146,7 @@ func _on_Area2_body_entered(body):
 			yield(get_tree().create_timer(1.5), "timeout")
 			hide_pop()
 
+
 func _on_Area3_body_entered(body):
 	hide_pop()
 	
@@ -133,6 +155,7 @@ func _on_Area3_body_entered(body):
 			display_area3.popup()
 			yield(get_tree().create_timer(1.5), "timeout")
 			hide_pop()
+
 
 func _on_Area4_body_entered(body):
 	hide_pop()

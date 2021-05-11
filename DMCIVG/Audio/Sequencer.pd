@@ -1,4 +1,4 @@
-#N canvas 134 -1057 1668 999 10;
+#N canvas 121 -1057 1668 999 10;
 #X obj 517 1431 dac~;
 #N canvas 0 23 1680 997 9drums 0;
 #N canvas 1 82 844 677 monomode 0;
@@ -319,11 +319,11 @@
 #X connect 18 0 16 0;
 #X restore -146 478 pd monomode;
 #X obj 108 202 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
--262144 -1 -1 8467 1;
+-262144 -1 -1 4979 1;
 #X obj 109 185 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2.008 256;
 #X obj 169 184 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
--1 -1 1890 1;
+-1 -1 3150 1;
 #X obj 108 242 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
 -262144 -1 -1 8467 1;
 #X obj 109 225 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
@@ -341,13 +341,13 @@
 #X obj 248 181 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2.0005 256;
 #X obj 308 180 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
--1 -1 1890 1;
+-1 -1 0 1;
 #X obj 247 237 hsl 128 15 10 10000 1 1 empty empty empty -2 -8 0 10
 -262144 -1 -1 8467 1;
 #X obj 248 220 nbx 5 14 -16 16 0 1 empty empty empty 0 -8 0 10 -262144
 -1 -1 2 256;
 #X obj 308 219 hsl 64 15 0 1 0 1 empty empty empty -2 -8 0 10 -262144
--1 -1 1890 1;
+-1 -1 0 1;
 #X obj 257 106 bng 10 250 50 0 empty empty rnd_r 14 7 0 10 -260097
 -1 -1;
 #X obj 95 419 float;
@@ -679,7 +679,7 @@
 #X connect 18 0 16 0;
 #X restore -185 414 pd monomode;
 #X obj 106 136 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 51 256;
+-1 -1 50 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -998,7 +998,7 @@
 #X connect 18 0 16 0;
 #X restore -167 443 pd monomode;
 #X obj 106 156 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 53 256;
+-1 -1 52 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -1317,7 +1317,7 @@
 #X connect 18 0 16 0;
 #X restore -76 529 pd monomode;
 #X obj 153 116 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 55 256;
+-1 -1 54 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -1636,7 +1636,7 @@
 #X connect 18 0 16 0;
 #X restore -48 561 pd monomode;
 #X obj 153 136 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 58 256;
+-1 -1 55 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -1955,7 +1955,7 @@
 #X connect 18 0 16 0;
 #X restore -30 590 pd monomode;
 #X obj 153 156 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 60 256;
+-1 -1 57 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -2274,7 +2274,7 @@
 #X connect 18 0 16 0;
 #X restore 36 619 pd monomode;
 #X obj 198 116 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 63 256;
+-1 -1 59 256;
 #N canvas 1 82 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -2593,7 +2593,7 @@
 #X connect 18 0 16 0;
 #X restore 64 651 pd monomode;
 #X obj 198 136 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 65 256;
+-1 -1 60 256;
 #N canvas 108 68 844 677 monomode 0;
 #N canvas 415 379 628 478 reaonbp 0;
 #X obj 23 233 *;
@@ -2912,7 +2912,7 @@
 #X connect 18 0 16 0;
 #X restore 82 680 pd monomode;
 #X obj 198 156 nbx 3 14 0 127 0 1 empty empty empty 0 -8 0 10 -262144
--1 -1 67 256;
+-1 -1 62 256;
 #X obj 720 -24 / 1000;
 #X obj 722 -46 random 1000;
 #X obj 724 23 / 1000;
@@ -3235,9 +3235,9 @@
 #X msg 1071 1032 48 50 57 58 60 62 64 65 69;
 #N canvas 597 116 1083 868 probabilities 0;
 #N canvas 0 50 450 300 (subpatch) 0;
-#X array \$0probs 12 float 3;
-#A 0 85 0 0 0 50 0 0 0 75 0 0 0;
-#X coords 0 100 12 0 320 100 1 0 0;
+#X array \$0probs 16 float 3;
+#A 0 85 0 0 0 50 0 0 0 75 0 0 0 0 0 0 0;
+#X coords 0 100 16 0 320 100 1 0 0;
 #X restore 105 118 graph;
 #X obj -11 22 inlet;
 #X obj 10 488 outlet;
@@ -3249,12 +3249,12 @@
 #X obj 575 -51 t b f;
 #X obj 415 63 float;
 #X obj 397 102 nbx 2 14 2 32 0 1 empty empty len -20 7 0 10 -262144
--1 -1 12 256;
+-1 -1 16 256;
 #X msg 500 267 \; \$1probs resize \$2;
 #X obj -5 309 tabread \$0probs;
 #X obj -4 90 mod;
 #X obj 108 220 hsl 315 8 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 0 1;
+-1 -1 23550 1;
 #X obj 17 117 /;
 #X obj 53 367 random 1000;
 #X obj -1 48 t f b;
@@ -3321,7 +3321,7 @@
 #X obj 302 185 *;
 #X obj 219 199 t b f f;
 #X obj 82 119 hsl 100 8 0 100 0 1 empty empty empty -33 4 0 10 -262144
--1 -1 990 1;
+-1 -1 0 1;
 #X obj 229 330 int;
 #X obj 199 32 inlet;
 #X obj 371 17 inlet;
@@ -3367,7 +3367,7 @@
 #X obj 172 17 loadbang;
 #X floatatom 126 113 5 30 300 0 bpm - -;
 #X msg -2 85 set \$1;
-#X msg 5 139 130;
+#X msg 5 139 110;
 #X obj 174 112 bng 15 250 50 0 empty empty empty 6 7 0 10 -261234 -1
 -1;
 #X obj 278 636 outlet;
@@ -3891,6 +3891,9 @@ loopDensity loopLen noteProb1 noteProb2 noteProb3 noteProbArr, f 189
 #X obj 55 255 netsend;
 #X text 60 195 Let Godot know that patch is ready;
 #X msg 53 214 connect localhost 4243;
+#X floatatom 799 326 5 0 0 0 - - -;
+#X floatatom 760 779 5 0 0 0 - - -;
+#X floatatom 1022 985 5 0 0 0 - - -;
 #X connect 1 0 16 0;
 #X connect 2 0 1 11;
 #X connect 3 0 8 0;
@@ -3963,15 +3966,18 @@ loopDensity loopLen noteProb1 noteProb2 noteProb3 noteProbArr, f 189
 #X connect 77 0 101 1;
 #X connect 77 0 103 0;
 #X connect 78 0 55 0;
+#X connect 78 0 139 0;
 #X connect 81 0 9 0;
 #X connect 83 0 18 0;
 #X connect 85 0 60 0;
+#X connect 85 0 137 0;
 #X connect 87 0 19 0;
 #X connect 88 0 3 3;
 #X connect 91 0 22 0;
 #X connect 92 0 20 0;
 #X connect 94 0 21 0;
 #X connect 96 0 44 0;
+#X connect 96 0 138 0;
 #X connect 101 0 7 0;
 #X connect 108 0 76 0;
 #X connect 108 1 75 0;

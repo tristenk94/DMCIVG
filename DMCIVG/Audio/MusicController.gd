@@ -411,8 +411,10 @@ func _on_Threat_Level_4_threat_4():
 func _on_PlayerDetectionArea_body_entered(body):
 	if body.name == "boss":
 		print("boss detected.")
+	if body.get("character_type") == null: 
+		print("%s does not have type" % body.name)
 		
-	if body.get_class() == "Enemy": 
+	if body.get("health") != null: 
 		setEnemyCount(1)
 		sendMessage()
 		print("%d enemy(s) detected." % enemy_count) # (debug statements)
@@ -423,7 +425,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 	if body.name == "boss":
 		print("boss detected.")
 		
-	if body.get_class() == "Enemy":
+	if body.get("character_type") != null && body.get("enemy"):
 		setEnemyCount(-1)
 		sendMessage()
 		print("%d enemy(s) detected." % enemy_count)
@@ -432,7 +434,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 
 
 func _on_DangerZone1_body_entered(body):
-	if body.get_class() == "Enemy":
+	if body.get("character_type") != null && body.get("enemy"):
 		setDangerZone1Count(1)
 		if dangerZone1_enemyCount >= 1:
 			if (in_boss_room):
@@ -444,7 +446,7 @@ func _on_DangerZone1_body_entered(body):
 
 
 func _on_DangerZone1_body_exited(body):
-	if body.get_class() == "Enemy":
+	if body.get("character_type") != null && body.get("enemy"):
 		setDangerZone1Count(-1)
 		if dangerZone1_enemyCount == 0:
 			if (in_boss_room):
@@ -458,7 +460,7 @@ func _on_DangerZone1_body_exited(body):
 
 # Zone closest to player
 func _on_DangerZone2_body_entered(body):
-	if body.get_class() == "Enemy":
+	if body.get("character_type") != null && body.get("enemy"):
 		setDangerZone2Count(1)
 		if dangerZone2_enemyCount >= 1:
 			setInstrumentNoteLengths([NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST])
@@ -466,7 +468,7 @@ func _on_DangerZone2_body_entered(body):
 			sendMessage()
 
 func _on_DangerZone2_body_exited(body):
-	if body.get_class() == "Enemy":
+	if body.get("character_type") != null && body.get("enemy"):
 		setDangerZone2Count(-1)
 		if dangerZone2_enemyCount == 0:
 			if (in_boss_room):
@@ -495,31 +497,33 @@ func _on_Area4_body_exited(body):
 
 
 func _on_Area4_body_entered(body):
-	print("Playing Area 4 music...")
-	setBPMSelect(1)
-	setBPM(110)
-	setMasterVol(100)
-	setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
-	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
-	setScale(Scales.LYDIAN)
-	setPitch(1)
-	setSwingPercent(0)
-	setTriggerProb(TriggerProb.MIN_TENSION)
-	setLoopDensity(MEDIAN_VALUE)
-	setLoopLen(DEFAULT_LOOPLENGTH)
-	setNoteProb(10, 10, 10)
-	setNoteProbArr(LOW)
-	sendMessage()
+	if body.name == "player":
+		print("Area 4 entered.")
 
-	setBPMSelect(0)
+		setBPMSelect(1)
+		setBPM(110)
+		setMasterVol(100)
+		setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
+		setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+		setScale(Scales.LYDIAN)
+		setPitch(1)
+		setSwingPercent(0)
+		setTriggerProb(TriggerProb.MIN_TENSION)
+		setLoopDensity(MEDIAN_VALUE)
+		setLoopLen(DEFAULT_LOOPLENGTH)
+		setNoteProb(10, 10, 10)
+		setNoteProbArr(LOW)
+		sendMessage()
+
+		setBPMSelect(0)
 
 
 func _on_GUI_game_over():
 	print("Playing game over music...")
 	setBPMSelect(1)
-	setBPM(130)
+	setBPM(120)
 	setMasterVol(100)
-	setInstrumentVolumes([QUIET, QUIET, FULL, SILENT, SILENT])
+	setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
 	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
 	setScale(Scales.MINOR_PENT)
 	setPitch(-3)

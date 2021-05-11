@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://characters/enemies/Enemy.gd"
 
 # link to main node
 var main_node_ref 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fonts/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://fonts/SubtitleFont.tres" type="DynamicFont" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://gui/MenuImages/space-bar.png" type="Texture" id=8]
 [ext_resource path="res://gui/MenuImages/p.png" type="Texture" id=9]
 [ext_resource path="res://gui/Back.tscn" type="PackedScene" id=10]
+[ext_resource path="res://gui/MenuImages/m.png" type="Texture" id=11]
 
 [node name="HelpMenu" type="Control"]
 anchor_right = 1.0
@@ -27,7 +28,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 468.0
-margin_bottom = 695.0
+margin_bottom = 798.0
 size_flags_horizontal = 3
 custom_constants/separation = 15
 
@@ -41,7 +42,7 @@ align = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 51.0
 margin_right = 468.0
-margin_bottom = 613.0
+margin_bottom = 716.0
 custom_constants/separation = 10
 
 [node name="Controls" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer"]
@@ -53,7 +54,7 @@ text = "CONTROLS"
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer"]
 margin_top = 34.0
 margin_right = 468.0
-margin_bottom = 562.0
+margin_bottom = 665.0
 custom_constants/separation = 20
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
@@ -217,5 +218,33 @@ margin_bottom = 19.0
 custom_fonts/font = ExtResource( 3 )
 text = "  --  Interact"
 
+[node name="map container" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 548.0
+margin_right = 468.0
+margin_bottom = 631.0
+custom_constants/separation = 30
+
+[node name="CenterContainer2" type="CenterContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/map container"]
+margin_right = 100.0
+margin_bottom = 83.0
+
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/map container/CenterContainer2"]
+margin_right = 100.0
+margin_bottom = 83.0
+texture = ExtResource( 11 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/map container"]
+margin_left = 130.0
+margin_right = 192.0
+margin_bottom = 83.0
+
+[node name="map" type="Label" parent="ScrollContainer/VBoxContainer/VBoxContainer/VBoxContainer/map container/CenterContainer"]
+margin_top = 32.0
+margin_right = 62.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 3 )
+text = "  --  Map"
+
 [node name="Back" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_bottom = 695.0
+margin_top = 731.0
+margin_bottom = 798.0

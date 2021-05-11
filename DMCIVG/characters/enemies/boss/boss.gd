@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://characters/enemies/Enemy.gd"
 
 # boss stats
 var health = 500

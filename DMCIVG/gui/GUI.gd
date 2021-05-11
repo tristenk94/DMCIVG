@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal game_over
 
 #health textures
 var bar_red = preload("res://gui/redhp.png")
@@ -93,6 +94,7 @@ func update_player():
 	playerhealthvalue.text = str(round(healthpercent), "%")
 	
 	if playerhealth.value == 0: #end the game if player loses all health
+		emit_signal("game_over")
 		end_game()
 		
 	#player attack charge

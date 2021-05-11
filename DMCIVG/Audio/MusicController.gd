@@ -412,10 +412,7 @@ func _on_PlayerDetectionArea_body_entered(body):
 	if body.name == "boss":
 		print("boss detected.")
 		
-	if body.name == "merchant":
-		print("merchant detected.")
-		
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D": # TODO: would be better to implement "Enemy" class
+	if body.get_class() == "Enemy": 
 		setEnemyCount(1)
 		sendMessage()
 		print("%d enemy(s) detected." % enemy_count) # (debug statements)
@@ -426,10 +423,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 	if body.name == "boss":
 		print("boss detected.")
 		
-	if body.name == "merchant":
-		print("merchant detected.")
-		
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
+	if body.get_class() == "Enemy":
 		setEnemyCount(-1)
 		sendMessage()
 		print("%d enemy(s) detected." % enemy_count)
@@ -438,7 +432,7 @@ func _on_PlayerDetectionArea_body_exited(body):
 
 
 func _on_DangerZone1_body_entered(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
+	if body.get_class() == "Enemy":
 		setDangerZone1Count(1)
 		if dangerZone1_enemyCount >= 1:
 			if (in_boss_room):
@@ -450,7 +444,7 @@ func _on_DangerZone1_body_entered(body):
 
 
 func _on_DangerZone1_body_exited(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
+	if body.get_class() == "Enemy":
 		setDangerZone1Count(-1)
 		if dangerZone1_enemyCount == 0:
 			if (in_boss_room):
@@ -464,7 +458,7 @@ func _on_DangerZone1_body_exited(body):
 
 # Zone closest to player
 func _on_DangerZone2_body_entered(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
+	if body.get_class() == "Enemy":
 		setDangerZone2Count(1)
 		if dangerZone2_enemyCount >= 1:
 			setInstrumentNoteLengths([NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST, NoteLength.SHORTEST])
@@ -472,7 +466,7 @@ func _on_DangerZone2_body_entered(body):
 			sendMessage()
 
 func _on_DangerZone2_body_exited(body):
-	if body.name != "player" && body.name != "merchant" && body.get_class() == "KinematicBody2D":
+	if body.get_class() == "Enemy":
 		setDangerZone2Count(-1)
 		if dangerZone2_enemyCount == 0:
 			if (in_boss_room):
@@ -492,23 +486,7 @@ func _on_Pause_Menu_Popup_pause_deactivated():
 	sendMessage()
 	
 ## Game Over Menu
-#	print("Playing game over music...")
-#	setBPMSelect(1)
-#	setBPM(130)
-#	setMasterVol(100)
-#	setInstrumentVolumes([QUIET, QUIET, FULL, SILENT, SILENT])
-#	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
-#	setScale(Scales.MINOR_PENT)
-#	setPitch(-3)
-#	setSwingPercent(0)
-#	setTriggerProb(TriggerProb.MIN_TENSION)
-#	setLoopDensity(MEDIAN_VALUE)
-#	setLoopLen(DEFAULT_LOOPLENGTH)
-#	setNoteProb(10, 10, 10)
-#	setNoteProbArr(LOW)
-#	sendMessage()
 
-#	setBPMSelect(0)
 
 
 ## @ TOMO todo...
@@ -517,4 +495,60 @@ func _on_Area4_body_exited(body):
 
 
 func _on_Area4_body_entered(body):
-	pass # Replace with function body.
+	print("Playing Area 4 music...")
+	setBPMSelect(1)
+	setBPM(110)
+	setMasterVol(100)
+	setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
+	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+	setScale(Scales.LYDIAN)
+	setPitch(1)
+	setSwingPercent(0)
+	setTriggerProb(TriggerProb.MIN_TENSION)
+	setLoopDensity(MEDIAN_VALUE)
+	setLoopLen(DEFAULT_LOOPLENGTH)
+	setNoteProb(10, 10, 10)
+	setNoteProbArr(LOW)
+	sendMessage()
+
+	setBPMSelect(0)
+
+
+func _on_GUI_game_over():
+	print("Playing game over music...")
+	setBPMSelect(1)
+	setBPM(130)
+	setMasterVol(100)
+	setInstrumentVolumes([QUIET, QUIET, FULL, SILENT, SILENT])
+	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+	setScale(Scales.MINOR_PENT)
+	setPitch(-3)
+	setSwingPercent(0)
+	setTriggerProb(TriggerProb.MIN_TENSION)
+	setLoopDensity(MEDIAN_VALUE)
+	setLoopLen(DEFAULT_LOOPLENGTH)
+	setNoteProb(10, 10, 10)
+	setNoteProbArr(LOW)
+	sendMessage()
+
+	setBPMSelect(0)
+
+
+func _on_Background_victory():
+	print("Playing victory music...")
+	setBPMSelect(1)
+	setBPM(110)
+	setMasterVol(100)
+	setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
+	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+	setScale(Scales.LYDIAN)
+	setPitch(1)
+	setSwingPercent(0)
+	setTriggerProb(TriggerProb.MIN_TENSION)
+	setLoopDensity(MEDIAN_VALUE)
+	setLoopLen(DEFAULT_LOOPLENGTH)
+	setNoteProb(10, 10, 10)
+	setNoteProbArr(LOW)
+	sendMessage()
+
+	setBPMSelect(0)

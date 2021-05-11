@@ -354,6 +354,28 @@ func check_boss():#check if the boss has been slain or not
 		boss_slain = true #boss has been slain, used to short circuit this funct
 		score += 10000
 		
+#		# BOSS IS DEAD NOW KILL ALL ENEMIES
+#		var all_enemies = get_tree().get_nodes_in_group("grunts")
+#
+#		for grunt in all_enemies:
+#			get_tree().queue_delete(grunt)
+#
+#		all_enemies = get_tree().get_nodes_in_group("ballbot")
+#
+#		for ballbot in all_enemies:
+#			get_tree().queue_delete(ballbot)
+#
+#		all_enemies = get_tree().get_nodes_in_group("skeleton")
+#
+#		for skeleton in all_enemies:
+#			get_tree().queue_delete(skeleton)
+#
+#		all_enemies = get_tree().get_nodes_in_group("merchant")
+#
+#		for merchant in all_enemies:
+#			get_tree().queue_delete(merchant)
+			
+		
 
 func check_puzzles_solved():
 	var all_puzzles = get_tree().get_nodes_in_group("puzzles")

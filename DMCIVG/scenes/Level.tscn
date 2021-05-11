@@ -70,7 +70,7 @@ tile_data = PoolIntArray( -15007937, 16, 0, -15007936, 13, 0, -15007935, 13, 0, 
 [node name="player" parent="Background" instance=ExtResource( 1 )]
 position = Vector2( -1514.25, 11292.2 )
 z_as_relative = false
-speed = 1500
+speed = 500
 
 [node name="Camera2D" type="Camera2D" parent="Background/player"]
 visible = false

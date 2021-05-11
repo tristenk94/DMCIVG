@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = true
+const DEBUG = false
 signal threat_0
 
 var fsm: Minor_Event_Stat_Machine

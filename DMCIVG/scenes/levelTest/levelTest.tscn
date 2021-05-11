@@ -901,6 +901,7 @@ script = ExtResource( 29 )
 [connection signal="health_amount" from="Background/player" to="Background/Health State Machine" method="_on_player_health_amount"]
 [connection signal="body_entered" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_entered"]
 [connection signal="body_exited" from="Background/player/Camera2D/PlayerDetectionArea" to="MusicController" method="_on_PlayerDetectionArea_body_exited"]
+[connection signal="game_over" from="Background/player/GUI" to="MusicController" method="_on_GUI_game_over"]
 [connection signal="player_in_area_4" from="Background/player/GUI" to="Background" method="_on_GUI_player_in_area_4"]
 [connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Quit " to="Background/player/GUI" method="_on_Quit__pressed"]
 [connection signal="pressed" from="Background/player/GUI/Game Over Pop-Up/Red Screen/Restart" to="Background/player/GUI" method="_on_Restart_pressed"]

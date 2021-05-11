@@ -1,6 +1,6 @@
 extends Node
 
-const DEBUG = true
+const DEBUG = false
 signal threat_1
 
 

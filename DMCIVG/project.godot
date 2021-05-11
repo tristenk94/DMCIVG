@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="DMCIVG"
-run/main_scene="res://scenes/TitleScreen.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://item_icons/icon.png"
 
 [autoload]
@@ -63,6 +63,11 @@ primary_attack={
 secondary_attack={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
  ]
 }
 

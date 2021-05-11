@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://fonts/ButtonFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://gui/ReturnToTitle.gd" type="Script" id=2]
 
 [node name="Back" type="VBoxContainer"]
 margin_top = 628.0
@@ -25,3 +26,5 @@ margin_right = 318.0
 margin_bottom = 47.0
 custom_fonts/font = ExtResource( 1 )
 text = "BACK"
+script = ExtResource( 2 )
+[connection signal="pressed" from="MarginContainer/Back" to="MarginContainer/Back" method="_on_Back_pressed"]

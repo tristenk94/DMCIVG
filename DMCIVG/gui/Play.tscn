@@ -3,6 +3,7 @@
 [ext_resource path="res://gui/MenuButton.tscn" type="PackedScene" id=1]
 
 [node name="Play" instance=ExtResource( 1 )]
+scene_to_load = "res://scenes/levelTest/levelTest.tscn"
 
 [node name="Label" parent="." index="0"]
 text = "PLAY"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://fonts/ButtonFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://gui/MenuButton.gd" type="Script" id=2]
 
 [node name="MenuButton" type="Button"]
 margin_right = 480.0
@@ -8,6 +9,7 @@ margin_bottom = 60.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color_hover = Color( 0.0745098, 0.847059, 0.576471, 1 )
 flat = true
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

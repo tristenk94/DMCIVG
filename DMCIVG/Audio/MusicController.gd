@@ -1,6 +1,10 @@
-# --- Music Controller ---
+# --- MusicController.gd --- #
 extends Node
 var socket
+
+## Signals
+signal TCP_connected
+signal patch_loaded
 
 ## --- Pure Data global variables
 var bpmSelect = 0 setget setBPMSelect # 1 = change bpm, 0 = don't change bpm.
@@ -55,11 +59,11 @@ var in_boss_room = false
 var enemy_count = 0 setget setEnemyCount
 var dangerZone1_enemyCount = 0 setget setDangerZone1Count
 var dangerZone2_enemyCount = 0 setget setDangerZone2Count
-var player
 
 # Other variables
 var rng = RandomNumberGenerator.new()
 var format_message = "%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s;" # 23 parameters
+
 
 ## --- Functions
 func sendMessage():
@@ -69,17 +73,32 @@ func sendMessage():
 	socket.put_data(message.to_ascii())
 	# print(message)
 
+# Sending socket to send messages to Pure Data
 func _ready():
-	# Connect to Pure Data
 	socket = StreamPeerTCP.new()
 	print("connecting to Pure Data...")
 	socket.connect_to_host("127.0.0.1", 4242)
-	sendMessage()
+	emit_signal("TCP_connected")
+
+## Listening socket processes message from PD patch
+#func _init():
+#	var done = false
+#	var listen_socket = StreamPeerTCP.new()
+#	if (listen_socket.listen(4243, "127.0.0.1") != OK):
+#		print("An error occured listening on port 4243")
+#	else: 
+#		print("Listening on port 4243 on localhost...")
+#
+#	while(done != true):
+#		if (listen_socket.get_status() == 2):
+#			var data = socket.get_packet().get_string_from_ascii()
+#			if (data == "connected"):
+#				done = true
+#				emit_signal("patch_loaded")
+#	listen_socket.close()
+#	print("PD patch is ready.")
 	
-	# Initialize variables
-	player = get_node("../Background/player")
-
-
+	
 # --------- Pure Data Setters ---------
 func setMasterVol(new_masterVol):
 	if new_masterVol >= MIN_MASTER_VOLUME && new_masterVol <= MAX_MASTER_VOLUME:
@@ -150,12 +169,6 @@ func setNoteProb(prob1, prob2, prob3):
 
 func setNoteProbArr(new_arr):
 	noteProbArr = new_arr
-
-#func setNoteLenArr(new_arr):
-#	noteLenArr = new_arr
-
-#func setVolArr(new_arr):
-#	volArr = new_arr
 	
 func setBPMSelect(set):
 	if (set == 0 || set == 1):
@@ -216,53 +229,49 @@ func getPitch():
 ## --- Signals --- ##
 
 ## Main Screen
-#	setBPMSelect(1)
-#	setBPM(90)
-#	setMasterVol(100)
-#	setInstrumentVolumes([QUIET, QUIET, FULL, QUIET, QUIET])
-#	setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
-#	setScale(Scales.MINOR_PENT)
-#	setPitch(-2)
-#	setSwingPercent(10)
-#	setTriggerProb(TriggerProb.LEAST_TENSION)
-#	setLoopDensity(MEDIAN_VALUE)
-#	setLoopLen(TRIPLE_TIME_LOOPLENGTH)
-#	setNoteProb(10, 10, 10)
-#	setNoteProbArr(LOW)
-#	setNoteLenArr(NoteLength.LONGEST)
-#	setVolArr(MEDIUM)
-#	sendMessage()
-# 	setBPMSelect(0)
+func _on_TitleScreen_title_screen():
+	print("Playing title screen music...")
+	setBPMSelect(1)
+	setBPM(130)
+	setMasterVol(100)
+	setInstrumentVolumes([QUIET, QUIET, FULL, QUIET, QUIET])
+	setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+	setScale(Scales.MINOR_PENT)
+	setPitch(-2)
+	setSwingPercent(10)
+	setTriggerProb(TriggerProb.MIN_TENSION)
+	setLoopDensity(MEDIAN_VALUE)
+	setLoopLen(TRIPLE_TIME_LOOPLENGTH)
+	setNoteProb(10, 10, 10)
+	setNoteProbArr(LOW)
+	sendMessage()
+	setBPMSelect(0)
 
-## Pause Menu
-
-## Game Over Menu
 
 ## Areas
 func _on_Area1_body_entered(body):
 	in_area1 = true
-	if body != null:
-		if body.name == "player":
-			print("Area1 entered.")
-			if area1_visited == false:
-				area1_visited = true
-				
-			setBPMSelect(1) # IMPORTANT: Only change BPM for areas/menus (otherwise "stuttering" occurs often).
-			setBPM(150)
-			setMasterVol(MAX_MASTER_VOLUME)
-			setInstrumentVolumes([FULL, SILENT, SILENT, SILENT, SILENT])
-			setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
-			setScale(Scales.PHRYG_DOM)
-			setPitch(DEFAULT_PITCH)
-			setSwingPercent(MEDIAN_VALUE)
-			setTriggerProb(TriggerProb.NORMAL_TENSION)
-			setLoopDensity(MEDIAN_VALUE)
-			setLoopLen(DEFAULT_LOOPLENGTH)
-			setNoteProb(10, 10, 10)
-			setNoteProbArr(LOW)
-			sendMessage()
+	if body.name == "player":
+		print("Area1 entered.")
+		if area1_visited == false:
+			area1_visited = true
 			
-			setBPMSelect(0) # IMPORTANT: Remember to turn off BPM change
+		setBPMSelect(1) # IMPORTANT: Only change BPM for areas/menus (otherwise "stuttering" occurs often).
+		setBPM(150)
+		setMasterVol(MAX_MASTER_VOLUME)
+		setInstrumentVolumes([FULL, SILENT, SILENT, SILENT, SILENT])
+		setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+		setScale(Scales.PHRYG_DOM)
+		setPitch(DEFAULT_PITCH)
+		setSwingPercent(MEDIAN_VALUE)
+		setTriggerProb(TriggerProb.NORMAL_TENSION)
+		setLoopDensity(MEDIAN_VALUE)
+		setLoopLen(DEFAULT_LOOPLENGTH)
+		setNoteProb(10, 10, 10)
+		setNoteProbArr(LOW)
+		sendMessage()
+		
+		setBPMSelect(0) # IMPORTANT: Remember to turn off BPM change
 
 func _on_Area1_body_exited(body):
 	if body.name == "player":
@@ -470,4 +479,35 @@ func _on_DangerZone2_body_exited(body):
 				setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.SHORT, NoteLength.SHORT, NoteLength.SHORT, NoteLength.SHORT])
 			print("danger zone 2 exited.")
 			sendMessage()
+
+
+## Pause Menu
+func _on_Pause_Menu_Popup_pause_activated():
+	setMasterVol(MIN_MASTER_VOLUME)
+	sendMessage()
+
+
+func _on_Pause_Menu_Popup_pause_deactivated():
+	setMasterVol(MAX_MASTER_VOLUME)
+	sendMessage()
+	
+## Game Over Menu
+#	print("Playing game over music...")
+#	setBPMSelect(1)
+#	setBPM(130)
+#	setMasterVol(100)
+#	setInstrumentVolumes([QUIET, QUIET, FULL, SILENT, SILENT])
+#	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+#	setScale(Scales.MINOR_PENT)
+#	setPitch(-3)
+#	setSwingPercent(0)
+#	setTriggerProb(TriggerProb.MIN_TENSION)
+#	setLoopDensity(MEDIAN_VALUE)
+#	setLoopLen(DEFAULT_LOOPLENGTH)
+#	setNoteProb(10, 10, 10)
+#	setNoteProbArr(LOW)
+#	sendMessage()
+
+#	setBPMSelect(0)
+
 

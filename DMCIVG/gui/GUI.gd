@@ -35,9 +35,9 @@ func _ready():
 	
 	#work around so that the area 1 text actually displays 
 	#should only run once
-	yield(get_tree().create_timer(.5), "timeout")
-	display_area1.popup()
-	yield(get_tree().create_timer(2.5), "timeout")
+#	yield(get_tree().create_timer(.5), "timeout")
+#	display_area1.popup()
+#	yield(get_tree().create_timer(2.5), "timeout")
 	hide_pop()#just in case we have an outlier in pausing/restarting game, unpause the game
 	
 
@@ -77,7 +77,7 @@ func _on_Restart_pressed(): # MAKE SURE PROCESS PRIORITY ON THIS NODES ARE SET T
 	# Restart game
 	#print("restart clicked")
 	get_tree().paused = false #need to unpause game over screen to continue this command
-	get_tree().change_scene("res://scenes/levelTest/levelTest.tscn")
+	get_tree().change_scene("res://scenes/Level.tscn")
 
 
 #Funtions Used in Area text Display ############################################

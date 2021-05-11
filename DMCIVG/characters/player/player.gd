@@ -175,7 +175,8 @@ func _input(event):
 		#print("secondary attack pressed")
 		# Check if player can attack
 		var now = OS.get_ticks_msec()
-		if charges_remaining >= 1 && now >= next_attack_time:	
+		if charges_remaining >= 1 && now >= charge_next_attack_time:	
+			print("now : ", now, " charge_next_attack_time : ", charge_next_attack_time)
 			# What's the target?,, calculate target ad do the charge damage since we know this attack is a charge
 			print("charges left : ", charges_remaining - 1)
 			var target = $RayCast2D.get_collider()

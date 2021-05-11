@@ -29,8 +29,8 @@ func _determine_state(var det_state):
 	# the other fsms 
 	
 	#bunch of if else to determine what state the FSM should point at
-	if(state_value>= 10):
-		state = get_child(5)
+	if(state_value >= 10):
+		state = get_child(4)
 		_enter_state()
 	elif(state_value >=9):
 		state = get_child(4)

@@ -39,12 +39,20 @@ _global_script_class_icons={
 [application]
 
 config/name="DMCIVG"
+config/description="CSUN Computer Science Senior Design Project (COMP 490-491) Fall 2020 - Spring 2021
+
+About Our Game
+DMCIVG stands for, \"Dynamic Music Composition in Video Games.\" The goal of our project is to create a game which composes music in real-time. The music in our game adapts to events and changes in the game's state to create a unique auditory experience on every playthrough.
+
+Our project uses the audio processing software and visual programming language, Pure Data. The game was made using the Godot game engine."
 run/main_scene="res://scenes/Main.tscn"
-config/icon="res://item_icons/icon.png"
+config/icon="res://icon.png"
+config/macos_native_icon="res://icon.icns"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-JsonData="*res://JSONData.gd"
+JsonData="res://JSONData.gd"
 
 [display]
 

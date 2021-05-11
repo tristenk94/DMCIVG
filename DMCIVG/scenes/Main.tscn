@@ -10,5 +10,6 @@ script = ExtResource( 3 )
 [node name="TitleScreen" parent="." instance=ExtResource( 1 )]
 
 [node name="MusicController" parent="." instance=ExtResource( 2 )]
+
 [connection signal="title_screen" from="TitleScreen" to="MusicController" method="_on_TitleScreen_title_screen"]
 [connection signal="TCP_connected" from="MusicController" to="TitleScreen" method="_on_MusicController_TCP_connected"]

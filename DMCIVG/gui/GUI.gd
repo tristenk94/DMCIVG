@@ -33,6 +33,8 @@ onready var display_area4 = get_node("Area4 Display")
 
 var game_over_selected_menu
 
+var signal_once = 0 
+
 signal player_in_area_4
 
 # Called when the node enters the scene tree for the first time.
@@ -94,15 +96,17 @@ func update_player():
 	playerhealthvalue.text = str(round(healthpercent), "%")
 	
 	if playerhealth.value == 0: #end the game if player loses all health
-		emit_signal("game_over")
-		end_game()
+		end_game(1)
 		
 	#player attack charge
 	laservalue.text = str("x", player.charges_remaining)
 
 
-func end_game(): #displays game over scren, shows option to quit or restart along with score
+func end_game(value): #displays game over scren, shows option to quit or restart along with score
 	#_on_Game_Over_PopUp_draw() #dont need to use the pause function
+	signal_once += value
+	if(signal_once == 1 ):
+		emit_signal("game_over")
 	game_over_screen.popup()
 	get_tree().paused = true #pauses game
 	score_board.hide()

@@ -48,9 +48,9 @@ func _ready():
 	
 	#work around so that the area 1 text actually displays 
 	#should only run once
-#	yield(get_tree().create_timer(.5), "timeout")
-#	display_area1.popup()
-#	yield(get_tree().create_timer(2.5), "timeout")
+	yield(get_tree().create_timer(.5), "timeout")
+	display_area1.popup()
+	yield(get_tree().create_timer(2.5), "timeout")
 	hide_pop()#just in case we have an outlier in pausing/restarting game, unpause the game
 	initialize()
 	get_tree().paused = false #just in case we have an outlier in pausing/restarting game, unpause the game

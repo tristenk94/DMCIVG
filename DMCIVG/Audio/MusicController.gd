@@ -368,23 +368,24 @@ func _on_19_Health_health_3():
 
 # 0 health
 func _on_0__Health_health_min():
-	print("Playing Game Over music...")
-	setBPMSelect(1)
-	setBPM(100)
-	setMasterVol(100)
-	setInstrumentVolumes([QUIET, QUIET, FULL, QUIET, QUIET])
-	setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
-	setScale(Scales.MINOR_PENT)
-	setPitch(-2)
-	setSwingPercent(10)
-	setTriggerProb(TriggerProb.LESS_TENSION)
-	setLoopDensity(MEDIAN_VALUE)
-	setLoopLen(DEFAULT_LOOPLENGTH)
-	setNoteProb(10, 10, 10)
-	setNoteProbArr(LOW)
-	sendMessage()
-	
-	setBPMSelect(0)
+	pass
+#	print("Playing Game Over music...")
+#	setBPMSelect(1)
+#	setBPM(100)
+#	setMasterVol(100)
+#	setInstrumentVolumes([QUIET, QUIET, FULL, QUIET, QUIET])
+#	setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+#	setScale(Scales.MINOR_PENT)
+#	setPitch(-2)
+#	setSwingPercent(10)
+#	setTriggerProb(TriggerProb.LESS_TENSION)
+#	setLoopDensity(MEDIAN_VALUE)
+#	setLoopLen(DEFAULT_LOOPLENGTH)
+#	setNoteProb(10, 10, 10)
+#	setNoteProbArr(LOW)
+#	sendMessage()
+#
+#	setBPMSelect(0)
 
 
 ## Threat Levels 0 - 4 
@@ -517,22 +518,22 @@ func _on_Area4_body_entered(body):
 
 
 func _on_GUI_game_over():
-	print("Playing game over music...")
+	print("Playing Game Over music...")
 	setBPMSelect(1)
-	setBPM(120)
+	setBPM(100)
 	setMasterVol(100)
-	setInstrumentVolumes([FULL, QUIET, FULL, SILENT, SILENT])
-	setInstrumentNoteLengths([NoteLength.SHORT, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
+	setInstrumentVolumes([QUIET, QUIET, FULL, QUIET, QUIET])
+	setInstrumentNoteLengths([NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST, NoteLength.LONGEST])
 	setScale(Scales.MINOR_PENT)
-	setPitch(-3)
-	setSwingPercent(0)
-	setTriggerProb(TriggerProb.MIN_TENSION)
+	setPitch(-2)
+	setSwingPercent(10)
+	setTriggerProb(TriggerProb.LESS_TENSION)
 	setLoopDensity(MEDIAN_VALUE)
 	setLoopLen(DEFAULT_LOOPLENGTH)
 	setNoteProb(10, 10, 10)
 	setNoteProbArr(LOW)
 	sendMessage()
-
+	
 	setBPMSelect(0)
 
 

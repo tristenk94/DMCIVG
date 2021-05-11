@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Switch Red and Yellow.wav-996600b069028391010952e1e5e1d819.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Switch Red and Yellow.wav"
+dest_files=[ "res://.import/Switch Red and Yellow.wav-996600b069028391010952e1e5e1d819.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

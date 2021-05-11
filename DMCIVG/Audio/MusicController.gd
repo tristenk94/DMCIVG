@@ -511,3 +511,10 @@ func _on_Pause_Menu_Popup_pause_deactivated():
 #	setBPMSelect(0)
 
 
+## @ TOMO todo...
+func _on_Area4_body_exited(body):
+	pass # Replace with function body.
+
+
+func _on_Area4_body_entered(body):
+	pass # Replace with function body.

@@ -13,5 +13,6 @@ func lock():
 
 #helper funct to unlock the door
 func unlock():
+	$DoorUnlocked.play()
 	door_sprite.play("unlock")
 	$StaticBody2D/CollisionShape2D.disabled = true #disable collision

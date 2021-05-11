@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Merchant Death.wav-ba830076bab0e87764eb10900752b724.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Merchant Death.wav"
+dest_files=[ "res://.import/Merchant Death.wav-ba830076bab0e87764eb10900752b724.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

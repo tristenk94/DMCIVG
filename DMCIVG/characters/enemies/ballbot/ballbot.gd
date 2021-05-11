@@ -32,9 +32,11 @@ var attack_damage = 10
 var attack_cooldown_time = 1500
 var next_attack_time = 0
 
-
 # Animation variables
 var other_animation_playing = false
+
+# Minimap variables
+var mm_icon = "enemy"
 
 # Ballbot Signals
 signal spawn
@@ -79,7 +81,7 @@ func _process(delta):
 				only_once = 0
 				emit_signal("detected_player", 3)
 			attack()
-			yield(get_tree().create_timer(1.5), "timeout")
+			yield(get_tree().create_timer(1.0), "timeout")
 			#print("done attacking")
 			state = "searching"
 			
@@ -144,6 +146,7 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
@@ -272,5 +275,6 @@ func _on_AnimatedSprite_frame_changed():
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking") #slowing if attacking
+			$Swing.play()
 			speed_cooldown = 100 #receive speed penalty for attacking
 			speed = speed * 0.3

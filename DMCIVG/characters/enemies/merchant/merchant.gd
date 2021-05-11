@@ -35,6 +35,9 @@ var next_attack_time = 0
 # Animation variables
 var other_animation_playing = false
 
+# Minimap variables
+var mm_icon = "enemy"
+
 # Merchant Signals
 signal spawn
 signal movement
@@ -143,6 +146,7 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
@@ -255,6 +259,7 @@ func _on_AnimatedSprite_animation_finished():
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
 		main_node_ref.score += 1000
+		main_node_ref.load_potion([position.x, position.y, rng.randi_range(0,1)]) #merchant will drop health or charge potion
 	other_animation_playing = false
 
 

@@ -45,6 +45,7 @@ func _process(delta): #constantly check if puzzle solved
 	
 	#print("we have solved ", solved_count, " puzzles")
 	if solved_count == num_pits: #we must complete all puzzles to pass
+		$PuzzleSolved.play()
 		emit_signal("box_and_pit_puzzle_solved")
 		puzzle_solved = true
 		#print("puzzle solved!")

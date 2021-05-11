@@ -7,6 +7,9 @@ var health_regeneration = 5
 
 # Node references
 var player
+onready var bossgui = get_tree().root.get_node("Main/Background/player/GUI/boss_hp")
+onready var healthbar = get_tree().root.get_node("Main/Background/player/GUI/boss_hp/health")
+onready var healthbarnumber = get_tree().root.get_node("Main/Background/player/GUI/boss_hp/health/value")
 
 # Random number generator
 var rng = RandomNumberGenerator.new()
@@ -32,6 +35,9 @@ var fireball_scene = preload("res://characters/enemies/boss/projectile/fireball.
 # Animation variables
 var other_animation_playing = false
 
+# Minimap variables
+var mm_icon = "boss"
+
 # boss Signals
 signal spawn
 signal movement
@@ -43,6 +49,7 @@ signal death
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_node("../player") #in the default code
+	hp_init() #initialize boss healthbar GUI
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
 	
@@ -53,6 +60,9 @@ func _process(delta):
 	#base health regen
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
+	
+	#update boss healthbar
+	update_bosshp()
 	
 	# Check if boss can attack
 	var now = OS.get_ticks_msec()
@@ -84,11 +94,14 @@ func _process(delta):
 #	else:
 #			print("fail2")
 	
+func hp_init():
+	bossgui.hide()
+	healthbar.max_value = health_max
+	healthbar.value = health
 
 func hit(damage):
 	health -= damage
 	#print("hit called")
-	#$HealthDisplay.update_healthbar(health)
 	if health > 0:
 		$AnimationPlayer.play("hit")
 	else:
@@ -96,8 +109,25 @@ func hit(damage):
 		direction = Vector2.ZERO
 		set_process(false)
 		other_animation_playing = true
+		bossgui.hide()
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$DIE.play()
+		
+func update_bosshp():
+	var player_relative_position = player.position - position
+	
+	#show healthbar if player is close
+	if player_relative_position.length() <= 1600:
+		bossgui.show()
+	else:
+		bossgui.hide()
+	
+	#update healthbar gui
+	healthbar.value = health
+	healthbarnumber.text = str(round((health / health_max) * 100), "%")
+	
+
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
@@ -150,7 +180,7 @@ func _on_Timer_timeout():
 		# If player is within range, move toward it
 		#print("in range!")
 		direction = player_relative_position.normalized()
-	
+		
 	
 	elif bounce_countdown == 0:
 		# If player is too far, randomly decide whether to stand still or where to move
@@ -250,6 +280,7 @@ func _on_AnimatedSprite_frame_changed():
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking")
+			$LAND.play()
 		
 			
 func shootFireballs():
@@ -271,3 +302,4 @@ func shootFireballs():
 		
 		get_tree().root.get_node("Main/Background").add_child(fireball)
 		#emit_signal("spawning_enemies", ballbot_count) #returns signal with amt of enemies
+		$LASERS.play()

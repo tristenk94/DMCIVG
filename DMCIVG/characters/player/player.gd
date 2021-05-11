@@ -40,6 +40,12 @@ var charge_next_attack_time = 0
 var charge_attack_damage = 100
 var charges_remaining = 1
 
+# Particle References
+onready var sword_particles = get_node("pivot/SwordParticles")
+var swordPickup = false #once sword is picked up, permanentely increase base attack damage, spawn particles
+
+onready var speed_particles = get_node("pivot/SpeedParticles")
+var speedPickup = false #once speedboost is picked up, permanentely increase base speed, spawn particles
 
 # Player Signals
 signal player_stats_changed
@@ -124,6 +130,7 @@ func _input(event):
 				#print("stabbing is true")
 				isSlashing = true
 				$pivot/AnimatedSprite.play("slash")
+				$Slashing.play()
 				isStabbing = false
 				attack_damage = slash_attack_damage
 				#slash_next_attack_time = now + stab_next_attack_time
@@ -132,6 +139,7 @@ func _input(event):
 				isStabbing = true
 				attack_damage = stab_attack_damage
 				$pivot/AnimatedSprite.play("stab")
+				$Stabbing.play()
 				
 			if last_direction == "left": 
 				get_node( "pivot/AnimatedSprite" ).set_flip_h( true )
@@ -169,7 +177,7 @@ func _input(event):
 		var now = OS.get_ticks_msec()
 		if charges_remaining >= 1 && now >= next_attack_time:	
 			# What's the target?,, calculate target ad do the charge damage since we know this attack is a charge
-			print("charges left : ", charges_remaining)
+			print("charges left : ", charges_remaining - 1)
 			var target = $RayCast2D.get_collider()
 			#print(target.name)
 			if target != null: #seperated into if's in case we want to send specific sfx or states to sequencer
@@ -200,6 +208,7 @@ func _input(event):
 				get_node( "pivot/AnimatedSprite" ).set_flip_h( false )
 				
 			$pivot/AnimatedSprite.play("laser")
+			$Charging.play()
 			# Add cooldown time to current time
 			charge_next_attack_time = now + charge_attack_cooldown_time
 
@@ -244,12 +253,34 @@ func _on_AnimatedSprite_animation_finished():
 func _ready(): #connect this to health bar
 	emit_signal("player_stats_changed", self)
 	
+	#particle clean up
+	sword_particles.set_emitting(false)
+	sword_particles.hide()
+	
+	speed_particles.set_emitting(false)
+	speed_particles.hide()
+
+	
 func _process(delta):
 	
-	# Regenerates health
-	var new_health = min(health + health_regeneration * delta, health_max)
+	# Regenerates health --> nerfed since i divided delta/1000
+	var new_health = min(health + health_regeneration * (delta/1000), health_max)
 	if new_health != health:
 		health = new_health
 		emit_signal("player_stats_changed", self)
 		emit_signal("health_amount", new_health, health) #connect this to health bar, send strength to fsm?, 
 		#possibly dupe state of health_amount
+
+	if swordPickup:
+		sword_particles.set_emitting(true)
+		sword_particles.show()
+
+	if speedPickup:
+		speed_particles.set_emitting(true)
+		speed_particles.show()
+
+
+func _on_health_potion(potion_value):
+	health += potion_value
+	emit_signal("player_stats_changed",self)
+	emit_signal("health_amount",0,health)

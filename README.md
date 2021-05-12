@@ -18,14 +18,3 @@ If you don't already have the Pure Data program on your computer, **download it*
 ### Project Website
 Visit our homepage [here](https://www.sandbox.csun.edu/~tsk48664/app/).  
 Visit the Senior Design Projects homepage [here](https://www.sandbox.csun.edu/~xjiang/SeniorDesign/).
-
-#### Contribution rules for teammates
-Always update feature branches, then have branch review. Always keep a local version of the project (a copy)
-
-Always rebase your updates from master
-
-Music \
-       |---->Master
-Game  /
-
-(edit this text file to view it, the formatting breaks)

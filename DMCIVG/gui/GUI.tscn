@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gui/greenhp.png" type="Texture" id=1]
+
+[node name="GUI" type="CanvasLayer"]
+follow_viewport_enable = true
+
+[node name="Health" type="Control" parent="."]
+margin_left = 0.840897
+margin_top = 228.739
+margin_right = 201.841
+margin_bottom = 268.739
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" type="TextureProgress" parent="Health"]
+margin_right = 200.0
+margin_bottom = 26.0
+value = 35.0
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_over = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

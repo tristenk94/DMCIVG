@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Melee Attack.wav-acacb74caa374b07558e7b3fb4b5b747.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Melee Attack.wav"
+dest_files=[ "res://.import/Melee Attack.wav-acacb74caa374b07558e7b3fb4b5b747.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

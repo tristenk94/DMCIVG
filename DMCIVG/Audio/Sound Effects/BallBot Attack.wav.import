@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/BallBot Attack.wav-95c156090d4540bd03bf6c6e635ab367.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/BallBot Attack.wav"
+dest_files=[ "res://.import/BallBot Attack.wav-95c156090d4540bd03bf6c6e635ab367.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

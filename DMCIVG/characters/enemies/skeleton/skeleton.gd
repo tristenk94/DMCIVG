@@ -1,4 +1,7 @@
-extends KinematicBody2D
+extends "res://characters/enemies/Enemy.gd"
+
+# link to main node
+var main_node_ref 
 
 # Skeleton stats
 var health = 100
@@ -8,36 +11,53 @@ var health_regeneration = 1
 # Node references
 var player
 
+#state machine uses
+var state = "idle"
+var only_once = 0
+var _1_attack = 0 
+var can_attack = false
+var x = 0
+
 # Random number generator
 var rng = RandomNumberGenerator.new()
 
 # Movement variables
-export var speed = 425
+export var speed = 380
 var direction : Vector2
 var last_direction = Vector2(0, 1)
 var bounce_countdown = 0
+var speed_cooldown = 0
 
 # Attack variables
 var attack_damage = 10
 var attack_cooldown_time = 1500
 var next_attack_time = 0
 
+
 # Animation variables
 var other_animation_playing = false
+
+# Minimap variables
+var mm_icon = "enemy"
 
 # Skeleton Signals
 signal spawn
 signal movement
 signal attacking
 signal detected_player
+signal undetected_player
 signal death
 
 #-------------------------------------------INITIALIZATION FUNCTIONS-------------------------------------------
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().root.get_node("Background/player") #in the default code
+	main_node_ref = get_tree().root.get_node("Main/Background")
+	
+	player = get_node("../player") #in the default code
 	#player = get_node("../player") # ok for single instance
 	#player = get_node("..../player") #reference for spawner use
+	self.connect('detected_player',get_tree().root.get_node("Main/Background/Minor Event State Machine"), '_on_detected_player')
+	self.connect('undetected_player',get_tree().root.get_node("Main/Background/Minor Event State Machine"), '_on_undetected_player')
 	
 	rng.randomize()
 
@@ -48,14 +68,58 @@ func _process(delta):
 	health = min(health + health_regeneration * delta, health_max)
 	#print(health)
 	
-	# Check if Skeleton can attack
-	var now = OS.get_ticks_msec()
-	if now >= next_attack_time:
-		# What's the target?
+	match state:
+		"idle":
+			
+			can_attack()
+			if(can_attack == true):
+				#print("i can attack if need be")
+				state = "attacking"
+			elif(can_attack == false):
+				pass
+				#print("cannot attack right now :c")
+		"attacking":
+			_1_attack += 1
+			if(_1_attack == 1):
+				only_once = 0
+				emit_signal("detected_player", 2)
+			attack()
+			yield(get_tree().create_timer(1.5), "timeout")
+			#print("done attacking")
+			state = "searching"
+			
+		"searching":
+			#print("I will now hunt you down")
+			
+			can_attack()
+			if(can_attack == true):
+				#print("no need to search i'll attack")
+				state = "attacking"
+			elif(can_attack == false):
+				
+				only_once += 1
+				if (only_once == 1):
+					_1_attack = 0
+					#print("darn, i lost you")
+					emit_signal("undetected_player", -2)
+				state = "idle"
+
+
+func can_attack():
+	#Check if Skeleton can attack
 		var target = $RayCast2D.get_collider()
 		#print(target)
 		if target != null and target.name == "player" and player.health > 0: #DETECTED TO STATE MACHINE
-			# Play attack animation
+			can_attack = true
+			
+			
+		else: 
+			#print("nope")
+			can_attack = false
+
+#function to run attack animation
+func attack():
+# Play attack animation
 			other_animation_playing = true
 			
 			#print("detected")
@@ -68,8 +132,10 @@ func _process(delta):
 				
 			#var animation = get_animation_direction(last_direction) + "_attack"
 			$AnimatedSprite.play("attack")
+			
+			
+			
 			# Add cooldown time to current time
-			next_attack_time = now + attack_cooldown_time
 
 
 func hit(damage):
@@ -85,24 +151,26 @@ func hit(damage):
 		other_animation_playing = true
 		$AnimatedSprite.play("death")
 		emit_signal("death")
+		$Die.play()
 
 #-------------------------------------------AI/MOVEMENT FUNCTIONS-------------------------------------------
 func _on_Timer_timeout():
 	# Calculate the position of the player relative to the skeleton
 	var player_relative_position = player.position - position
-	emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+	#emit_signal("detected_player", player_relative_position.length()) #transmitting signal with how close the player is, bigger number means enemy is further away
+	#print(player_relative_position.length())
 
-	if player_relative_position.length() <= 16:
+	if player_relative_position.length() <= 130:
 		# If player is near, don't move but turn toward it
 		direction = Vector2.ZERO
 		last_direction = player_relative_position.normalized()
 		
-	elif player_relative_position.length() <= 100 and bounce_countdown == 0:
+	elif (player_relative_position.length() <= 500 and bounce_countdown == 0):
 		# If player is within range, move toward it
 		direction = player_relative_position.normalized()
 		
 		
-	elif bounce_countdown == 0:
+	elif(bounce_countdown == 0 and state == "idle"):
 		# If player is too far, randomly decide whether to stand still or where to move
 		var random_number = rng.randf()
 		if random_number < 0.05:
@@ -116,6 +184,13 @@ func _on_Timer_timeout():
 
 
 func _physics_process(delta):
+	
+	if speed_cooldown > 1:
+		speed_cooldown -= 1
+		speed = 0
+	else:
+		speed = 380
+	
 	var movement = direction * speed * delta
 
 	var collision = move_and_collide(movement)
@@ -192,6 +267,7 @@ func _on_AnimatedSprite_animation_finished():
 		$Timer.start()
 	elif $AnimatedSprite.animation == "death": 
 		get_tree().queue_delete(self)
+		main_node_ref.score += 2500
 	other_animation_playing = false
 
 
@@ -201,3 +277,6 @@ func _on_AnimatedSprite_frame_changed(): #enemy attacking player
 		if target != null and target.name == "player" and player.health > 0:
 			player.hit(attack_damage)
 			emit_signal("attacking")
+			$Swing.play()
+			speed_cooldown = 120 #receive speed penalty for attacking
+			speed = speed * 0.1

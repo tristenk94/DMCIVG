@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Enemy Death 5 (Skeleton).wav-a5b26cdf05da71ddc69bc7d8309379b1.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Enemy Death 5 (Skeleton).wav"
+dest_files=[ "res://.import/Enemy Death 5 (Skeleton).wav-a5b26cdf05da71ddc69bc7d8309379b1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Charge Potion.wav-96112f7ef332d69ffa5b7eed02df9f67.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Charge Potion.wav"
+dest_files=[ "res://.import/Charge Potion.wav-96112f7ef332d69ffa5b7eed02df9f67.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

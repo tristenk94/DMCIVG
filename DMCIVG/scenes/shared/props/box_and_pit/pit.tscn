@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/shared/assets/azul_tiles.png" type="Texture" id=1]
+[ext_resource path="res://scenes/shared/props/box_and_pit/pit.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.0708, 32.1689 )
+
+[node name="pit" type="Area2D"]
+z_index = 1
+z_as_relative = false
+collision_layer = 2
+collision_mask = 2147483650
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -0.176777 )
+scale = Vector2( 16, 16 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 52, 28, 4, 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_pit_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_pit_body_exited"]

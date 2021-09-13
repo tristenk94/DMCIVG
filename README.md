@@ -8,6 +8,8 @@ CSUN Computer Science Senior Design Project (COMP 490-491)
 
 Our project uses the audio processing software and visual programming language, [Pure Data.](https://en.wikipedia.org/wiki/Pure_Data) The game was made using the [Godot](https://godotengine.org) game engine.
 
+Read the official Research Paper [here](https://github.com/tristenk94/DMCIVG/blob/master/Research%20Paper.pdf).
+
 ### ---***Important***--- How to play our game:
 **Always** make sure to open the Pure Data patch (Sequencer.pd) in Pure Data **before** launching the game. 
 
